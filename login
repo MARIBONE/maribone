@@ -1,1 +1,268 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Empresa de Tecnologia. Design de Projetos. Desenvolvimento de Sistemas. Assessoria Juridica. Streaming de TV. Sistemas Automotivos. Criacao de Sites e Aplicativos.">
+<meta name="author" content="AE MARIBONE - A. EDSON MARIBONE">
+<meta name="generator" content="AE Maribone">
+<meta name="robots" content="/index, follow">
+<meta name="keywords" content="Patrimonio, Valorizacao, Excelencia, Referencia, Tecnologia, Alto Rendimento, Estrutura, Elegancia, Automacao, Sofisticacao, Maribone, Criacao de Sites e Aplicativos, Projetos, Blueprint">
+<title>AE MARIBONE</title>
+</head>
 
+<style>
+
+body {
+background-color: #ffffff;
+display: flex;
+flex-direction: column;
+margin: 1px;
+border: 1px solid #000000;
+font-family: 'garamond', 'times new roman'; 'arial', sans-serif;
+font-size: 2vw;
+text-align: center;
+box-shadow: 0 0 10px rgba(0, 0, 0, 0.9);
+font-weight: bold;
+width: 98vw;
+height: 100vw;
+word-spacing: 0.2em;
+}
+
+header {
+margin-left: 1%;
+margin-top: 1%;
+background-color: #ffffff;
+display: flex;
+height: 5%;
+width: 98%;
+border: 1px solid #ffffff;
+
+}
+
+
+section {
+background-image: url('https://urlz.fr/riRH');
+background-position: center;
+background-size: 60%;
+background-repeat: no-repeat;
+
+
+}
+
+
+input[type="text"] {
+display: flex;
+width: 49%;
+height: 20%;
+margin-left: 25%;
+margin-top: 25px;
+border: 1px solid #ccc;
+border-radius: 4px;
+
+}
+
+
+input[type="password"] {
+display: flex;
+width: 49%;
+max-width: 49%;
+height: 20%;
+margin-left: 25%;
+margin-top: 5px;
+border: 1px solid #ccc;
+border-radius: 4px;
+
+}
+
+button {
+width: 50%;
+max-width: 50%;
+height: 25%;
+background-color: #008ac3;
+color: white;
+margin: 10px 0;
+margin-left: 25%;
+border: none;
+border-radius: 4px;
+
+}
+
+button:hover {
+backgrund-color: #218838;
+}
+
+#resultado {
+text-align: center;
+margin-top; 10px;
+}
+
+#BOTAO {
+position: fixed;
+right: 2em;
+margin-top: 0.3%;
+display: flex;
+flex-direction: column;
+justify-content: center;
+width: 3em;
+height: 2em;
+background-color: #ffffff;
+border: 1px solid #ffffff;
+cursor: pointer;
+}
+
+.bar {
+width: 3em;
+height: 0.6em;
+background-color: #008ac3;
+margin: 1px;
+
+}
+
+.sidebar {
+  width: 150px; /* Ajuste conforme necessário */
+  height: 100%; /* Altura total da visualização */
+  position: fixed; /* Fixa a sidebar na tela */
+  top: 0;
+  right: -150px; /* Esconde a sidebar fora da tela à direita */
+  border: 1px solid #008ac3;
+  background-color: #a7a7a7; /* Cor de fundo da sidebar */
+  color: #008ac3;
+  overflow-y: auto; /* Adiciona rolagem vertical se necessário */
+  transition: right 0.5s; /* Animação para mostrar/esconder a sidebar */
+  z-index: 101;
+}
+
+.close-button {
+  font-size: 24px; /* Tamanho do ícone de fechar */
+  color: #fff; /* Cor do ícone */
+  cursor: pointer; /* Indica que é clicável */
+  position: absolute;
+  top: 10px; /* Ajuste conforme necessário */
+  right: 10px; /* Ajuste conforme necessário */
+  z-index: 102;
+}
+
+.sidebar-menu {
+  list-style-type: none; /* Remove marcadores da lista */
+  padding: 20px; /* Espaçamento interno */
+}
+
+.sidebar-menu li {
+  margin-bottom: 10px; /* Espaçamento entre itens */
+}
+
+.sidebar-menu a {
+  color: #ffffff;exto dos links */
+  text-decoration: none; /* Remove o sublinhado dos links */
+}
+
+.sidebar-menu a:hover {
+  text-decoration: underline; /* Sublinha o texto ao passar o mouse */
+}
+
+
+</style>
+
+ 
+<body>
+
+<header> <img src="https://urlz.fr/riQg" style="width: auto; display: flex; height: auto; margin-right: 8px;">
+<p id="datetime" style="font-size: 0.7em; text-align: left";> Iniciar Sessão: Quinta, 18/07/2024 - 14:26:00</p>
+
+<div>
+<div id="BOTAO">
+<div class="bar"></div>
+<div class="bar"></div>
+<div class="bar"></div>
+</div>
+
+<div class="sidebar" id="ABA">
+  <ul class="sidebar-menu">
+    <li><a href="#sobre">Ínicio</a></li>
+    <li><a href="#servicos">Serviços</a></li>
+    <li><a href="#servicos">Contato</a></li>
+    <li><a href="#contato">Suporte</a></li>
+  </ul>
+</div>
+
+<div class="close-button" id="closeButton">
+    &times; <!-- Ícone de fechar -->
+  </div>
+
+
+</header>
+
+
+
+<section style="display: flex; flex-direction: column; justify-content: center;
+margin-top: 1%; margin-left: 40%; background-color: #ffffff; display: flex; height: 12%;
+width: 20%; border: 1px solid #ffffff;">
+
+</section>
+
+<div style="display: flex; flex-direction: column; justify-content: center;
+margin-top: 25px; margin-left: 25.5%; background-color: #d2d2d2; display: flex; height: 25%;
+width: 50%; border: 1px solid #008ac3; box-shadow: 0 0 5px rgba(0, 138, 195, 0.9);">
+
+<input type="text" id="usuario" placeholder="Usuário">
+<input type="password" id="senha" placeholder="Senha">
+<button onclick="verificarLogin()">ENTRAR</button>
+<p id="resultado"></p>
+
+</div>
+
+
+<script>
+
+function updatedatetime() {
+    var dataAtual = new Date();
+
+    // Obter o nome do dia da semana usando um array
+    var diasDaSemana = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'];
+    var nomeDiaSemana = diasDaSemana[dataAtual.getDay()];
+
+    // Formatar a data e hora
+    var dia = String(dataAtual.getDate()).padStart(2, '0');
+    var mes = String(dataAtual.getMonth() + 1).padStart(2, '0'); // Janeiro é 0
+    var ano = dataAtual.getFullYear();
+    var horas = String(dataAtual.getHours()).padStart(2, '0');
+    var minutos = String(dataAtual.getMinutes()).padStart(2, '0');
+    var segundos = String(dataAtual.getSeconds()).padStart(2, '0');
+
+    // Exibir a data e hora no formato desejado
+    var dataHoraFormatada = nomeDiaSemana + ', ' + dia + '/' + mes + '/' + ano + ' - ' + horas + ':' + minutos + ':' + segundos;
+
+    // Atualizar o elemento HTML com a data e hora formatada
+    document.getElementById('datetime').textContent = 'Iniciar Sessão: ' + dataHoraFormatada;
+}
+
+// Chamar a função updatedatetime inicialmente
+updatedatetime();
+
+// Atualizar a data e hora a cada segundo
+setInterval(updatedatetime, 1000);
+
+
+document.getElementById('BOTAO').onclick = function() {
+  var sidebar = document.getElementById('ABA');
+  if (sidebar.style.left === '0px') {
+    sidebar.style.right = '-250px'; // Esconde a sidebar
+  } else {
+    sidebar.style.right = '0px'; // Mostra a sidebar
+  }
+}
+
+
+document.getElementById('closeButton').onclick = function() {
+  var sidebar = document.getElementById('ABA');
+  sidebar.style.right = '-250px'; // Esconde a sidebar
+}
+
+
+</script>
+
+
+
+</body>
+</html>
