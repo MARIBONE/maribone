@@ -323,6 +323,48 @@ align-items: center;">
 
 }
 
+.sidebar {
+  width: 150px; /* Ajuste conforme necessário */
+  height: 100%; /* Altura total da visualização */
+  position: fixed; /* Fixa a sidebar na tela */
+  top: 0;
+  right: -150px; /* Esconde a sidebar fora da tela à direita */
+  border: 1px solid #008ac3;
+  background-color: #a7a7a7; /* Cor de fundo da sidebar */
+  color: #008ac3;
+  overflow-y: auto; /* Adiciona rolagem vertical se necessário */
+  transition: right 0.5s; /* Animação para mostrar/esconder a sidebar */
+  z-index: 101;
+}
+
+.close-button {
+  font-size: 24px; /* Tamanho do ícone de fechar */
+  color: #fff; /* Cor do ícone */
+  cursor: pointer; /* Indica que é clicável */
+  position: absolute;
+  top: 10px; /* Ajuste conforme necessário */
+  right: 10px; /* Ajuste conforme necessário */
+  z-index: 102;
+}
+
+.sidebar-menu {
+  list-style-type: none; /* Remove marcadores da lista */
+  padding: 20px; /* Espaçamento interno */
+}
+
+.sidebar-menu li {
+  margin-bottom: 10px; /* Espaçamento entre itens */
+}
+
+.sidebar-menu a {
+  color: #ffffff;exto dos links */
+  text-decoration: none; /* Remove o sublinhado dos links */
+}
+
+.sidebar-menu a:hover {
+  text-decoration: underline; /* Sublinha o texto ao passar o mouse */
+}
+
 
 
 
@@ -340,6 +382,18 @@ align-items: center;">
 <div class="bar"></div>
 </div>
 
+<div class="sidebar" id="ABA">
+  <ul class="sidebar-menu">
+    <li><a href="#sobre">Ínicio</a></li>
+    <li><a href="#servicos">Serviços</a></li>
+    <li><a href="#servicos">Contato</a></li>
+    <li><a href="#contato">Suporte</a></li>
+  </ul>
+</div>
+
+<div class="close-button" id="closeButton">
+    &times; <!-- Ícone de fechar -->
+  </div>
 
 <p  id="datetime" style="color: #a7a7a7; display: flex; flex-wrap: wrap; margin-left: 55%; font-size: 100%; margin-top: -2em;"> 13/07/2024 16:00:14</p>
 
@@ -563,11 +617,26 @@ function UpdateDateTime() {
       UpdateDateTime();
 
 
+
+document.getElementById('BOTAO').onclick = function() {
+  var sidebar = document.getElementById('ABA');
+  if (sidebar.style.left === '0px') {
+    sidebar.style.right = '-250px'; // Esconde a sidebar
+  } else {
+    sidebar.style.right = '0px'; // Mostra a sidebar
+  }
+}
+
+
+document.getElementById('closeButton').onclick = function() {
+  var sidebar = document.getElementById('ABA');
+  sidebar.style.right = '-250px'; // Esconde a sidebar
+}
+
+
     </script>
 
 
 
 </body>
 </html>
-
-
