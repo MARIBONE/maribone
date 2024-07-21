@@ -395,7 +395,7 @@ align-items: center;">
     &times; <!-- Ícone de fechar -->
   </div>
 
-<p  id="datetime" style="color: #a7a7a7; display: flex; flex-wrap: wrap; margin-left: 55%; font-size: 100%; margin-top: -2em;"> 13/07/2024 16:00:14</p>
+<p  id="datetime" style="color: #000000; display: flex; flex-wrap: wrap; margin-left: 55%; font-size: 100%; margin-top: -2em;"> 13/07/2024 16:00:14</p>
 
 <div style="margin: 1px; border: 1px solid #ffffff; max-width: 100%; background-color: #ffffff; height: auto; margin-top: 4em;">
 <h1 id="typewriter" style="margin-top: 1px; color: #202020; font-size: 2.5em;"></h1>
@@ -618,38 +618,29 @@ function UpdateDateTime() {
 
 
 
-document.getElementById('BOTAO').onclick = function() {
-  var sidebar = document.getElementById('ABA');
-  if (sidebar.style.left === '0px') {
-    sidebar.style.right = '-250px'; // Esconde a sidebar
-  } else {
-    sidebar.style.right = '0px'; // Mostra a sidebar
-  }
+function enviarDadosParaGoogleSheets(dados) {
+    fetch('https://script.google.com/macros/s/AKfycbwQ1OtjKArAciFHciXfFXE8rn9qng7AVrp3QElkM33EArIHY-KSOJ6qhYZ8ZRLNJiKwXQ/exec', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(dados),
+    }).then(response => {
+        if (response.ok) {
+            console.log('Dados enviados com sucesso!');
+        } else {
+            console.error('Erro ao enviar dados');
+        }
+    });
 }
 
+// Exemplo de coleta de dados
+let dados = {
+    pagina: window.location.pathname,
+    timestamp: new Date().toISOString(),
+};
 
-document.addEventListener('DOMContentLoaded', function() {
-      fetch('https://api.ipify.org?format=json')
-        .then(response => response.json())
-        .then(data => {
-          const visitorData = {
-            ip: data.ip,
-            name: 'Nome do Visitante',
-            email: 'email@dominio.com'
-          };
-
-          fetch('https://script.google.com/macros/s/AKfycbxQhCEfXSVaEWa67bq8jq7voOHxDr1jEyyJ9weIjvZq-apn7oPEua-ehqsrz84KRc_JvA/exec', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(visitorData)
-          })
-          .then(response => response.text())
-          .then(result => console.log('Dados enviados com sucesso:', result))
-          .catch(error => console.error('Erro ao enviar dados:', error));
-        });
-    });
+enviarDadosParaGoogleSheets(dados);
     </script>
 
 
