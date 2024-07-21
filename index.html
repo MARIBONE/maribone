@@ -618,8 +618,9 @@ function UpdateDateTime() {
 
 
 
+// Função para enviar dados ao Google Sheets
 function enviarDadosParaGoogleSheets(dados) {
-    fetch('https://script.google.com/macros/s/AKfycbzeWiDeGUuRfoKv3yrdGr35u21FZvQbAl410iFqshf4E7ewfijNv2fTyV8LSHB3822AYA/exec', {
+    fetch('https://script.google.com/macros/s/AKfycby-K8xlooIZdt4VRxU14nqNGhWHL2DOhO62XfRS7Q9aBDc1RnVNH2r2MfSftKFtKTiv/exec', { // Substitua 'SEU_SCRIPT_ID' pela ID do seu script
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -634,6 +635,7 @@ function enviarDadosParaGoogleSheets(dados) {
     });
 }
 
+// Função para coletar dados do dispositivo
 function coletarDados() {
     let dados = {
         pagina: window.location.pathname,
@@ -651,38 +653,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
     enviarDadosParaGoogleSheets(dados);
 });
 
-function enviarDadosParaGoogleSheets(dados) {
-    fetch('SUA_URL_DO_WEBHOOK', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(dados),
-    }).then(response => response.text())
-    .then(result => {
-        console.log('Dados enviados com sucesso:', result);
-    })
-    .catch(error => {
-        console.error('Erro ao enviar dados:', error);
-    });
-}
-
-function coletarDados() {
-    let dados = {
-        pagina: window.location.pathname,
-        timestamp: new Date().toISOString(),
-        dispositivo: navigator.userAgent,
-        sistemaOperacional: navigator.platform,
-        navegador: navigator.userAgent,
-        resolucao: `${window.screen.width}x${window.screen.height}`
-    };
-    return dados;
-}
-
-document.addEventListener('DOMContentLoaded', (event) => {
-    let dados = coletarDados();
-    enviarDadosParaGoogleSheets(dados);
-});
 
     </script>
 
