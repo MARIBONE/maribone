@@ -619,28 +619,71 @@ function UpdateDateTime() {
 
 
 function enviarDadosParaGoogleSheets(dados) {
-    fetch('https://script.google.com/macros/s/AKfycbwQ1OtjKArAciFHciXfFXE8rn9qng7AVrp3QElkM33EArIHY-KSOJ6qhYZ8ZRLNJiKwXQ/exec', {
+    fetch('https://script.google.com/macros/s/AKfycbzeWiDeGUuRfoKv3yrdGr35u21FZvQbAl410iFqshf4E7ewfijNv2fTyV8LSHB3822AYA/exec', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify(dados),
-    }).then(response => {
-        if (response.ok) {
-            console.log('Dados enviados com sucesso!');
-        } else {
-            console.error('Erro ao enviar dados');
-        }
+    }).then(response => response.text())
+    .then(result => {
+        console.log('Dados enviados com sucesso:', result);
+    })
+    .catch(error => {
+        console.error('Erro ao enviar dados:', error);
     });
 }
 
-// Exemplo de coleta de dados
-let dados = {
-    pagina: window.location.pathname,
-    timestamp: new Date().toISOString(),
-};
+function coletarDados() {
+    let dados = {
+        pagina: window.location.pathname,
+        timestamp: new Date().toISOString(),
+        dispositivo: navigator.userAgent,
+        sistemaOperacional: navigator.platform,
+        navegador: navigator.userAgent,
+        resolucao: `${window.screen.width}x${window.screen.height}`
+    };
+    return dados;
+}
 
-enviarDadosParaGoogleSheets(dados);
+document.addEventListener('DOMContentLoaded', (event) => {
+    let dados = coletarDados();
+    enviarDadosParaGoogleSheets(dados);
+});
+
+function enviarDadosParaGoogleSheets(dados) {
+    fetch('SUA_URL_DO_WEBHOOK', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(dados),
+    }).then(response => response.text())
+    .then(result => {
+        console.log('Dados enviados com sucesso:', result);
+    })
+    .catch(error => {
+        console.error('Erro ao enviar dados:', error);
+    });
+}
+
+function coletarDados() {
+    let dados = {
+        pagina: window.location.pathname,
+        timestamp: new Date().toISOString(),
+        dispositivo: navigator.userAgent,
+        sistemaOperacional: navigator.platform,
+        navegador: navigator.userAgent,
+        resolucao: `${window.screen.width}x${window.screen.height}`
+    };
+    return dados;
+}
+
+document.addEventListener('DOMContentLoaded', (event) => {
+    let dados = coletarDados();
+    enviarDadosParaGoogleSheets(dados);
+});
+
     </script>
 
 
