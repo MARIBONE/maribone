@@ -620,7 +620,7 @@ function UpdateDateTime() {
 
 // Função para enviar dados ao Google Sheets
 function enviarDadosParaGoogleSheets(dados) {
-    fetch('https://script.google.com/macros/s/AKfycby-K8xlooIZdt4VRxU14nqNGhWHL2DOhO62XfRS7Q9aBDc1RnVNH2r2MfSftKFtKTiv/exec', { // Substitua 'SEU_SCRIPT_ID' pela ID do seu script
+    fetch('https://script.google.com/macros/s/AKfycbzV8GoqnMNxYBNcu4Qiw3y5t_GmIdnCWvBOQ8Q7VYDKu7woRg7kHbMcj3aKV6XQZzpa6Q/exec', { // Substitua 'SEU_SCRIPT_ID' pela ID do seu script
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -652,6 +652,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     let dados = coletarDados();
     enviarDadosParaGoogleSheets(dados);
 });
+
 
 
     </script>
