@@ -628,11 +628,6 @@ document.getElementById('BOTAO').onclick = function() {
 }
 
 
-document.getElementById('closeButton').onclick = function() {
-  var sidebar = document.getElementById('ABA');
-  sidebar.style.right = '-250px'; // Esconde a sidebar
-}
-
 document.addEventListener('DOMContentLoaded', function() {
       fetch('https://api.ipify.org?format=json')
         .then(response => response.json())
