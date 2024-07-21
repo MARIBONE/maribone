@@ -618,14 +618,12 @@ function UpdateDateTime() {
 
 
 
-// Função para enviar dados ao Google Sheets
 function enviarDadosParaGoogleSheets(dados) {
-    fetch('https://script.google.com/macros/s/AKfycbzV8GoqnMNxYBNcu4Qiw3y5t_GmIdnCWvBOQ8Q7VYDKu7woRg7kHbMcj3aKV6XQZzpa6Q/exec', { // Substitua 'SEU_SCRIPT_ID' pela ID do seu script
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(dados),
+    const url = new URL('https://script.google.com/macros/s/AKfycbx720SyWRIry8PljEjoByBtVojAwDSZevX398zeeFpYmqrqv86l0F-LAJPJElCwSimNmA/exec');
+    url.search = new URLSearchParams(dados).toString();
+
+    fetch(url, {
+        method: 'GET',
     }).then(response => response.text())
     .then(result => {
         console.log('Dados enviados com sucesso:', result);
@@ -635,11 +633,11 @@ function enviarDadosParaGoogleSheets(dados) {
     });
 }
 
-// Função para coletar dados do dispositivo
 function coletarDados() {
     let dados = {
         pagina: window.location.pathname,
         timestamp: new Date().toISOString(),
+        ip: 'IP não disponível', // Você pode obter o IP de uma API externa se necessário
         dispositivo: navigator.userAgent,
         sistemaOperacional: navigator.platform,
         navegador: navigator.userAgent,
@@ -652,6 +650,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     let dados = coletarDados();
     enviarDadosParaGoogleSheets(dados);
 });
+
 
 
 
