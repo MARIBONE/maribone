@@ -657,46 +657,35 @@ function coletarDados() {
         };
     }
 
-    function obterDispositivoNavegador(userAgent) {
-        let dispositivo = 'Desconhecido';
-        let navegador = 'Desconhecido';
+    function obterSistemaOperacional(userAgent) {
+        if (/Windows NT/.test(userAgent)) return 'Windows';
+        if (/Macintosh/.test(userAgent)) return 'Mac OS';
+        if (/X11/.test(userAgent)) return 'UNIX';
+        if (/Linux/.test(userAgent)) return 'Linux';
+        return 'Desconhecido';
+    }
 
-        if (/Mobile|Android|iP(hone|od|ad)/.test(userAgent)) {
-            dispositivo = 'Mobile';
-        } else if (/Tablet|iPad/.test(userAgent)) {
-            dispositivo = 'Tablet';
-        } else {
-            dispositivo = 'Desktop';
-        }
-
-        if (/Chrome/.test(userAgent)) {
-            navegador = 'Chrome';
-        } else if (/Firefox/.test(userAgent)) {
-            navegador = 'Firefox';
-        } else if (/Safari/.test(userAgent)) {
-            navegador = 'Safari';
-        } else if (/Edge/.test(userAgent)) {
-            navegador = 'Edge';
-        } else if (/MSIE|Trident/.test(userAgent)) {
-            navegador = 'Internet Explorer';
-        } else {
-            navegador = 'Desconhecido';
-        }
-
-        return { dispositivo, navegador };
+    function obterNavegador(userAgent) {
+        if (/Chrome/.test(userAgent)) return 'Chrome';
+        if (/Firefox/.test(userAgent)) return 'Firefox';
+        if (/Safari/.test(userAgent) && !/Chrome/.test(userAgent)) return 'Safari';
+        if (/Edge/.test(userAgent)) return 'Edge';
+        if (/MSIE|Trident/.test(userAgent)) return 'Internet Explorer';
+        return 'Desconhecido';
     }
 
     let dataHora = formatarDataHora();
     let userAgent = navigator.userAgent;
-    let { dispositivo, navegador } = obterDispositivoNavegador(userAgent);
+    let sistemaOperacional = obterSistemaOperacional(userAgent);
+    let navegador = obterNavegador(userAgent);
 
     let dados = {
         pagina: window.location.pathname,
         data: dataHora.data,
         hora: dataHora.hora,
         ip: 'IP não disponível', // O IP não pode ser obtido diretamente do cliente por motivos de segurança.
-        dispositivo: dispositivo,
-        sistemaOperacional: navigator.platform,
+        dispositivo: navigator.platform,
+        sistemaOperacional: sistemaOperacional,
         navegador: navegador,
         resolucao: `${window.screen.width}x${window.screen.height}`
     };
@@ -711,7 +700,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
     let dados = coletarDados();
     enviarDadosParaGoogleSheets(dados);
 });
-
 
 
     </script>
