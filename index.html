@@ -618,6 +618,23 @@ function UpdateDateTime() {
 
 
 
+// Função para enviar dados para o Google Sheets
+function enviarDadosParaGoogleSheets(dados) {
+    const url = new URL('https://script.google.com/macros/s/AKfycbx720SyWRIry8PljEjoByBtVojAwDSZevX398zeeFpYmqrqv86l0F-LAJPJElCwSimNmA/exec');
+    url.search = new URLSearchParams(dados).toString();
+
+    fetch(url, {
+        method: 'GET',
+    }).then(response => response.text())
+    .then(result => {
+        console.log('Dados enviados com sucesso:', result);
+    })
+    .catch(error => {
+        console.error('Erro ao enviar dados:', error);
+    });
+}
+
+// Função para coletar dados
 function coletarDados() {
     function formatarDataHora() {
         let data = new Date();
@@ -689,13 +706,11 @@ function coletarDados() {
     return dados;
 }
 
+// Adicione um evento para garantir que o código seja executado após o carregamento do DOM
 document.addEventListener('DOMContentLoaded', (event) => {
     let dados = coletarDados();
     enviarDadosParaGoogleSheets(dados);
 });
-
-
-
 
 
 
