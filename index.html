@@ -666,11 +666,20 @@ function coletarDados() {
     }
 
     function obterNavegador(userAgent) {
-        if (/Chrome/.test(userAgent) && !/Edge/.test(userAgent)) return 'Chrome';
+        if (/Edg/.test(userAgent)) return 'Edge';
+        if (/Chrome/.test(userAgent) && !/Edg/.test(userAgent)) return 'Chrome';
         if (/Firefox/.test(userAgent)) return 'Firefox';
         if (/Safari/.test(userAgent) && !/Chrome/.test(userAgent)) return 'Safari';
-        if (/Edge/.test(userAgent)) return 'Edge';
         if (/MSIE|Trident/.test(userAgent)) return 'Internet Explorer';
+        return 'Desconhecido';
+    }
+
+    // Nota: A identificação exata da marca do dispositivo não está disponível diretamente no navegador.
+    function obterMarcaDoDispositivo(userAgent) {
+        if (/Android/.test(userAgent)) return 'Android';
+        if (/iPhone/.test(userAgent)) return 'iPhone';
+        if (/iPad/.test(userAgent)) return 'iPad';
+        if (/Windows/.test(userAgent)) return 'Windows PC';
         return 'Desconhecido';
     }
 
@@ -678,13 +687,14 @@ function coletarDados() {
     let userAgent = navigator.userAgent;
     let sistemaOperacional = obterSistemaOperacional(userAgent);
     let navegador = obterNavegador(userAgent);
+    let marcaDispositivo = obterMarcaDoDispositivo(userAgent);
 
     let dados = {
         pagina: window.location.pathname,
         data: dataHora.data,
         hora: dataHora.hora,
         ip: 'IP não disponível', // O IP não pode ser obtido diretamente do cliente por motivos de segurança.
-        dispositivo: navigator.platform,
+        dispositivo: marcaDispositivo,
         sistemaOperacional: sistemaOperacional,
         navegador: navegador,
         resolucao: `${window.screen.width}x${window.screen.height}`
@@ -700,7 +710,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
     let dados = coletarDados();
     enviarDadosParaGoogleSheets(dados);
 });
-
 
 
     </script>
