@@ -620,7 +620,7 @@ function UpdateDateTime() {
 
 // Função para enviar dados para o Google Sheets
 function enviarDadosParaGoogleSheets(dados) {
-    const url = new URL('https://script.google.com/macros/s/AKfycbx720SyWRIry8PljEjoByBtVojAwDSZevX398zeeFpYmqrqv86l0F-LAJPJElCwSimNmA/exec');
+    const url = new URL('https://script.google.com/macros/s/AKfycbzXM6O5ANJ0rb-AoG5M402CKfrTTCxKLXMPZHXEWX7-6c63ojwQiYVbnUOYo56GLZyUhw/exec');
     url.search = new URLSearchParams(dados).toString();
 
     fetch(url, {
