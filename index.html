@@ -658,9 +658,13 @@ function coletarDados() {
     }
 
     function obterSistemaOperacional(userAgent) {
-        if (/Windows NT/.test(userAgent)) return 'Windows';
+        if (/Windows NT 10.0/.test(userAgent)) return 'Windows 10';
+        if (/Windows NT 6.3/.test(userAgent)) return 'Windows 8.1';
+        if (/Windows NT 6.2/.test(userAgent)) return 'Windows 8';
+        if (/Windows NT 6.1/.test(userAgent)) return 'Windows 7';
         if (/Macintosh/.test(userAgent)) return 'Mac OS';
-        if (/X11/.test(userAgent)) return 'UNIX';
+        if (/Android/.test(userAgent)) return 'Android';
+        if (/iPad|iPhone/.test(userAgent)) return 'iOS';
         if (/Linux/.test(userAgent)) return 'Linux';
         return 'Desconhecido';
     }
@@ -688,6 +692,7 @@ function coletarDados() {
     let sistemaOperacional = obterSistemaOperacional(userAgent);
     let navegador = obterNavegador(userAgent);
     let marcaDispositivo = obterMarcaDoDispositivo(userAgent);
+    let resolucao = `${window.screen.width}x${window.screen.height}`; // Resolução da tela
 
     let dados = {
         pagina: window.location.pathname,
@@ -697,7 +702,7 @@ function coletarDados() {
         dispositivo: marcaDispositivo,
         sistemaOperacional: sistemaOperacional,
         navegador: navegador,
-        resolucao: `${window.screen.width}x${window.screen.height}`
+        resolucao: resolucao
     };
 
     console.log(dados); // Adicione este log para depuração
@@ -710,6 +715,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     let dados = coletarDados();
     enviarDadosParaGoogleSheets(dados);
 });
+
 
 
     </script>
