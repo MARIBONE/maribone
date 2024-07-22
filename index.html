@@ -618,38 +618,94 @@ function UpdateDateTime() {
 
 
 
-function coletarDados() {
-    // Função para formatar a data e hora no fuso horário desejado
-    function formatarDataHora(offsetHoras) {
-        let data = new Date();
-        // Aplicar o ajuste de fuso horário
-        data.setHours(data.getHours() + offsetHoras);
+function enviarDadosParaGoogleSheets(dados) {
+    const url = new URL('https://script.google.com/macros/s/AKfycbx720SyWRIry8PljEjoByBtVojAwDSZevX398zeeFpYmqrqv86l0F-LAJPJElCwSimNmA/exec');
+    url.search = new URLSearchParams(dados).toString();
 
-        let opcoes = {
-            year: 'numeric',
-            month: '2-digit',
-            day: '2-digit',
-            hour: '2-digit',
-            minute: '2-digit',
-            second: '2-digit',
-            timeZoneName: 'short'
+    fetch(url, {
+        method: 'GET',
+    }).then(response => response.text())
+    .then(result => {
+        console.log('Dados enviados com sucesso:', result);
+    })
+    .catch(error => {
+        console.error('Erro ao enviar dados:', error);
+    });
+}
+
+function coletarDados() {
+    function formatarDataHora() {
+        let data = new Date();
+        // Ajuste para o Horário de Brasília (UTC-3)
+        data.setHours(data.getHours() - 3);
+
+        let dia = String(data.getDate()).padStart(2, '0');
+        let mes = String(data.getMonth() + 1).padStart(2, '0');
+        let ano = data.getFullYear();
+        let hora = String(data.getHours()).padStart(2, '0');
+        let minuto = String(data.getMinutes()).padStart(2, '0');
+        let segundo = String(data.getSeconds()).padStart(2, '0');
+
+        let dataFormatada = `${dia}-${mes}-${ano}`;
+        let horaFormatada = `${hora}:${minuto}:${segundo}`;
+
+        return {
+            data: dataFormatada,
+            hora: horaFormatada
         };
-        return data.toLocaleString('pt-BR', opcoes);
     }
 
-    // Ajuste do fuso horário (exemplo: -3 horas para UTC-3)
-    let fusoHorario = -3; // Ajuste conforme necessário
+    function obterDispositivoNavegador(userAgent) {
+        let dispositivo = 'Desconhecido';
+        let navegador = 'Desconhecido';
+
+        if (/Mobile|Android|iP(hone|od|ad)/.test(userAgent)) {
+            dispositivo = 'Mobile';
+        } else if (/Tablet|iPad/.test(userAgent)) {
+            dispositivo = 'Tablet';
+        } else {
+            dispositivo = 'Desktop';
+        }
+
+        if (/Chrome/.test(userAgent)) {
+            navegador = 'Chrome';
+        } else if (/Firefox/.test(userAgent)) {
+            navegador = 'Firefox';
+        } else if (/Safari/.test(userAgent)) {
+            navegador = 'Safari';
+        } else if (/Edge/.test(userAgent)) {
+            navegador = 'Edge';
+        } else if (/MSIE|Trident/.test(userAgent)) {
+            navegador = 'Internet Explorer';
+        } else {
+            navegador = 'Desconhecido';
+        }
+
+        return { dispositivo, navegador };
+    }
+
+    let dataHora = formatarDataHora();
+    let userAgent = navigator.userAgent;
+    let { dispositivo, navegador } = obterDispositivoNavegador(userAgent);
+
     let dados = {
         pagina: window.location.pathname,
-        timestamp: formatarDataHora(fusoHorario),
+        data: dataHora.data,
+        hora: dataHora.hora,
         ip: 'IP não disponível', // O IP não pode ser obtido diretamente do cliente por motivos de segurança.
-        dispositivo: navigator.userAgent,
+        dispositivo: dispositivo,
         sistemaOperacional: navigator.platform,
-        navegador: navigator.userAgent,
+        navegador: navegador,
         resolucao: `${window.screen.width}x${window.screen.height}`
     };
     return dados;
 }
+
+document.addEventListener('DOMContentLoaded', (event) => {
+    let dados = coletarDados();
+    enviarDadosParaGoogleSheets(dados);
+});
+
 
 
 
