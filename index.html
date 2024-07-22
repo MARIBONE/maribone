@@ -618,26 +618,31 @@ function UpdateDateTime() {
 
 
 
-function enviarDadosParaGoogleSheets(dados) {
-    const url = new URL('https://script.google.com/macros/s/AKfycbx720SyWRIry8PljEjoByBtVojAwDSZevX398zeeFpYmqrqv86l0F-LAJPJElCwSimNmA/exec');
-    url.search = new URLSearchParams(dados).toString();
-
-    fetch(url, {
-        method: 'GET',
-    }).then(response => response.text())
-    .then(result => {
-        console.log('Dados enviados com sucesso:', result);
-    })
-    .catch(error => {
-        console.error('Erro ao enviar dados:', error);
-    });
-}
-
 function coletarDados() {
+    // Função para formatar a data e hora no fuso horário desejado
+    function formatarDataHora(offsetHoras) {
+        let data = new Date();
+        // Aplicar o ajuste de fuso horário
+        data.setHours(data.getHours() + offsetHoras);
+
+        let opcoes = {
+            year: 'numeric',
+            month: '2-digit',
+            day: '2-digit',
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit',
+            timeZoneName: 'short'
+        };
+        return data.toLocaleString('pt-BR', opcoes);
+    }
+
+    // Ajuste do fuso horário (exemplo: -3 horas para UTC-3)
+    let fusoHorario = -3; // Ajuste conforme necessário
     let dados = {
         pagina: window.location.pathname,
-        timestamp: new Date().toISOString(),
-        ip: 'IP não disponível', // Você pode obter o IP de uma API externa se necessário
+        timestamp: formatarDataHora(fusoHorario),
+        ip: 'IP não disponível', // O IP não pode ser obtido diretamente do cliente por motivos de segurança.
         dispositivo: navigator.userAgent,
         sistemaOperacional: navigator.platform,
         navegador: navigator.userAgent,
@@ -645,11 +650,6 @@ function coletarDados() {
     };
     return dados;
 }
-
-document.addEventListener('DOMContentLoaded', (event) => {
-    let dados = coletarDados();
-    enviarDadosParaGoogleSheets(dados);
-});
 
 
 
