@@ -726,16 +726,34 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
    
 async function enviarDadosParaGoogleSheets(ip, localizacao) {
-    const url = 'https://script.google.com/macros/s/AKfycbzn11viVA6dxLNA3ROSvbUuHzcyGXePbFFgqFK_J2_AHnH-AYzHkBrj_6JP-tgAj7-i/exec'; // Substitua com a URL do seu Web App
+    const url = 'https://script.google.com/macros/s/AKfycbzn11viVA6dxLNA3ROSvbUuHzcyGXePbFFgqFK_J2_AHnH-AYzHkBrj_6JP-tgAj7-i/exec'; // Substitua com a URL do seu endpoint
+    
+    // Adiciona logs para depuração
+    console.log('IP:', ip);
+    console.log('Localização:', localizacao);
+
+    // Verifique se localizacao está definido e é um objeto
+    if (!localizacao || typeof localizacao !== 'object') {
+        console.error('Localização não está definida ou não é um objeto.');
+        return; // Interrompe a execução da função se localizacao não for válido
+    }
+
+    // Define valores com base na presença das propriedades
+    const cidade = localizacao.city || '';
+    const estado = localizacao.region || '';
+    const pais = localizacao.country || '';
+    const latitude = localizacao.loc ? localizacao.loc.split(',')[0] : '';
+    const longitude = localizacao.loc ? localizacao.loc.split(',')[1] : '';
+
     const payload = {
         ip: ip,
-        cidade: localizacao.city || '',
-        estado: localizacao.region || '',
-        pais: localizacao.country || '',
-        latitude: localizacao.loc ? localizacao.loc.split(',')[0] : '',
-        longitude: localizacao.loc ? localizacao.loc.split(',')[1] : ''
+        cidade: cidade,
+        estado: estado,
+        pais: pais,
+        latitude: latitude,
+        longitude: longitude
     };
-
+    
     try {
         let response = await fetch(url, {
             method: 'POST',
@@ -749,6 +767,7 @@ async function enviarDadosParaGoogleSheets(ip, localizacao) {
         console.error('Erro ao enviar dados:', error);
     }
 }
+
 
 
 
