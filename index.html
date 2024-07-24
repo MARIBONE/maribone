@@ -768,6 +768,37 @@ async function enviarDadosParaGoogleSheets(ip, localizacao) {
     }
 }
 
+function obterLocalizacaoEEnviarDados() {
+    // Substitua o IP pelo IP real, se necessário
+    const ip = 'Seu IP Aqui';
+
+    navigator.geolocation.getCurrentPosition(
+        async (posicao) => {
+            const latitude = posicao.coords.latitude;
+            const longitude = posicao.coords.longitude;
+
+            // Use uma API de geolocalização para obter a cidade, estado e país
+            const resposta = await fetch(`https://api.ipgeolocation.io/ipgeo?apiKey=fb445d077454b7&lat=${latitude}&long=${longitude}`);
+            const dados = await resposta.json();
+
+            // Defina a localização
+            const localizacao = {
+                city: dados.city,
+                region: dados.state_prov,
+                country: dados.country_name,
+                loc: `${latitude},${longitude}`
+            };
+
+            // Chame a função para enviar dados
+            await enviarDadosParaGoogleSheets(ip, localizacao);
+        },
+        (erro) => {
+            console.error('Erro ao obter localização:', erro);
+        }
+    );
+}
+
+
 
 
 
