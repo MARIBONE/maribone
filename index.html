@@ -725,7 +725,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 });
 
    
-async function enviarDadosParaGoogleSheets(Rastreamento) {
+async function enviarDadosParaGoogleSheets(ip, localizacao) {
     const url = 'https://script.google.com/macros/s/AKfycbxrjfXgLpwmB1fdOKDE4Xreyh9I_0_qDsx8HVo6cePSJuHY-53L81t06smQhGLGZRLJ/exec'; // Substitua com a URL do seu endpoint
     const payload = {
         ip: ip,
