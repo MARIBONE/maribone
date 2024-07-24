@@ -719,7 +719,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
   async function getVisitorIp() {
     try {
-      // Captura o IP público do visitante
       const response = await fetch('https://api.ipify.org?format=json');
       const data = await response.json();
       return data.ip;
@@ -745,7 +744,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
     }
   }
 
-  // Chama a função de rastreamento ao carregar a página
   window.onload = sendTrackingData;
 </script>
 
