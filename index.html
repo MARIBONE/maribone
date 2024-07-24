@@ -732,7 +732,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
   async function sendTrackingData() {
     const ip = await getVisitorIp();
     if (ip) {
-      fetch('https://script.google.com/macros/s/YOUR_DEPLOYMENT_ID/exec', {
+      fetch('https://script.google.com/macros/s/AKfycbyFNAZT5as8rGDzAc_qB7-1clDr_OYQ8hsIZ2vUtQVg-j9GGpRYmTVqbeiDe4g4v9wo/exec', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
