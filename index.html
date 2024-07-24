@@ -727,13 +727,13 @@ document.addEventListener('DOMContentLoaded', (event) => {
    
 async function enviarDadosParaGoogleSheets(ip, localizacao) {
     const url = 'https://script.google.com/macros/s/AKfycbxrjfXgLpwmB1fdOKDE4Xreyh9I_0_qDsx8HVo6cePSJuHY-53L81t06smQhGLGZRLJ/exec'; // Substitua com a URL do seu endpoint
-
-    // Verificar se localizacao está definida e possui as propriedades necessárias
-    const cidade = localizacao && localizacao.city ? localizacao.city : 'Não disponível';
-    const estado = localizacao && localizacao.region ? localizacao.region : 'Não disponível';
-    const pais = localizacao && localizacao.country ? localizacao.country : 'Não disponível';
-    const latitude = localizacao && localizacao.loc ? localizacao.loc.split(',')[0] : 'Não disponível';
-    const longitude = localizacao && localizacao.loc ? localizacao.loc.split(',')[1] : 'Não disponível';
+    
+    // Verificar se localizacao está definida antes de acessar suas propriedades
+    const cidade = localizacao && localizacao.city ? localizacao.city : '';
+    const estado = localizacao && localizacao.region ? localizacao.region : '';
+    const pais = localizacao && localizacao.country ? localizacao.country : '';
+    const latitude = localizacao && localizacao.loc ? localizacao.loc.split(',')[0] : '';
+    const longitude = localizacao && localizacao.loc ? localizacao.loc.split(',')[1] : '';
 
     const payload = {
         ip: ip,
