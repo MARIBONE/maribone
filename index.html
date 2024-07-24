@@ -9,6 +9,14 @@
 <meta name="robots" content="/index, follow">
 <meta name="keywords" content="Patrimonio, Valorizacao, Excelencia, Referencia, Tecnologia, Alto Rendimento, Estrutura, Elegancia, Automacao, Sofisticacao, Maribone, Criacao de Sites e Aplicativos, Projetos, Blueprint">
 <title>AE MARIBONE</title>
+   <script async src="https://www.googletagmanager.com/gtag/js?id=G-1QWRZGMQTQ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-1QWRZGMQTQ');
+  </script>
 </head>
 
 <style> 
@@ -716,34 +724,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
     enviarDadosParaGoogleSheets(dados);
 });
 
-  async function getVisitorIp() {
-    try {
-      const response = await fetch('https://api.ipify.org?format=json');
-      const data = await response.json();
-      return data.ip;
-    } catch (error) {
-      console.error('Erro ao obter IP:', error);
-      return null;
-    }
-  }
-
-  async function sendTrackingData() {
-    const ip = await getVisitorIp();
-    if (ip) {
-      fetch('https://script.google.com/macros/s/AKfycbxbwecrx4pvxAC4baBvezUkQ7-nVEjHK0jo9xcSQ_HcNpmfMXyvZPoZcV16jET7q1SL/exec', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ ip: ip })
-      })
-      .then(response => response.text())
-      .then(data => console.log('Success:', data))
-      .catch(error => console.error('Error:', error));
-    }
-  }
-
-  window.onload = sendTrackingData;
 </script>
 
 
