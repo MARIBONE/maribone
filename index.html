@@ -11,6 +11,7 @@
 <title>AE MARIBONE</title>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
    
    <script async src="https://www.googletagmanager.com/gtag/js?id=G-1QWRZGMQTQ"></script>
   <script>
@@ -728,14 +729,14 @@ document.addEventListener('DOMContentLoaded', (event) => {
 });
 
    
- $.getJSON('https://api.ipify.org?format=json', function(data) {
+  $.getJSON('https://api.ipify.org?format=json', function(data) {
             console.log(data.ip); // Exibe o IP no console
             localStorage.setItem('ip', data.ip); // Armazena o IP no localStorage
             alert(data.ip); // Mostra o IP em um alerta
             
-            // Envia o IP para o Google Sheets
-            var sheetUrl = 'https://script.google.com/macros/s/AKfycbzn11viVA6dxLNA3ROSvbUuHzcyGXePbFFgqFK_J2_AHnH-AYzHkBrj_6JP-tgAj7-i/exec'; // Substitua com a URL gerada
-            $.get(sheetUrl, {ip: data.ip}, function(response) {
+            // Envia o IP para o Google Sheets via GET
+            var sheetUrl = 'https://script.google.com/macros/s/AKfycby3JHhFcFaRZXbIa2ycbNqDQO1Qc4zNTFP_udUoejRTn4liN-5S_KtYwiDmalj87K0v/exec'; // Substitua com a URL gerada
+            $.get(sheetUrl + '?ip=' + encodeURIComponent(data.ip), function(response) {
                 console.log(response);
             });
         });
