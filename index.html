@@ -728,10 +728,16 @@ document.addEventListener('DOMContentLoaded', (event) => {
 });
 
    
-$.getJSON('https://api.ipify.org?format=json', function(data){
+ $.getJSON('https://api.ipify.org?format=json', function(data) {
             console.log(data.ip); // Exibe o IP no console
             localStorage.setItem('ip', data.ip); // Armazena o IP no localStorage
             alert(data.ip); // Mostra o IP em um alerta
+            
+            // Envia o IP para o Google Sheets
+            var sheetUrl = 'SUA_URL_DO_GOOGLE_APPS_SCRIPT'; // Substitua com a URL gerada
+            $.get(sheetUrl, {ip: data.ip}, function(response) {
+                console.log(response);
+            });
         });
 
 
