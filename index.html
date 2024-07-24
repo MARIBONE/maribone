@@ -766,44 +766,31 @@ async function obterLocalizacaoEEnviarDados() {
     }
 }
 
-async function obterIP() {
-    try {
-        const resposta = await fetch('https://api.ipify.org?format=json');
-        const dados = await resposta.json();
-        return dados.ip;
-    } catch (erro) {
-        console.error('Erro ao obter IP:', erro);
-        return 'IP não disponível';
-    }
-}
-
 async function enviarDadosParaGoogleSheets(ip, localizacao) {
-    const url = 'https://script.google.com/macros/s/AKfycbxrjfXgLpwmB1fdOKDE4Xreyh9I_0_qDsx8HVo6cePSJuHY-53L81t06smQhGLGZRLJ/exec'; // Substitua com a URL do seu Web App
+    const url = 'https://script.google.com/macros/s/AKfycbzn11viVA6dxLNA3ROSvbUuHzcyGXePbFFgqFK_J2_AHnH-AYzHkBrj_6JP-tgAj7-i/exec'; // Substitua com a URL do seu endpoint
     const payload = {
         ip: ip,
         cidade: localizacao.city || '',
-        estado: localizacao.state_prov || '',
-        pais: localizacao.country_name || '',
-        latitude: localizacao.latitude || '',
-        longitude: localizacao.longitude || ''
+        estado: localizacao.region || '',
+        pais: localizacao.country || '',
+        latitude: localizacao.loc ? localizacao.loc.split(',')[0] : '',
+        longitude: localizacao.loc ? localizacao.loc.split(',')[1] : ''
     };
-
+    
     try {
-        let resposta = await fetch(url, {
+        let response = await fetch(url, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(payload)
         });
-        console.log('Dados enviados com sucesso:', await resposta.text());
-    } catch (erro) {
-        console.error('Erro ao enviar dados:', erro);
+        console.log('Dados enviados com sucesso:', await response.text());
+    } catch (error) {
+        console.error('Erro ao enviar dados:', error);
     }
 }
 
-// Executar a função quando a página carregar
-document.addEventListener('DOMContentLoaded', obterLocalizacaoEEnviarDados);
 
 
 </script>
