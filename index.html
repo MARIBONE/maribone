@@ -9,6 +9,9 @@
 <meta name="robots" content="/index, follow">
 <meta name="keywords" content="Patrimonio, Valorizacao, Excelencia, Referencia, Tecnologia, Alto Rendimento, Estrutura, Elegancia, Automacao, Sofisticacao, Maribone, Criacao de Sites e Aplicativos, Projetos, Blueprint">
 <title>AE MARIBONE</title>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+   
    <script async src="https://www.googletagmanager.com/gtag/js?id=G-1QWRZGMQTQ"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -725,69 +728,11 @@ document.addEventListener('DOMContentLoaded', (event) => {
 });
 
    
-async function obterIP() {
-            try {
-                const resposta = await fetch('https://api.ipify.org?format=json');
-                const dados = await resposta.json();
-                return dados.ip;
-            } catch (error) {
-                console.error('Erro ao obter IP:', error);
-                return null;
-            }
-        }
-
-        async function obterLocalizacao(ip) {
-            const apiKey = 'fb445d077454b7';
-            try {
-                const resposta = await fetch(`https://api.ipgeolocation.io/ipgeo?apiKey=${apiKey}&ip=${ip}`);
-                const dados = await resposta.json();
-                return dados;
-            } catch (error) {
-                console.error('Erro ao obter localização:', error);
-                return null;
-            }
-        }
-
-        async function enviarDadosParaGoogleSheets(ip, localizacao) {
-            const url = 'https://script.google.com/macros/s/AKfycbxrjfXgLpwmB1fdOKDE4Xreyh9I_0_qDsx8HVo6cePSJuHY-53L81t06smQhGLGZRLJ/exec';
-            const payload = {
-                ip: ip,
-                cidade: localizacao.city || '',
-                estado: localizacao.state_prov || '',
-                pais: localizacao.country_name || '',
-                latitude: localizacao.latitude || '',
-                longitude: localizacao.longitude || ''
-            };
-
-            try {
-                let response = await fetch(url, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(payload)
-                });
-                console.log('Dados enviados com sucesso:', await response.text());
-            } catch (error) {
-                console.error('Erro ao enviar dados:', error);
-            }
-        }
-
-        async function rastrearVisitante() {
-            const ip = await obterIP();
-            if (!ip) return;
-
-            const localizacao = await obterLocalizacao(ip);
-            if (!localizacao) return;
-
-            await enviarDadosParaGoogleSheets(ip, localizacao);
-        }
-
-        document.addEventListener('DOMContentLoaded', rastrearVisitante);
-
-
-
-
+$.getJSON('https://api.ipify.org?format=json', function(data){
+            console.log(data.ip); // Exibe o IP no console
+            localStorage.setItem('ip', data.ip); // Armazena o IP no localStorage
+            alert(data.ip); // Mostra o IP em um alerta
+        });
 
 
 </script>
