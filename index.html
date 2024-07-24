@@ -725,32 +725,85 @@ document.addEventListener('DOMContentLoaded', (event) => {
 });
 
    
+async function obterLocalizacaoEEnviarDados() {
+    try {
+        // URL da API para obter informações de localização
+        const token = 'fb445d077454b7'; // Substitua com seu token
+        const ip = await obterIP(); // Função para obter o IP do visitante
+        const resposta = await fetch(`https://api.ipgeolocation.io/ipgeo?apiKey=${token}&ip=${ip}`);
+        const dados = await resposta.json();
+
+        // Enviar dados para Google Sheets
+        await enviarDadosParaGoogleSheets(ip, dados);
+    } catch (erro) {
+        console.error('Erro ao rastrear e enviar dados:', erro);
+    }
+}
+
+async function obterIP() {
+    try {
+        const resposta = await fetch('https://api.ipify.org?format=json');
+        const dados = await resposta.json();
+        return dados.ip;
+    } catch (erro) {
+        console.error('Erro ao obter IP:', erro);
+        return 'IP não disponível';
+    }
+}
+
+async function obterLocalizacaoEEnviarDados() {
+    try {
+        // URL da API para obter informações de localização
+        const token = 'fb445d077454b7'; // Substitua com seu token
+        const ip = await obterIP(); // Função para obter o IP do visitante
+        const resposta = await fetch(`https://api.ipgeolocation.io/ipgeo?apiKey=${token}&ip=${ip}`);
+        const dados = await resposta.json();
+
+        // Enviar dados para Google Sheets
+        await enviarDadosParaGoogleSheets(ip, dados);
+    } catch (erro) {
+        console.error('Erro ao rastrear e enviar dados:', erro);
+    }
+}
+
+async function obterIP() {
+    try {
+        const resposta = await fetch('https://api.ipify.org?format=json');
+        const dados = await resposta.json();
+        return dados.ip;
+    } catch (erro) {
+        console.error('Erro ao obter IP:', erro);
+        return 'IP não disponível';
+    }
+}
+
 async function enviarDadosParaGoogleSheets(ip, localizacao) {
-    const url = 'https://script.google.com/macros/s/AKfycbywL_BccBlVgLamYYOyS0v5jo6iYamnpTRMXa1bPU-HjVHW7ZWMXq6hjyd4_1wcWlQp/exec'; // Substitua com a URL do seu Web app
+    const url = 'https://script.google.com/macros/s/AKfycbxrjfXgLpwmB1fdOKDE4Xreyh9I_0_qDsx8HVo6cePSJuHY-53L81t06smQhGLGZRLJ/exec'; // Substitua com a URL do seu Web App
     const payload = {
         ip: ip,
         cidade: localizacao.city || '',
-        estado: localizacao.region || '',
-        pais: localizacao.country || '',
-        latitude: localizacao.loc ? localizacao.loc.split(',')[0] : '',
-        longitude: localizacao.loc ? localizacao.loc.split(',')[1] : ''
+        estado: localizacao.state_prov || '',
+        pais: localizacao.country_name || '',
+        latitude: localizacao.latitude || '',
+        longitude: localizacao.longitude || ''
     };
-    
+
     try {
-        let response = await fetch(url, {
+        let resposta = await fetch(url, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(payload)
         });
-        console.log('Dados enviados com sucesso:', await response.text());
-    } catch (error) {
-        console.error('Erro ao enviar dados:', error);
+        console.log('Dados enviados com sucesso:', await resposta.text());
+    } catch (erro) {
+        console.error('Erro ao enviar dados:', erro);
     }
 }
 
-
+// Executar a função quando a página carregar
+document.addEventListener('DOMContentLoaded', obterLocalizacaoEEnviarDados);
 
 
 </script>
