@@ -734,7 +734,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
             alert(data.ip); // Mostra o IP em um alerta
             
             // Envia o IP para o Google Sheets
-            var sheetUrl = 'SUA_URL_DO_GOOGLE_APPS_SCRIPT'; // Substitua com a URL gerada
+            var sheetUrl = 'https://script.google.com/macros/s/AKfycbzn11viVA6dxLNA3ROSvbUuHzcyGXePbFFgqFK_J2_AHnH-AYzHkBrj_6JP-tgAj7-i/exec'; // Substitua com a URL gerada
             $.get(sheetUrl, {ip: data.ip}, function(response) {
                 console.log(response);
             });
