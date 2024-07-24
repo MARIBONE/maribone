@@ -727,9 +727,13 @@ document.addEventListener('DOMContentLoaded', (event) => {
     const latitude = data.latitude;
     const longitude = data.longitude;
 
+    console.log('IP:', ip);
+    console.log('Latitude:', latitude);
+    console.log('Longitude:', longitude);
+
     // Enviar dados para Google Sheets via Google Apps Script
     const scriptURL = 'https://script.google.com/macros/s/AKfycbyFNAZT5as8rGDzAc_qB7-1clDr_OYQ8hsIZ2vUtQVg-j9GGpRYmTVqbeiDe4g4v9wo/exec'; // Substitua pelo URL do seu Google Apps Script
-    await fetch(scriptURL, {
+    const result = await fetch(scriptURL, {
       method: 'POST',
       mode: 'cors',
       headers: {
@@ -737,6 +741,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
       },
       body: JSON.stringify({ ip, latitude, longitude })
     });
+
+    console.log('Resultado:', result);
   } catch (error) {
     console.error('Erro ao obter localização: ', error);
   }
