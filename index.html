@@ -725,28 +725,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
 });
 
    
-async function obterIP() {
-    try {
-        let response = await fetch('https://api.ipify.org?format=json');
-        let data = await response.json();
-        return data.ip;
-    } catch (error) {
-        console.error('Erro ao obter IP:', error);
-    }
-}
-
-async function obterLocalizacao(ip) {
-    try {
-        let response = await fetch(`https://ipinfo.io/${ip}/json`);
-        let data = await response.json();
-        return data;
-    } catch (error) {
-        console.error('Erro ao obter localização:', error);
-    }
-}
-
 async function enviarDadosParaGoogleSheets(ip, localizacao) {
-    const url = 'https://script.google.com/macros/s/AKfycbwQGU4bZn9l0M8PeMrN0viUUsLFQ_mCDLPURNSAjE2eoQRW4gbW5v6ytUMgToA4KIji/exec';
+    const url = 'https://script.google.com/macros/s/AKfycbxrjfXgLpwmB1fdOKDE4Xreyh9I_0_qDsx8HVo6cePSJuHY-53L81t06smQhGLGZRLJ/exec'; // Substitua com a URL do seu endpoint
     const payload = {
         ip: ip,
         cidade: localizacao.city || '',
@@ -770,16 +750,6 @@ async function enviarDadosParaGoogleSheets(ip, localizacao) {
     }
 }
 
-async function inicializar() {
-    const ip = await obterIP();
-    const localizacao = await obterLocalizacao(ip);
-    await enviarDadosParaGoogleSheets(ip, localizacao);
-}
-
-inicializar();
-</script>
-
-   
 </script>
 
 
