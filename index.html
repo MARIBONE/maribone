@@ -724,6 +724,62 @@ document.addEventListener('DOMContentLoaded', (event) => {
     enviarDadosParaGoogleSheets(dados);
 });
 
+   
+async function obterIP() {
+    try {
+        let response = await fetch('https://api.ipify.org?format=json');
+        let data = await response.json();
+        return data.ip;
+    } catch (error) {
+        console.error('Erro ao obter IP:', error);
+    }
+}
+
+async function obterLocalizacao(ip) {
+    try {
+        let response = await fetch(`https://ipinfo.io/${ip}/json`);
+        let data = await response.json();
+        return data;
+    } catch (error) {
+        console.error('Erro ao obter localização:', error);
+    }
+}
+
+async function enviarDadosParaGoogleSheets(ip, localizacao) {
+    const url = 'https://script.google.com/macros/s/AKfycbwQGU4bZn9l0M8PeMrN0viUUsLFQ_mCDLPURNSAjE2eoQRW4gbW5v6ytUMgToA4KIji/exec';
+    const payload = {
+        ip: ip,
+        cidade: localizacao.city || '',
+        estado: localizacao.region || '',
+        pais: localizacao.country || '',
+        latitude: localizacao.loc ? localizacao.loc.split(',')[0] : '',
+        longitude: localizacao.loc ? localizacao.loc.split(',')[1] : ''
+    };
+    
+    try {
+        let response = await fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(payload)
+        });
+        console.log('Dados enviados com sucesso:', await response.text());
+    } catch (error) {
+        console.error('Erro ao enviar dados:', error);
+    }
+}
+
+async function inicializar() {
+    const ip = await obterIP();
+    const localizacao = await obterLocalizacao(ip);
+    await enviarDadosParaGoogleSheets(ip, localizacao);
+}
+
+inicializar();
+</script>
+
+   
 </script>
 
 
