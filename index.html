@@ -727,23 +727,15 @@ document.addEventListener('DOMContentLoaded', (event) => {
    
 async function enviarDadosParaGoogleSheets(ip, localizacao) {
     const url = 'https://script.google.com/macros/s/AKfycbxrjfXgLpwmB1fdOKDE4Xreyh9I_0_qDsx8HVo6cePSJuHY-53L81t06smQhGLGZRLJ/exec'; // Substitua com a URL do seu endpoint
-
-    // Verifique se localizacao está definido e possui as propriedades necessárias
-    const cidade = localizacao && localizacao.city ? localizacao.city : 'Não disponível';
-    const estado = localizacao && localizacao.region ? localizacao.region : 'Não disponível';
-    const pais = localizacao && localizacao.country ? localizacao.country : 'Não disponível';
-    const latitude = localizacao && localizacao.loc ? localizacao.loc.split(',')[0] : 'Não disponível';
-    const longitude = localizacao && localizacao.loc ? localizacao.loc.split(',')[1] : 'Não disponível';
-
     const payload = {
         ip: ip,
-        cidade: cidade,
-        estado: estado,
-        pais: pais,
-        latitude: latitude,
-        longitude: longitude
+        cidade: localizacao.city || '',
+        estado: localizacao.region || '',
+        pais: localizacao.country || '',
+        latitude: localizacao.loc ? localizacao.loc.split(',')[0] : '',
+        longitude: localizacao.loc ? localizacao.loc.split(',')[1] : ''
     };
-
+    
     try {
         let response = await fetch(url, {
             method: 'POST',
@@ -752,11 +744,7 @@ async function enviarDadosParaGoogleSheets(ip, localizacao) {
             },
             body: JSON.stringify(payload)
         });
-        if (response.ok) {
-            console.log('Dados enviados com sucesso:', await response.text());
-        } else {
-            console.error('Erro ao enviar dados:', response.status, await response.text());
-        }
+        console.log('Dados enviados com sucesso:', await response.text());
     } catch (error) {
         console.error('Erro ao enviar dados:', error);
     }
