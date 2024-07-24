@@ -717,8 +717,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 });
 
 
-  // Função para obter o IP do usuário (substitua com seu método de obtenção real)
-  async function getUserIp() {
+ async function getUserIp() {
     // Você pode usar uma API de terceiros para obter o IP
     const response = await fetch('https://api.ipify.org?format=json');
     const data = await response.json();
@@ -730,7 +729,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     const latitude = 0; // Substitua com a latitude real
     const longitude = 0; // Substitua com a longitude real
 
-    fetch('https://script.google.com/macros/s/AKfycbyFNAZT5as8rGDzAc_qB7-1clDr_OYQ8hsIZ2vUtQVg-j9GGpRYmTVqbeiDe4g4v9wo/exec', {
+    fetch('https://script.google.com/macros/s/SEU_CODIGO_DE_IMPLANTACAO/exec', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
