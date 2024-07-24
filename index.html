@@ -742,11 +742,12 @@ document.addEventListener('DOMContentLoaded', (event) => {
       body: JSON.stringify({ ip, latitude, longitude })
     });
 
-    console.log('Resultado:', result);
+    console.log('Resultado:', await result.text());
   } catch (error) {
     console.error('Erro ao obter localização: ', error);
   }
 })();
+
 
 
 
