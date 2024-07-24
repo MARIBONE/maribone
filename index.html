@@ -717,49 +717,27 @@ document.addEventListener('DOMContentLoaded', (event) => {
 });
 
 
-  // Função para obter o IP e localização do usuário
-  async function getUserInfo() {
+  async function getVisitorIp() {
     try {
-      // Obtenha o IP do usuário
-      const ipResponse = await fetch('https://api.ipify.org?format=json');
-      const ipData = await ipResponse.json();
-      const ip = ipData.ip;
-
-      // Obtenha a localização do usuário com base no IP
-      const locationResponse = await fetch(`https://ipinfo.io/${ip}/json?token=YOUR_API_TOKEN`);
-      const locationData = await locationResponse.json();
-
-      return {
-        ip: ip,
-        city: locationData.city || 'Unknown',
-        region: locationData.region || 'Unknown',
-        country: locationData.country || 'Unknown',
-        loc: locationData.loc ? locationData.loc.split(',') : [0, 0]
-      };
+      // Captura o IP público do visitante
+      const response = await fetch('https://api.ipify.org?format=json');
+      const data = await response.json();
+      return data.ip;
     } catch (error) {
-      console.error('Error obtaining user info:', error);
+      console.error('Erro ao obter IP:', error);
       return null;
     }
   }
 
   async function sendTrackingData() {
-    const userInfo = await getUserInfo();
-    if (userInfo) {
-      const [latitude, longitude] = userInfo.loc;
-
+    const ip = await getVisitorIp();
+    if (ip) {
       fetch('https://script.google.com/macros/s/YOUR_DEPLOYMENT_ID/exec', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({
-          ip: userInfo.ip,
-          city: userInfo.city,
-          region: userInfo.region,
-          country: userInfo.country,
-          latitude: latitude,
-          longitude: longitude
-        })
+        body: JSON.stringify({ ip: ip })
       })
       .then(response => response.text())
       .then(data => console.log('Success:', data))
@@ -770,6 +748,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
   // Chama a função de rastreamento ao carregar a página
   window.onload = sendTrackingData;
 </script>
+
 
 
 
