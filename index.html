@@ -725,49 +725,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
 });
 
    
-async function obterLocalizacaoEEnviarDados() {
-    try {
-        // URL da API para obter informações de localização
-        const token = 'fb445d077454b7'; // Substitua com seu token
-        const ip = await obterIP(); // Função para obter o IP do visitante
-        const resposta = await fetch(`https://api.ipgeolocation.io/ipgeo?apiKey=${token}&ip=${ip}`);
-        const dados = await resposta.json();
-
-        // Enviar dados para Google Sheets
-        await enviarDadosParaGoogleSheets(ip, dados);
-    } catch (erro) {
-        console.error('Erro ao rastrear e enviar dados:', erro);
-    }
-}
-
-async function obterIP() {
-    try {
-        const resposta = await fetch('https://api.ipify.org?format=json');
-        const dados = await resposta.json();
-        return dados.ip;
-    } catch (erro) {
-        console.error('Erro ao obter IP:', erro);
-        return 'IP não disponível';
-    }
-}
-
-async function obterLocalizacaoEEnviarDados() {
-    try {
-        // URL da API para obter informações de localização
-        const token = 'fb445d077454b7'; // Substitua com seu token
-        const ip = await obterIP(); // Função para obter o IP do visitante
-        const resposta = await fetch(`https://api.ipgeolocation.io/ipgeo?apiKey=${token}&ip=${ip}`);
-        const dados = await resposta.json();
-
-        // Enviar dados para Google Sheets
-        await enviarDadosParaGoogleSheets(ip, dados);
-    } catch (erro) {
-        console.error('Erro ao rastrear e enviar dados:', erro);
-    }
-}
-
 async function enviarDadosParaGoogleSheets(ip, localizacao) {
-    const url = 'https://script.google.com/macros/s/AKfycbzn11viVA6dxLNA3ROSvbUuHzcyGXePbFFgqFK_J2_AHnH-AYzHkBrj_6JP-tgAj7-i/exec'; // Substitua com a URL do seu endpoint
+    const url = 'https://script.google.com/macros/s/AKfycbzn11viVA6dxLNA3ROSvbUuHzcyGXePbFFgqFK_J2_AHnH-AYzHkBrj_6JP-tgAj7-i/exec'; // Substitua com a URL do seu Web App
     const payload = {
         ip: ip,
         cidade: localizacao.city || '',
@@ -776,7 +735,7 @@ async function enviarDadosParaGoogleSheets(ip, localizacao) {
         latitude: localizacao.loc ? localizacao.loc.split(',')[0] : '',
         longitude: localizacao.loc ? localizacao.loc.split(',')[1] : ''
     };
-    
+
     try {
         let response = await fetch(url, {
             method: 'POST',
@@ -790,6 +749,9 @@ async function enviarDadosParaGoogleSheets(ip, localizacao) {
         console.error('Erro ao enviar dados:', error);
     }
 }
+
+
+
 
 
 </script>
