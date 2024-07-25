@@ -733,19 +733,22 @@ $.getJSON('https://api.ipify.org?format=json', function(data) {
             });
         });
 
-   document.getElementById('meuFormulario').addEventListener('submit', async function(event) {
+   ocument.getElementById('meuFormulario').addEventListener('submit', async function(event) {
             event.preventDefault(); // Previne o envio padrão do formulário
 
-            var nome = document.getElementById('nome').value.trim();
-            var email = document.getElementById('email').value.trim();
-            var whatsapp = document.getElementById('whatsapp').value.trim();
-            var mensagem = document.getElementById('mensagem').value.trim();
+            // Obtém os valores dos campos do formulário
+            var nome = document.getElementById('nome')?.value.trim();
+            var email = document.getElementById('email')?.value.trim();
+            var whatsapp = document.getElementById('whatsapp')?.value.trim();
+            var mensagem = document.getElementById('mensagem')?.value.trim();
 
+            // Verifica se todos os campos foram preenchidos
             if (!nome || !email || !whatsapp || !mensagem) {
                 showNotification('Por favor, preencha todos os campos.', 'error');
                 return;
             }
 
+            // Cria um objeto FormData para enviar os dados
             var formData = new FormData();
             formData.append('nome', nome);
             formData.append('email', email);
@@ -753,6 +756,7 @@ $.getJSON('https://api.ipify.org?format=json', function(data) {
             formData.append('mensagem', mensagem);
 
             try {
+                // Envia os dados para o Apps Script usando Fetch API
                 let response = await fetch('https://script.google.com/macros/s/AKfycbzOs7UhIMH-frRWliGaib6qegTIUt5dCF8u3FRZKUG3o3coHgsLsJ2Myo1nLuz2Ciql/exec', {
                     method: 'POST',
                     body: formData
