@@ -733,27 +733,36 @@ $.getJSON('https://api.ipify.org?format=json', function(data) {
             });
         });
 
-    document.getElementById('caixa_de_mensagem').addEventListener('submit', function(event) {
-    event.preventDefault(); // Previne o envio padrão do formulário
+    document.getElementById('meuFormulario').addEventListener('submit', function(event) {
+            event.preventDefault(); // Previne o envio padrão do formulário
 
-    var nome = document.getElementById('nome').value;
-    var email = document.getElementById('email').value;
-    var whatsapp = document.getElementById('whatsapp').value;
-    var mensagem = document.getElementById('mensagem').value;
+            var nome = document.getElementById('nome').value.trim();
+            var email = document.getElementById('email').value.trim();
+            var whatsapp = document.getElementById('whatsapp').value.trim();
+            var mensagem = document.getElementById('mensagem').value.trim();
 
-    var xhr = new XMLHttpRequest();
-    xhr.open('POST', 'https://script.google.com/macros/s/AKfycbzOs7UhIMH-frRWliGaib6qegTIUt5dCF8u3FRZKUG3o3coHgsLsJ2Myo1nLuz2Ciql/exec', true);
-    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            if (!nome || !email || !whatsapp || !mensagem) {
+                alert('Por favor, preencha todos os campos.');
+                return;
+            }
 
-    xhr.onload = function() {
-      if (xhr.status === 200) {
-        alert('Dados enviados com sucesso.');
-      } else {
-        alert('Houve um erro no envio dos dados.');
-      }
-    };
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', 'https://script.google.com/macros/s/AKfycbzOs7UhIMH-frRWliGaib6qegTIUt5dCF8u3FRZKUG3o3coHgsLsJ2Myo1nLuz2Ciql/exec', true);
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 
-    xhr.send('nome=' + encodeURIComponent(nome) +
+            xhr.onload = function() {
+                if (xhr.status === 200) {
+                    alert('Dados enviados com sucesso.');
+                } else {
+                    alert('Houve um erro no envio dos dados.');
+                }
+            };
+
+            xhr.send('nome=' + encodeURIComponent(nome) +
+                    '&email=' + encodeURIComponent(email) +
+                    '&whatsapp=' + encodeURIComponent(whatsapp) +
+                    '&mensagem=' + encodeURIComponent(mensagem));
+        });xhr.send('nome=' + encodeURIComponent(nome) +
              '&email=' + encodeURIComponent(email) +
              '&whatsapp=' + encodeURIComponent(whatsapp) +
              '&mensagem=' + encodeURIComponent(mensagem));
