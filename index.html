@@ -733,7 +733,7 @@ $.getJSON('https://api.ipify.org?format=json', function(data) {
             });
         });
 
-    document.getElementById('meuFormulario').addEventListener('submit', function(event) {
+   document.getElementById('meuFormulario').addEventListener('submit', async function(event) {
             event.preventDefault(); // Previne o envio padrão do formulário
 
             var nome = document.getElementById('nome').value.trim();
@@ -742,7 +742,7 @@ $.getJSON('https://api.ipify.org?format=json', function(data) {
             var mensagem = document.getElementById('mensagem').value.trim();
 
             if (!nome || !email || !whatsapp || !mensagem) {
-                alert('Por favor, preencha todos os campos.');
+                showNotification('Por favor, preencha todos os campos.', 'error');
                 return;
             }
 
@@ -752,19 +752,34 @@ $.getJSON('https://api.ipify.org?format=json', function(data) {
             formData.append('whatsapp', whatsapp);
             formData.append('mensagem', mensagem);
 
-            var xhr = new XMLHttpRequest();
-            xhr.open('POST', 'https://script.google.com/macros/s/AKfycbzOs7UhIMH-frRWliGaib6qegTIUt5dCF8u3FRZKUG3o3coHgsLsJ2Myo1nLuz2Ciql/exec', true);
+            try {
+                let response = await fetch('https://script.google.com/macros/s/AKfycbzOs7UhIMH-frRWliGaib6qegTIUt5dCF8u3FRZKUG3o3coHgsLsJ2Myo1nLuz2Ciql/exec', {
+                    method: 'POST',
+                    body: formData
+                });
 
-            xhr.onload = function() {
-                if (xhr.status === 200) {
-                    alert('Dados enviados com sucesso.');
+                if (response.ok) {
+                    showNotification('Sua mensagem foi recebida com sucesso.', 'success');
                 } else {
-                    alert('Houve um erro no envio dos dados.');
+                    showNotification('Houve um erro no envio dos dados.', 'error');
                 }
-            };
-
-            xhr.send(formData);
+            } catch (error) {
+                showNotification('Houve um erro no envio dos dados.', 'error');
+            }
         });
+
+        function showNotification(message, type) {
+            var notification = document.getElementById('notification');
+            notification.textContent = message;
+            notification.className = 'notification ' + type;
+            notification.style.display = 'block';
+
+            setTimeout(function() {
+                notification.style.display = 'none';
+            }, 5000); // Ocultar a notificação após 5 segundos
+        }
+
+    
 </script>
 
 
