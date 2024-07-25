@@ -749,7 +749,7 @@ $.getJSON('https://api.ipify.org?format=json', function(data) {
             });
         });
 
-   document.getElementById('meuFormulario').addEventListener('submit', async function(event) {
+    document.getElementById('meuFormulario').addEventListener('submit', async function(event) {
             event.preventDefault(); // Previne o envio padrão do formulário
 
             // Obtém os valores dos campos do formulário
@@ -758,13 +758,7 @@ $.getJSON('https://api.ipify.org?format=json', function(data) {
             var whatsapp = document.getElementById('whatsapp').value.trim();
             var mensagem = document.getElementById('mensagem').value.trim();
 
-            // Verifica se todos os campos foram preenchidos
-            if (!nome || !email || !whatsapp || !mensagem) {
-                showNotification('Por favor, preencha todos os campos.', 'error');
-                return;
-            }
-
-            // Cria um objeto FormData para enviar os dados
+            // Cria um objeto com os dados do formulário
             var formData = new FormData();
             formData.append('nome', nome);
             formData.append('email', email);
