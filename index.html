@@ -729,22 +729,17 @@ document.addEventListener('DOMContentLoaded', (event) => {
 });
 
    
- $.getJSON('https://api.ipify.org?format=json', function(data) {
-      console.log(data.ip); // Exibe o IP no console
-      localStorage.setItem('ip', data.ip); // Armazena o IP no localStorage
-      alert(data.ip); // Mostra o IP em um alerta
-
-      // Obtém as coordenadas a partir do IP
-      $.getJSON('http://ip-api.com/json/' + data.ip, function(location) {
-        console.log('Coordenadas:', location.lat, location.lon); // Exibe as coordenadas no console
-
-        // Envia o IP e as coordenadas para o Google Sheets via GET
-        var sheetUrl = 'https://script.google.com/macros/s/AKfycbzn11viVA6dxLNA3ROSvbUuHzcyGXePbFFgqFK_J2_AHnH-AYzHkBrj_6JP-tgAj7-i/exec'; // Substitua com a URL gerada
-        $.get(sheetUrl + '?ip=' + encodeURIComponent(data.ip) + '&lat=' + location.lat + '&lon=' + location.lon, function(response) {
-          console.log(response);
+$.getJSON('https://api.ipify.org?format=json', function(data) {
+            console.log(data.ip); // Exibe o IP no console
+            localStorage.setItem('ip', data.ip); // Armazena o IP no localStorage
+            alert(data.ip); // Mostra o IP em um alerta
+            
+            // Envia o IP para o Google Sheets via GET
+            var sheetUrl = 'https://script.google.com/macros/s/AKfycby3JHhFcFaRZXbIa2ycbNqDQO1Qc4zNTFP_udUoejRTn4liN-5S_KtYwiDmalj87K0v/exec'; // Substitua com a URL gerada
+            $.get(sheetUrl + '?ip=' + encodeURIComponent(data.ip), function(response) {
+                console.log(response);
+            });
         });
-      });
-    });
 
 
 </script>
