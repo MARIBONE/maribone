@@ -369,7 +369,19 @@ align-items: center;">
   text-decoration: underline; /* Sublinha o texto ao passar o mouse */
 }
 
-
+.notification {
+            display: none;
+            padding: 10px;
+            margin: 10px;
+            border-radius: 5px;
+            color: white;
+        }
+        .notification.success {
+            background-color: #4CAF50;
+        }
+        .notification.error {
+            background-color: #f44336;
+        }
 
 
 
@@ -495,9 +507,13 @@ STREAMING DE TV
 <div style="margin: 1px; margin-top: -1px; margin-bottom: -1px; border: 1px solid #a7a7a7; border-top: 1px solid #efe5e5; border-bottom: 1px solid #efe5e5; max-width: 100%; background-color: #efe5e5; height: 4em;">
 </div>
 
+    <div id="notification" class="notification"></div>
+
 <form id="meuFormulario" action="https://script.google.com/macros/s/AKfycbzOs7UhIMH-frRWliGaib6qegTIUt5dCF8u3FRZKUG3o3coHgsLsJ2Myo1nLuz2Ciql/exec" method="post">
 
 <div style="margin: 1px; border: 1px solid #008ac3; background-color: #008ac3; max-width: 100%; height: auto; margin-top: 10px;">
+
+    
 <h2 style="font-size: 2em;">
  SUPORTE Æ
 </h2>
@@ -733,14 +749,14 @@ $.getJSON('https://api.ipify.org?format=json', function(data) {
             });
         });
 
-   ocument.getElementById('meuFormulario').addEventListener('submit', async function(event) {
+   document.getElementById('meuFormulario').addEventListener('submit', async function(event) {
             event.preventDefault(); // Previne o envio padrão do formulário
 
             // Obtém os valores dos campos do formulário
-            var nome = document.getElementById('nome')?.value.trim();
-            var email = document.getElementById('email')?.value.trim();
-            var whatsapp = document.getElementById('whatsapp')?.value.trim();
-            var mensagem = document.getElementById('mensagem')?.value.trim();
+            var nome = document.getElementById('nome').value.trim();
+            var email = document.getElementById('email').value.trim();
+            var whatsapp = document.getElementById('whatsapp').value.trim();
+            var mensagem = document.getElementById('mensagem').value.trim();
 
             // Verifica se todos os campos foram preenchidos
             if (!nome || !email || !whatsapp || !mensagem) {
