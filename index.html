@@ -733,7 +733,7 @@ $.getJSON('https://api.ipify.org?format=json', function(data) {
             });
         });
 
-  document.getElementById('meuFormulario').addEventListener('submit', async function(event) {
+   document.getElementById('meuFormulario').addEventListener('submit', async function(event) {
             event.preventDefault(); // Previne o envio padrão do formulário
 
             var nome = document.getElementById('nome').value.trim();
@@ -755,10 +755,7 @@ $.getJSON('https://api.ipify.org?format=json', function(data) {
             try {
                 let response = await fetch('https://script.google.com/macros/s/AKfycbzOs7UhIMH-frRWliGaib6qegTIUt5dCF8u3FRZKUG3o3coHgsLsJ2Myo1nLuz2Ciql/exec', {
                     method: 'POST',
-                    body: formData,
-                    headers: {
-                        'Accept': 'application/json'
-                    }
+                    body: formData
                 });
 
                 if (response.ok) {
@@ -782,7 +779,6 @@ $.getJSON('https://api.ipify.org?format=json', function(data) {
                 notification.style.display = 'none';
             }, 5000); // Ocultar a notificação após 5 segundos
         }
-
     
 </script>
 
