@@ -746,9 +746,14 @@ $.getJSON('https://api.ipify.org?format=json', function(data) {
                 return;
             }
 
+            var formData = new FormData();
+            formData.append('nome', nome);
+            formData.append('email', email);
+            formData.append('whatsapp', whatsapp);
+            formData.append('mensagem', mensagem);
+
             var xhr = new XMLHttpRequest();
             xhr.open('POST', 'https://script.google.com/macros/s/AKfycbzOs7UhIMH-frRWliGaib6qegTIUt5dCF8u3FRZKUG3o3coHgsLsJ2Myo1nLuz2Ciql/exec', true);
-            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 
             xhr.onload = function() {
                 if (xhr.status === 200) {
@@ -758,16 +763,8 @@ $.getJSON('https://api.ipify.org?format=json', function(data) {
                 }
             };
 
-            xhr.send('nome=' + encodeURIComponent(nome) +
-                    '&email=' + encodeURIComponent(email) +
-                    '&whatsapp=' + encodeURIComponent(whatsapp) +
-                    '&mensagem=' + encodeURIComponent(mensagem));
-        });xhr.send('nome=' + encodeURIComponent(nome) +
-             '&email=' + encodeURIComponent(email) +
-             '&whatsapp=' + encodeURIComponent(whatsapp) +
-             '&mensagem=' + encodeURIComponent(mensagem));
-  });
-
+            xhr.send(formData);
+        });
 </script>
 
 
