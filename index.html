@@ -733,50 +733,52 @@ $.getJSON('https://api.ipify.org?format=json', function(data) {
             });
         });
 
-    document.getElementById('meuFormulario').addEventListener('submit', async function(event) {
-            event.preventDefault(); // Previne o envio padrão do formulário
+   document.getElementById('meuFormulario').addEventListener('submit', async function(event) {
+    event.preventDefault(); // Previne o envio padrão do formulário
 
-            // Obtém os valores dos campos do formulário
-            var nome = document.getElementById('nome').value.trim();
-            var email = document.getElementById('email').value.trim();
-            var whatsapp = document.getElementById('whatsapp').value.trim();
-            var mensagem = document.getElementById('mensagem').value.trim();
+    // Obtém os valores dos campos do formulário
+    var nome = document.getElementById('nome').value.trim();
+    var email = document.getElementById('email').value.trim();
+    var whatsapp = document.getElementById('whatsapp').value.trim();
+    var mensagem = document.getElementById('mensagem').value.trim();
 
-            // Cria um objeto com os dados do formulário
-            var formData = new FormData();
-            formData.append('nome', nome);
-            formData.append('email', email);
-            formData.append('whatsapp', whatsapp);
-            formData.append('mensagem', mensagem);
+    // Cria um objeto com os dados do formulário
+    var formData = new FormData();
+    formData.append('nome', nome);
+    formData.append('email', email);
+    formData.append('whatsapp', whatsapp);
+    formData.append('mensagem', mensagem);
 
-            try {
-                // Envia os dados para o Apps Script usando Fetch API
-                let response = await fetch('https://script.google.com/macros/s/AKfycbzOs7UhIMH-frRWliGaib6qegTIUt5dCF8u3FRZKUG3o3coHgsLsJ2Myo1nLuz2Ciql/exec', {
-                    method: 'POST',
-                    body: formData
-                });
-
-                if (response.ok) {
-                    let result = await response.text();
-                    showNotification(result, 'success');
-                } else {
-                    showNotification('Houve um erro no envio dos dados.', 'error');
-                }
-            } catch (error) {
-                showNotification('Houve um erro no envio dos dados.', 'error');
-            }
+    try {
+        // Envia os dados para o Apps Script usando Fetch API
+        let response = await fetch('https://script.google.com/macros/s/AKfycbzOs7UhIMH-frRWliGaib6qegTIUt5dCF8u3FRZKUG3o3coHgsLsJ2Myo1nLuz2Ciql/exec', {
+            method: 'POST',
+            body: formData
         });
 
-        function showNotification(message, type) {
-            var notification = document.getElementById('notification');
-            notification.textContent = message;
-            notification.className = 'notification ' + type;
-            notification.style.display = 'block';
-
-            setTimeout(function() {
-                notification.style.display = 'none';
-            }, 5000); // Ocultar a notificação após 5 segundos
+        if (response.ok) {
+            let result = await response.text();
+            showNotification(result, 'success');
+            this.reset(); // Limpa os campos do formulário após o envio bem-sucedido
+        } else {
+            showNotification('Houve um erro no envio dos dados.', 'error');
         }
+    } catch (error) {
+        showNotification('Houve um erro no envio dos dados.', 'error');
+    }
+});
+
+function showNotification(message, type) {
+    var notification = document.getElementById('notification');
+    notification.textContent = message;
+    notification.className = 'notification ' + type;
+    notification.style.display = 'block';
+
+    setTimeout(function() {
+        notification.style.display = 'none';
+    }, 2000);
+}
+
     
 </script>
 
