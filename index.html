@@ -187,56 +187,43 @@ color: #ffffff;
 }
 
 
-input[type="nome"] {
-        width: 40%;
-        height: 10%;
-        margin-top: 5%;
-        background-color: #ffffff;
-        border: 1px solid #000000;
-        border-radius: 4px;
-        cursor: pointer;
-        
-       
-    }
+input[type="text"], 
+input[type="email"], 
+input[type="tel"], 
+input[type="submit"] {
+    width: 100%; /* Ajusta a largura para 100% do elemento pai */
+    height: 40px; /* Define uma altura fixa para todos os campos */
+    margin-top: 10px; /* Margem superior para espaçamento */
+    background-color: #ffffff;
+    border: 1px solid #000000;
+    border-radius: 4px;
+    box-sizing: border-box; /* Inclui padding e border na largura total */
+}
+
+/* Estilo específico para input[type="submit"] */
+input[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px; /* Padding ajustado para maior conforto */
+    border: none;
+    cursor: pointer;
+    font-size: 18px; /* Ajusta o tamanho da fonte */
+}
+
+/* Ajustes específicos para diferentes tipos de input */
+input[type="text"][name="nome"] {
+    width: 40%; /* Ajusta a largura para 40% do elemento pai */
+}
 
 input[type="email"] {
-        width: 40%;
-        height: 10%;
-        margin-top: 10px;
-        background-color: #ffffff;
-        border: 1px solid #000000;
-        border-radius: 4px;
-        margin-bottom: 2%;
-        
-       
-    }
+    width: 40%; /* Ajusta a largura para 40% do elemento pai */
+}
 
-input[type="whatsapp"] {
-        width: 25%;
-        height: 10%;
-        margin-top: 10px;
-        background-color: #ffffff;
-        border: 1px solid #000000;
-        border-radius: 4px;
-        margin-bottom: 20px;
-        
-       
-    }
+input[type="tel"] {
+    width: 25%; /* Ajusta a largura para 25% do elemento pai */
+}
 
-
-
-input[type="submit"] {
-        background-color: #4CAF50;
-        color: white;
-        padding: 1% 2%; /* Ajuste o padding para aumentar o tamanho */
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-        font-size: 18px; /* Ajuste o tamanho da fonte */
-        margin-bottom: 10px;
-       
-    }
-
+    
 footer {
 margin:1px; 
 border: 1px solid #a7a7a7; 
