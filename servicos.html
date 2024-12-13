@@ -510,10 +510,10 @@ align-items: center;">
     &times; <!-- Ícone de fechar -->
   </div>
 
-<p  id="datetime" style="color: #a9a9a9; display: flex; flex-wrap: wrap; margin-left: 55%; font-size: 100%; margin-top: -2em;"> 13/07/2024 16:00:14</p>
+<p  id="datetime" style="color: #a9a9a9; display: flex; flex-wrap: wrap; margin-left: 55%; font-size: 100%; margin-top: -2em;"> 13/07/2024 <br>16:00:14</p>
 
 <div style="margin: 1px; border: 1px solid #ffffff; max-width: 100%; background-color: #ffffff; height: auto; margin-top: 4em;">
-<h1 id="typewriter" style="margin-top: 1px; color: #202020; font-size: 2.0em;"></h1>
+<h1 id="typewriter" style="margin-top: 1px; color: #202020; font-size: 2.5em;"></h1>
 </div>
 </header>
 
@@ -925,21 +925,7 @@ var card = document.getElementById('card');
 card.classList.toggle('show');
 });
 
-    function UpdateDateTime() {
-        var now = new Date();
-        var formattedDate = now.toLocaleDateString('pt-BR');
-        var formattedTime = now.toLocaleTimeString('pt-BR', {
-          hour: '2-digit',
-          minute: '2-digit',
-          second: '2-digit',
-          hour12: false
-        });
-
-        document.getElementById("datetime").innerHTML = formattedDate + '<br>' + formattedTime;
-      }
-
-      setInterval(UpdateDateTime, 1000);
-      UpdateDateTime();
+    
 
 
 
