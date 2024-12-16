@@ -500,7 +500,7 @@ align-items: center;">
 
 <body>
 
-<header> <img src="https://is.gd/VHppxT" style="width: 20em; max-width: 100%; display: flex; height: auto; margin-right: 800px;">
+<header> <a href="https://maribone.github.io/maribone"> <img src="https://is.gd/VHppxT" style="width: 20em; max-width: 100%; display: flex; height: auto; margin-right: 800px;">
 
 <div>
 <div id="BOTAO">
@@ -510,7 +510,7 @@ align-items: center;">
 </div>
 
 <div class="sidebar" id="ABA">
-  <ul class="sidebar-menu">
+  <ul class="sidebar-menu" style="font-size: 5vh;">
     <li><a href="">Ínicio</a></li>
     <li><a href="#servicos">Serviços</a></li>
     <li><a href="#servicos">Contato</a></li>
@@ -548,7 +548,7 @@ align-items: center;">
 
 
 <article>
-<p style="font-size: 2em; color: #008ac3; text-shadow: -1px -1px 1px rgba(255, 255, 255, 1);">
+<p style="font-size: 1.6em; color: #008ac3; text-shadow: -1px -1px 1px rgba(255, 255, 255, 1);">
 Para mais informações ligue: (11) 9.95862-3759 <br> ou envie um e-mail para: <br>contato@maribone.com.br
 </p>
 </article>
@@ -656,10 +656,11 @@ atualizações.</li>
 
     
 <footer> 
-<img src="https://speedyclearance.uk/wp-content/uploads/2018/04/whatsapp-icon.png" style="width: 20em; max-width: 8%; display: flex; height: auto; margin-left: 42em; margin-top: 3%;">
+<img src="https://iconape.com/wp-content/png_logo_vector/whatsapp-logo.png" style="width: 20em; max-width: 8%; display: flex; height: auto; margin-left: 42em; margin-top: 3%;">
 
 <img src="https://is.gd/e2eteA" style="width: 20em; max-width: 15%; display: flex; height: auto; margin-left: 43%; margin-top: 3%;">
 
+    
 <p style="color: #ffffff;"> Politica de Privacidade</p>
 <p style="color: #ffffff;"> Segurança dos Dados</p>
 <p style="color: #ffffff;"> Termos e Condições</p>
@@ -719,25 +720,6 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
-
-
-
-
-
-const banner = document.getElementById('banner');
-        let currentImage = 0;
-        const images = banner.querySelectorAll('img');
-
-        function changeImage() {
-            const nextImage = (currentImage + 1) % images.length;
-            images[currentImage].style.opacity = '0';
-            images[nextImage].style.opacity = '6000';
-            currentImage = nextImage;
-            setTimeout(changeImage, 3000); // Tempo de transição, 1000ms = 1 segundos
-        }
-
-        // Inicia a transição automática
-        changeImage();
 
 
 function UpdateDateTime() {
