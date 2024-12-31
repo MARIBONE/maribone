@@ -482,7 +482,77 @@ align-items: center;">
 
 
 
-         
+    .pesquisa {
+      max-width: 99%;
+      height: auto;
+      background-color: #efe5e5;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      border-radius: 15px;
+      padding: 20px;
+      text-align: center;
+      
+      
+      
+      
+    }
+
+    .pulsing-button {
+      width: 25vw;
+      height: 25vw;
+      background: #007BFF;
+      color: white;
+      font-size: 20px;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      box-shadow: 0 0 1000000px rgba(0, 123, 255, 0.5);
+      animation: pulse 0.5s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% {
+        box-shadow: 0 0 10px rgba(0, 123, 255, 0.5);
+      }
+      50% {
+        box-shadow: 0 0 20px rgba(0, 123, 255, 0.8);
+      }
+    }
+    .hidden {
+      display: none;
+    }
+    label2 {
+      display: block;
+      margin: 15px 0;
+      font-size: 18px;
+      text-align: center;
+      
+    }
+    h3 {
+      font-size: 22px;
+      margin-bottom: 20px;
+    }
+    input[type="text2"], input[type="tel2"] {
+      width: calc(100% - 20px);
+      padding: 10px;
+      font-size: 16px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    button2 {
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      font-size: 16px;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+    .confirmation {
+      font-size: 18px;
+      color: #333;
+      margin-top: 20px;
+    }     
 
 
 </style>
@@ -639,7 +709,53 @@ STREAMING DE TV
 </main>
 
 
-<div style="margin: 1px; margin-top: -1px; margin-bottom: -1px; border: 1px solid #a7a7a7; border-top: 1px solid #efe5e5; border-bottom: 1px solid #efe5e5; max-width: 100%; background-color: #efe5e5; height: 4em;">
+<div style="margin: 1px; margin-top: -1px; margin-bottom: -1px; border: 1px solid #a7a7a7; border-top: 1px solid #efe5e5; border-bottom: 1px solid #efe5e5; max-width: 100%; background-color: #efe5e5; height: auto;">
+
+<div class="pesquisa">
+    <button id="startButton" class="pulsing-button">Iniciar</button>
+
+    <!-- Primeiro Card -->
+    <div id="options" class="hidden">
+      <h3>O QUE VOCÊ QUER FAZER?</h3>
+      <label2><input type="radio" name="option" value="site"> SITE PARA WEB</label2>
+      <label2><input type="radio" name="option" value="app"> APLICATIVO DE CELULAR</label2>
+      <label2><input type="radio" name="option" value="streaming"> CANAL DE STREAMING</label2>
+      <label2><input type="radio" name="option" value="automotive"> SISTEMA NO PAINEL AUTOMOTIVO</label2>
+      <label2><input type="radio" name="option" value="smartwatch"> APLICAÇÕES EM RELÓGIOS INTELIGENTES</label2>
+      <label2><input type="radio" name="option" value="games"> JOGOS PARA MONETIZAR</label2>
+    </div>
+
+    <!-- Segundo Card -->
+    <div id="options-next" class="hidden">
+      <h3>O QUE DESEJA ALCANÇAR COM ISSO?</h3>
+      <label2><input type="radio" name="goal" value="sell"> VENDER</label2>
+      <label2><input type="radio" name="goal" value="advertise"> DIVULGAR</label2>
+      <label2><input type="radio" name="goal" value="manage"> GERENCIAR</label2>
+    </div>
+
+    <!-- Terceiro Card -->
+    <div id="contact-info" class="hidden">
+      <h3>INSIRA SEUS DADOS</h3>
+      <label for="name">Nome:</label>
+      <input type="text2" id="name" placeholder="Digite seu nome">
+      <label2 for="phone">Telefone:</label2>
+      <input type="tel2" id="phone" placeholder="Digite seu telefone">
+      <button2 id="submit">Enviar</button2>
+    </div>
+
+    <!-- Quarto Card -->
+    <div id="confirmation" class="hidden">
+      <h3>OBRIGADO!</h3>
+      <p class="confirmation">
+        Recebemos sua solicitação. Entraremos em contato em breve.  
+        <br><br>  
+        Ou preencha o formulário completo para um projeto personalizado!
+      </p>
+    </div>
+  </div>
+
+
+
 </div>
 
 <form id="meuFormulario">
@@ -955,6 +1071,41 @@ document.getElementById('closeButton').onclick = function() {
   sidebar.style.right = '-250px'; // Esconde a sidebar
 }
  
+const startButton = document.getElementById('startButton');
+    const options = document.getElementById('options');
+    const optionsNext = document.getElementById('options-next');
+    const contactInfo = document.getElementById('contact-info');
+    const confirmation = document.getElementById('confirmation');
+    const radioButtons = document.querySelectorAll('input[name="option"]');
+    const nextOptions = document.querySelectorAll('input[name="goal"]');
+
+    // Quando o botão inicial é clicado
+    startButton.addEventListener('click', () => {
+      startButton.classList.add('hidden'); // Esconde o botão
+      options.classList.remove('hidden'); // Mostra o primeiro card
+    });
+
+    // Quando uma opção do primeiro card é selecionada
+    radioButtons.forEach(radio => {
+      radio.addEventListener('change', () => {
+        options.classList.add('hidden'); // Esconde o primeiro card
+        optionsNext.classList.remove('hidden'); // Mostra o segundo card
+      });
+    });
+
+    // Quando uma opção do segundo card é selecionada
+    nextOptions.forEach(option => {
+      option.addEventListener('change', () => {
+        optionsNext.classList.add('hidden'); // Esconde o segundo card
+        contactInfo.classList.remove('hidden'); // Mostra o terceiro card
+      });
+    });
+
+    // Quando os dados são enviados
+    document.getElementById('submit').addEventListener('click', () => {
+      contactInfo.classList.add('hidden'); // Esconde o terceiro card
+      confirmation.classList.remove('hidden'); // Mostra o quarto card
+    });
 
 
 </script>
