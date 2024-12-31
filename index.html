@@ -637,18 +637,33 @@ align-items: center;">
 
 
 
+
 <article>
 <p style="font-size: 2em; color: #008ac3; text-shadow: -1px -1px 1px rgba(255, 255, 255, 1);">
-CONSULTE SEU PROJETO AQUI:<br>
-    <input type="search" id="campoPesquisa" placeholder="Digite o código...">
+CONSULTE SEU PROJETO AQUI:
 </p>
+
+
+    <input type="search" id="campoPesquisa" placeholder="Digite o código ou titulo...">
+  <button onclick="pesquisarLei()">Pesquisar</button><br><br>
+
+<div>
+  <div style="padding-left: 50px; padding-right: 50px;" id="pesquisa-resultado"></div>
+    
+<h2 style="font-size: 2em; color: #5d5555; justify-content: center; text-items: center;">
+
+</h2>
+
+</div>
+</div>
+
 </article>
 
 <div style="margin: 1px; max-width: 100%; background-color: #efe5e5; height: auto; border-bottom: -1px solid #ffffff; border-left: 1px solid #a7a7a7; border-right: 1px solid #a7a7a7;">
 <div style="margin: 1px; border-top: 1px solid #000000; border-bottom: -1px solid #ffffff; border-left: 1px solid #a7a7a7; border-right: 1px solid #a7a7a7; max-width: 90%; margin-left: 5%; background-color: #ffffff">
 
 <h2 style="font-size: 2em; color: #5d5555; display: inline-block; justify-content: center; text-items: center;">
-GARANTA SUA PRESENÇA DIGITAL<br> <br> VALORIZE SEU PATRIMÔNIO
+GARANTA SUA PRESENÇA DIGITAL<br>
 </h2>
 </div>
 </div>
@@ -1070,6 +1085,35 @@ document.getElementById('closeButton').onclick = function() {
   var sidebar = document.getElementById('ABA');
   sidebar.style.right = '-250px'; // Esconde a sidebar
 }
+
+
+    const textoLeiMEI = `
+    A 
+
+
+
+`;
+
+
+function pesquisarLei() {
+      const termo = document.getElementById('campoPesquisa').value.trim().toLowerCase();
+      const resultadoDiv = document.getElementById('pesquisa-resultado');
+      resultadoDiv.innerHTML = '';
+
+      if (!termo) {
+        resultadoDiv.innerText = 'Digite o código ou titulo do projeto para buscar:';
+        return;
+      }
+
+      const regex = new RegExp(`[^.]*?\\b${termo}\\b[^.]*?\\.`,'gi'); // Regex para capturar a frase onde o termo está presente
+      const matches = textoLeiMEI.match(regex);
+
+      if (matches) {
+        resultadoDiv.innerHTML = matches.join('<br><br>');
+      } else {
+        resultadoDiv.innerText = 'Nenhum termo encontrado.';
+      }
+    }
  
 const startButton = document.getElementById('startButton');
     const options = document.getElementById('options');
