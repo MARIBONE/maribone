@@ -520,3 +520,4 @@ document.getElementById('closeButton').onclick = function() {
 });
 
             
+}
