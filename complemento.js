@@ -1,6 +1,9 @@
 document.addEeventListener("DOMContentLoaded", function() {
-  if (document.title === "index") {
+  if (document.title === "index.html") {
     console.log(executando código da index");
+
+
+    <script>
       document.addEventListener('DOMContentLoaded', function() {
     const getCurrentDate = () => {
         const now = new Date();
@@ -335,4 +338,4 @@ const startButton = document.getElementById('startButton');
     });
 
   }
-  
+    </script>
