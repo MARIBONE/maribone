@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", function() {
         document.body.style.backgroundColor = "lightgreen";
     }
 
-    if (paginaAtual.endsWith("serviços.html")) {
+    if (paginaAtual.endsWith("servicos.html")) {
         document.body.style.backgroundColor = "lightcoral";
     }
 
