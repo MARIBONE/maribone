@@ -678,23 +678,6 @@ Implementamos serviços de streaming com suporte para vídeos on-demand, transmi
 
 
 
-
-const banner = document.getElementById('banner');
-        let currentImage = 0;
-        const images = banner.querySelectorAll('img');
-
-        function changeImage() {
-            const nextImage = (currentImage + 1) % images.length;
-            images[currentImage].style.opacity = '0';
-            images[nextImage].style.opacity = '6000';
-            currentImage = nextImage;
-            setTimeout(changeImage, 3000); // Tempo de transição, 1000ms = 1 segundos
-        }
-
-        // Inicia a transição automática
-        changeImage();
-
-
 function UpdateDateTime() {
         var now = new Date();
         var formattedDate = now.toLocaleDateString('pt-BR');
