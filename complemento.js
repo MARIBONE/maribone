@@ -1,7 +1,7 @@
 document.addEeventListener("DOMContentLoaded", function() {
 
   
-  if (document.title === "index.html") {
+  if (document.title === "index") {
     console.log(executando código da index");
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
