@@ -1,8 +1,11 @@
 document.addEeventListener("DOMContentLoaded", function() {
+
+  
   if (document.title === "index.html") {
     console.log(executando código da index");
 
-
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+      
     <script>
       document.addEventListener('DOMContentLoaded', function() {
     const getCurrentDate = () => {
