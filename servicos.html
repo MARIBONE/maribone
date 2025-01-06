@@ -628,9 +628,7 @@ Implementamos serviços de streaming com suporte para vídeos on-demand, transmi
 </body>
 
 <script>
-
-    
-document.addEventListener('DOMContentLoaded', function() {
+      document.addEventListener('DOMContentLoaded', function() {
     const getCurrentDate = () => {
         const now = new Date();
         const dayNames = ["Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado"];
@@ -646,8 +644,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const texts = [
         getCurrentDate(), 
-        "Æ MARIBONE TECNOLOGIA",
-        
+        "Tecnologia de Alto Nível",
+        "Seu sistema com a raiz Maribone", 
+        "Leve sua Marca mais Longe!"
     ]; // Array com textos a serem escritos
 
     let textIndex = 0;
@@ -680,7 +679,20 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
+const banner = document.getElementById('banner');
+        let currentImage = 0;
+        const images = banner.querySelectorAll('img');
 
+        function changeImage() {
+            const nextImage = (currentImage + 1) % images.length;
+            images[currentImage].style.opacity = '0';
+            images[nextImage].style.opacity = '6000';
+            currentImage = nextImage;
+            setTimeout(changeImage, 3000); // Tempo de transição, 1000ms = 1 segundos
+        }
+
+        // Inicia a transição automática
+        changeImage();
 
 
 function UpdateDateTime() {
@@ -805,9 +817,7 @@ $.getJSON('https://api.ipify.org?format=json', function(data) {
             localStorage.setItem('ip', data.ip); // Armazena o IP no localStorage
             
             // Envia o IP para o Google Sheets via GET
-            var sheetUrl = 'https://script.google.com/macros/s/AKfycby3JHhFcFaRZXbIa2ycbNqDQO1Qc4zNTFP_udUoejRTn4liN-5S_KtYwiDmalj87K0v/exec'; // Substitua 
-
-com a URL gerada
+            var sheetUrl = 'https://script.google.com/macros/s/AKfycby3JHhFcFaRZXbIa2ycbNqDQO1Qc4zNTFP_udUoejRTn4liN-5S_KtYwiDmalj87K0v/exec'; // Substitua com a URL gerada
             $.get(sheetUrl + '?ip=' + encodeURIComponent(data.ip), function(response) {
                 console.log(response);
             });
@@ -870,8 +880,6 @@ var card = document.getElementById('card');
 card.classList.toggle('show');
 });
 
-    
-
 
 document.getElementById('BOTAO').onclick = function() {
   var sidebar = document.getElementById('ABA');
@@ -888,8 +896,73 @@ document.getElementById('closeButton').onclick = function() {
   sidebar.style.right = '-250px'; // Esconde a sidebar
 }
 
+
+    const textoLeiMEI = `
+    A 
+
+
+
+`;
+
+
+function pesquisarLei() {
+      const termo = document.getElementById('campoPesquisa').value.trim().toLowerCase();
+      const resultadoDiv = document.getElementById('pesquisa-resultado');
+      resultadoDiv.innerHTML = '';
+
+      if (!termo) {
+        resultadoDiv.innerText = 'Digite o código ou titulo do projeto para buscar:';
+        return;
+      }
+
+      const regex = new RegExp(`[^.]*?\\b${termo}\\b[^.]*?\\.`,'gi'); // Regex para capturar a frase onde o termo está presente
+      const matches = textoLeiMEI.match(regex);
+
+      if (matches) {
+        resultadoDiv.innerHTML = matches.join('<br><br>');
+      } else {
+        resultadoDiv.innerText = 'Nenhum termo encontrado.';
+      }
     }
-        </script>
+ 
+const startButton = document.getElementById('startButton');
+    const options = document.getElementById('options');
+    const optionsNext = document.getElementById('options-next');
+    const contactInfo = document.getElementById('contact-info');
+    const confirmation = document.getElementById('confirmation');
+    const radioButtons = document.querySelectorAll('input[name="option"]');
+    const nextOptions = document.querySelectorAll('input[name="goal"]');
+
+    // Quando o botão inicial é clicado
+    startButton.addEventListener('click', () => {
+      startButton.classList.add('hidden'); // Esconde o botão
+      options.classList.remove('hidden'); // Mostra o primeiro card
+    });
+
+    // Quando uma opção do primeiro card é selecionada
+    radioButtons.forEach(radio => {
+      radio.addEventListener('change', () => {
+        options.classList.add('hidden'); // Esconde o primeiro card
+        optionsNext.classList.remove('hidden'); // Mostra o segundo card
+      });
+    });
+
+    // Quando uma opção do segundo card é selecionada
+    nextOptions.forEach(option => {
+      option.addEventListener('change', () => {
+        optionsNext.classList.add('hidden'); // Esconde o segundo card
+        contactInfo.classList.remove('hidden'); // Mostra o terceiro card
+      });
+    });
+
+    // Quando os dados são enviados
+    document.getElementById('submit').addEventListener('click', () => {
+      contactInfo.classList.add('hidden'); // Esconde o terceiro card
+      confirmation.classList.remove('hidden'); // Mostra o quarto card
+    });
+    
+    </script>
+    
         </body>
 </html>
  
