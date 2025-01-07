@@ -797,45 +797,12 @@ document.getElementById('closeButton').onclick = function() {
 }
 
 
-    
+
+
  
-const startButton = document.getElementById('startButton');
-    const options = document.getElementById('options');
-    const optionsNext = document.getElementById('options-next');
-    const contactInfo = document.getElementById('contact-info');
-    const confirmation = document.getElementById('confirmation');
-    const radioButtons = document.querySelectorAll('input[name="option"]');
-    const nextOptions = document.querySelectorAll('input[name="goal"]');
+  
 
-    // Quando o botão inicial é clicado
-    startButton.addEventListener('click', () => {
-      startButton.classList.add('hidden'); // Esconde o botão
-      options.classList.remove('hidden'); // Mostra o primeiro card
-    });
-
-    // Quando uma opção do primeiro card é selecionada
-    radioButtons.forEach(radio => {
-      radio.addEventListener('change', () => {
-        options.classList.add('hidden'); // Esconde o primeiro card
-        optionsNext.classList.remove('hidden'); // Mostra o segundo card
-      });
-    });
-
-    // Quando uma opção do segundo card é selecionada
-    nextOptions.forEach(option => {
-      option.addEventListener('change', () => {
-        optionsNext.classList.add('hidden'); // Esconde o segundo card
-        contactInfo.classList.remove('hidden'); // Mostra o terceiro card
-      });
-    });
-
-    // Quando os dados são enviados
-    document.getElementById('submit').addEventListener('click', () => {
-      contactInfo.classList.add('hidden'); // Esconde o terceiro card
-      confirmation.classList.remove('hidden'); // Mostra o quarto card
-    });
-
-}
+   
         </script>
            
         </body>
