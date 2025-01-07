@@ -204,3 +204,5 @@ const startButton = document.getElementById('startButton');
       contactInfo.classList.add('hidden'); // Esconde o terceiro card
       confirmation.classList.remove('hidden'); // Mostra o quarto card
     });
+
+}
