@@ -66,21 +66,7 @@ function UpdateDateTime() {
 
 
 
-// Função para enviar dados para o Google Sheets
-function enviarDadosParaGoogleSheets(dados) {
-    const url = new URL('https://script.google.com/macros/s/AKfycbx720SyWRIry8PljEjoByBtVojAwDSZevX398zeeFpYmqrqv86l0F-LAJPJElCwSimNmA/exec');
-    url.search = new URLSearchParams(dados).toString();
 
-    fetch(url, {
-        method: 'GET',
-    }).then(response => response.text())
-    .then(result => {
-        console.log('Dados enviados com sucesso:', result);
-    })
-    .catch(error => {
-        console.error('Erro ao enviar dados:', error);
-    });
-}
 
 // Função para coletar dados
 function coletarDados() {
@@ -105,76 +91,7 @@ function coletarDados() {
         };
     }
 
-    function obterSistemaOperacional(userAgent) {
-        if (/Windows NT 10.0/.test(userAgent)) return 'Windows 10';
-        if (/Windows NT 6.3/.test(userAgent)) return 'Windows 8.1';
-        if (/Windows NT 6.2/.test(userAgent)) return 'Windows 8';
-        if (/Windows NT 6.1/.test(userAgent)) return 'Windows 7';
-        if (/Macintosh/.test(userAgent)) return 'Mac OS';
-        if (/Android/.test(userAgent)) return 'Android';
-        if (/iPad|iPhone/.test(userAgent)) return 'iOS';
-        if (/Linux/.test(userAgent)) return 'Linux';
-        return 'Desconhecido';
-    }
-
-    function obterNavegador(userAgent) {
-        if (/Edg/.test(userAgent)) return 'Edge';
-        if (/Chrome/.test(userAgent) && !/Edg/.test(userAgent)) return 'Chrome';
-        if (/Firefox/.test(userAgent)) return 'Firefox';
-        if (/Safari/.test(userAgent) && !/Chrome/.test(userAgent)) return 'Safari';
-        if (/MSIE|Trident/.test(userAgent)) return 'Internet Explorer';
-        return 'Desconhecido';
-    }
-
-    // Nota: A identificação exata da marca do dispositivo não está disponível diretamente no navegador.
-    function obterMarcaDoDispositivo(userAgent) {
-        if (/Android/.test(userAgent)) return 'Android';
-        if (/iPhone/.test(userAgent)) return 'iPhone';
-        if (/iPad/.test(userAgent)) return 'iPad';
-        if (/Windows/.test(userAgent)) return 'Windows PC';
-        return 'Desconhecido';
-    }
-
-    let dataHora = formatarDataHora();
-    let userAgent = navigator.userAgent;
-    let sistemaOperacional = obterSistemaOperacional(userAgent);
-    let navegador = obterNavegador(userAgent);
-    let marcaDispositivo = obterMarcaDoDispositivo(userAgent);
-    let resolucao = `${window.screen.width}x${window.screen.height}`; // Resolução da tela
-
-    let dados = {
-        pagina: window.location.pathname,
-        data: dataHora.data,
-        hora: dataHora.hora,
-        ip: 'IP não disponível', // O IP não pode ser obtido diretamente do cliente por motivos de segurança.
-        dispositivo: marcaDispositivo,
-        sistemaOperacional: sistemaOperacional,
-        navegador: navegador,
-        resolucao: resolucao
-    };
-
-    console.log(dados); // Adicione este log para depuração
-
-    return dados;
-}
-
-// Adicione um evento para garantir que o código seja executado após o carregamento do DOM
-document.addEventListener('DOMContentLoaded', (event) => {
-    let dados = coletarDados();
-    enviarDadosParaGoogleSheets(dados);
-});
-
-   
-$.getJSON('https://api.ipify.org?format=json', function(data) {
-            console.log(data.ip); // Exibe o IP no console
-            localStorage.setItem('ip', data.ip); // Armazena o IP no localStorage
-            
-            // Envia o IP para o Google Sheets via GET
-            var sheetUrl = 'https://script.google.com/macros/s/AKfycby3JHhFcFaRZXbIa2ycbNqDQO1Qc4zNTFP_udUoejRTn4liN-5S_KtYwiDmalj87K0v/exec'; // Substitua com a URL gerada
-            $.get(sheetUrl + '?ip=' + encodeURIComponent(data.ip), function(response) {
-                console.log(response);
-            });
-        });
+    
 
    document.getElementById('meuFormulario').addEventListener('submit', async function(event) {
     event.preventDefault(); // Previne o envio padrão do formulário
@@ -250,33 +167,7 @@ document.getElementById('closeButton').onclick = function() {
 }
 
 
-    const textoLeiMEI = `
-    A 
-
-
-
-`;
-
-
-function pesquisarLei() {
-      const termo = document.getElementById('campoPesquisa').value.trim().toLowerCase();
-      const resultadoDiv = document.getElementById('pesquisa-resultado');
-      resultadoDiv.innerHTML = '';
-
-      if (!termo) {
-        resultadoDiv.innerText = 'Digite o código ou titulo do projeto para buscar:';
-        return;
-      }
-
-      const regex = new RegExp(`[^.]*?\\b${termo}\\b[^.]*?\\.`,'gi'); // Regex para capturar a frase onde o termo está presente
-      const matches = textoLeiMEI.match(regex);
-
-      if (matches) {
-        resultadoDiv.innerHTML = matches.join('<br><br>');
-      } else {
-        resultadoDiv.innerText = 'Nenhum termo encontrado.';
-      }
-    }
+    
  
 const startButton = document.getElementById('startButton');
     const options = document.getElementById('options');
