@@ -235,25 +235,39 @@ document.getElementById('closeButton').onclick = function() {
   sidebar.style.right = '-250px'; // Esconde a sidebar
 }
 
-const datafeed = require('./sindy.json');
 
-    // Função para buscar apenas o termo relevante no contexto
-    function pesquisarLei() {
-      const termo = document.getElementById('campoPesquisa').value.trim().toLowerCase();
-      const resultadoDiv = document.getElementById('pesquisa-resultado');
-      resultadoDiv.innerHTML = '';
 
-      if (!termo) {
-        resultadoDiv.innerText = 'Digite um termo para buscar na legislação.';
-        return;
-      }
 
-      const regex = new RegExp(`[^.]*?\\b${termo}\\b[^.]*?\\.`,'gi'); // Regex para capturar a frase onde o termo está presente
-      const matches = textoLeiMEI.match(regex);
 
-      if (matches) {
-        resultadoDiv.innerHTML = matches.join('<br><br>');
-      } else {
-        resultadoDiv.innerText = 'Nenhum termo encontrado.';
-      }
-    }
+
+
+let textoLeiMEI = ''; // Variável para armazenar o conteúdo das leis
+
+// Carregar o JSON de forma assíncrona
+fetch('./sindy.json')
+  .then(response => response.json())
+  .then(data => {
+    textoLeiMEI = data.legislacao.join(' '); // Assumindo que o JSON tenha uma propriedade 'legislacao'
+  })
+  .catch(error => console.error('Erro ao carregar o JSON:', error));
+
+// Função para buscar apenas o termo relevante no contexto
+function pesquisarLei() {
+  const termo = document.getElementById('campoPesquisa').value.trim().toLowerCase();
+  const resultadoDiv = document.getElementById('pesquisa-resultado');
+  resultadoDiv.innerHTML = '';
+
+  if (!termo) {
+    resultadoDiv.innerText = 'Digite um termo para buscar na legislação.';
+    return;
+  }
+
+  const regex = new RegExp(`[^.]*?\\b${termo}\\b[^.]*?\\.`, 'gi'); // Captura frases contendo o termo
+  const matches = textoLeiMEI.match(regex);
+
+  if (matches && matches.length > 0) {
+    resultadoDiv.innerHTML = matches.join('<br><br>');
+  } else {
+    resultadoDiv.innerText = 'Nenhum termo encontrado.';
+  }
+}
