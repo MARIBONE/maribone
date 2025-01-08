@@ -245,7 +245,7 @@ let textoLeiMEI = ''; // Variável para armazenar o conteúdo do JSON
 fetch('./sindy.json')
   .then(response => response.json())
   .then(data => {
-    textoLeiMEI = data.legislacao.join(' '); // Supondo que "legislacao" seja um array de strings
+    textoLeiMEI = data.texto; // Usando o campo "texto" do JSON
   })
   .catch(error => console.error('Erro ao carregar o JSON:', error));
 
