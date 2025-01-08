@@ -239,35 +239,22 @@ document.getElementById('closeButton').onclick = function() {
 
 
 
-let textoLeiMEI = ''; // Variável para armazenar o conteúdo do JSON
-
-// Carregar o arquivo JSON contendo as leis
-fetch('./sindy.json')
-  .then(response => response.json())
-  .then(data => {
-    textoLeiMEI = data.texto; // Usando o campo "texto" do JSON
-  })
-  .catch(error => console.error('Erro ao carregar o JSON:', error));
-
-// Função de busca
 function pesquisarLei() {
-  const termo = document.getElementById('campoPesquisa').value.trim().toLowerCase();
-  const resultadoDiv = document.getElementById('pesquisa-resultado');
+      const termo = document.getElementById('campoPesquisa').value.trim().toLowerCase();
+      const resultadoDiv = document.getElementById('pesquisa-resultado');
+      resultadoDiv.innerHTML = '';
 
-  // Limpa os resultados anteriores
-  resultadoDiv.innerHTML = '';
+      if (!termo) {
+        resultadoDiv.innerText = 'Digite um termo para buscar na legislação.';
+        return;
+      }
 
-  if (!termo) {
-    resultadoDiv.innerText = 'Digite um termo para buscar na legislação.';
-    return;
-  }
+      const regex = new RegExp(`[^.]*?\\b${termo}\\b[^.]*?\\.`,'gi'); // Regex para capturar a frase onde o termo está presente
+      const matches = textoLeiMEI.match(regex);
 
-  const regex = new RegExp(`[^.]*\\b${termo}\\b[^.]*\\.`, 'gi'); // Busca frases que contenham o termo
-  const matches = textoLeiMEI.match(regex);
-
-  if (matches && matches.length > 0) {
-    resultadoDiv.innerHTML = matches.join('<br><br>');
-  } else {
-    resultadoDiv.innerText = 'Nenhum termo encontrado.';
-  }
-}
+      if (matches) {
+        resultadoDiv.innerHTML = matches.join('<br><br>');
+      } else {
+        resultadoDiv.innerText = 'Nenhum termo encontrado.';
+      }
+    }
