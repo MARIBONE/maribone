@@ -253,7 +253,7 @@ fetch('./sindy.json')
 function pesquisarLei() {
   const termo = document.getElementById('campoPesquisa').value.trim().toLowerCase();
   const resultadoDiv = document.getElementById('pesquisa-resultado');
-  
+
   // Limpa os resultados anteriores
   resultadoDiv.innerHTML = '';
 
