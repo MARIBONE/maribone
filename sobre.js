@@ -237,7 +237,9 @@ document.getElementById('closeButton').onclick = function() {
 
 
 
+const textoLeiMEI = `
 
+exemplo`;
 
 function pesquisarLei() {
       const termo = document.getElementById('campoPesquisa').value.trim().toLowerCase();
