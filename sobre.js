@@ -239,7 +239,6 @@ document.getElementById('closeButton').onclick = function() {
 
 
 
-
 let textoLeiMEI = ''; // Variável para armazenar o conteúdo do JSON
 
 // Carregar o arquivo JSON contendo as leis
@@ -261,8 +260,9 @@ function pesquisarLei() {
     return;
   }
 
-  if (!textoLeiMEI) {
-    resultadoDiv.innerText = 'A legislação ainda não foi carregada. Tente novamente.';
+  // Verifica se o JSON foi carregado corretamente antes de continuar
+  if (textoLeiMEI === '') {
+    resultadoDiv.innerText = 'A legislação ainda está sendo carregada. Tente novamente em breve.';
     return;
   }
 
