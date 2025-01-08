@@ -235,10 +235,7 @@ document.getElementById('closeButton').onclick = function() {
   sidebar.style.right = '-250px'; // Esconde a sidebar
 }
 
-const textoLeiMEI = `
-
-
-     
+const datafeed = require('./sindy.json');
 
     // Função para buscar apenas o termo relevante no contexto
     function pesquisarLei() {
