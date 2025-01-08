@@ -274,4 +274,4 @@ function pesquisarLei() {
   } else {
     resultadoDiv.innerText = 'Nenhum termo encontrado.';
   }
-}
+} 
