@@ -239,7 +239,7 @@ document.getElementById('closeButton').onclick = function() {
 
   // Função para buscar o conteúdo do arquivo .txt
 async function carregarTextoLei() {
-  const resposta = await fetch('legislacao.txt');
+  const resposta = await fetch('sindy.txt');
   if (!resposta.ok) {
     console.error('Erro ao carregar o arquivo');
     return '';
