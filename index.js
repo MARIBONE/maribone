@@ -368,3 +368,4 @@ const startButton = document.getElementById('startButton');
         }
 
         scrambleText();
+
