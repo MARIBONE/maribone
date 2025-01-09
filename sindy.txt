@@ -1,8 +1,4 @@
-{
-
-"textoLeiMEI":
-
-    "A Lei Complementar nº 123, de 14 de dezembro de 2006, estabelece os critérios para microempreendedores individuais no Brasil.
+A Lei Complementar nº 123, de 14 de dezembro de 2006, estabelece os critérios para microempreendedores individuais no Brasil.
     Segundo a legislação, para ser considerado MEI, o faturamento anual deve ser de até R$ 81.000,00.
     O número de empregados não pode ultrapassar 1.
     O MEI deve estar formalizado conforme as exigências previstas pela Receita Federal, emitindo notas fiscais e contribuindo para o INSS.
@@ -1186,6 +1182,3 @@ Sobre o Portal
 Termos de Uso
 Aplicativos
 Extranet"
-
-
-}
