@@ -235,3 +235,36 @@ document.getElementById('closeButton').onclick = function() {
   sidebar.style.right = '-250px'; // Esconde a sidebar
 }
 
+// Função para buscar o conteúdo do arquivo .txt
+async function carregarTextoLei() {
+  const resposta = await fetch('sindy.txt');
+  if (!resposta.ok) {
+    console.error('Erro ao carregar o arquivo');
+    return '';
+  }
+  return await resposta.text();
+}
+
+// Função para buscar apenas o termo relevante no contexto
+async function pesquisarLei() {
+  const termo = document.getElementById('campoPesquisa').value.trim().toLowerCase();
+  const resultadoDiv = document.getElementById('pesquisa-resultado');
+  resultadoDiv.innerHTML = '';
+
+  if (!termo) {
+    resultadoDiv.innerText = 'Digite um termo para buscar na legislação.';
+    return;
+  }
+
+  // Carrega o conteúdo do arquivo .txt
+  const textoLeiMEI = await carregarTextoLei();
+
+  const regex = new RegExp(`[^.]*?\\b${termo}\\b[^.]*?\\.`,'gi'); // Regex para capturar a frase onde o termo está presente
+  const matches = textoLeiMEI.match(regex);
+
+  if (matches) {
+    resultadoDiv.innerHTML = matches.join('<br><br>');
+  } else {
+    resultadoDiv.innerText = 'Nenhum termo encontrado.';
+  }
+}
