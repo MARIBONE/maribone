@@ -235,6 +235,3 @@ document.getElementById('closeButton').onclick = function() {
   sidebar.style.right = '-250px'; // Esconde a sidebar
 }
 
-
-
-  
