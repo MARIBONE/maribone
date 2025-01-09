@@ -237,16 +237,14 @@ document.getElementById('closeButton').onclick = function() {
 
 
 
-   // Função para carregar o texto da Lei MEI do arquivo sindy.json
+  // Função para buscar o conteúdo do arquivo .txt
 async function carregarTextoLei() {
-  try {
-    const response = await fetch('sindy.json');
-    const dados = await response.json();
-    return dados.textoLeiMEI;
-  } catch (erro) {
-    console.error('Erro ao carregar o arquivo JSON:', erro);
+  const resposta = await fetch('legislacao.txt');
+  if (!resposta.ok) {
+    console.error('Erro ao carregar o arquivo');
     return '';
   }
+  return await resposta.text();
 }
 
 // Função para buscar apenas o termo relevante no contexto
@@ -260,12 +258,8 @@ async function pesquisarLei() {
     return;
   }
 
-  const textoLeiMEI = await carregarTextoLei(); // Carrega o texto da lei do JSON
-
-  if (!textoLeiMEI) {
-    resultadoDiv.innerText = 'Não foi possível carregar a legislação.';
-    return;
-  }
+  // Carrega o conteúdo do arquivo .txt
+  const textoLeiMEI = await carregarTextoLei();
 
   const regex = new RegExp(`[^.]*?\\b${termo}\\b[^.]*?\\.`,'gi'); // Regex para capturar a frase onde o termo está presente
   const matches = textoLeiMEI.match(regex);
