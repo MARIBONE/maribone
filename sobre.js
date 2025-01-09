@@ -237,31 +237,33 @@ document.getElementById('closeButton').onclick = function() {
 
 
 
-    let textoLeiMEI = ''; // Variável global para armazenar o texto do JSON
+   // Função para carregar o texto da Lei MEI do arquivo sindy.json
+async function carregarTextoLei() {
+  try {
+    const response = await fetch('sindy.json');
+    const dados = await response.json();
+    return dados.textoLeiMEI;
+  } catch (erro) {
+    console.error('Erro ao carregar o arquivo JSON:', erro);
+    return '';
+  }
+}
 
-// Carregar o JSON
-fetch('./sindy.json') // Nome correto do arquivo
-  .then(response => {
-    if (!response.ok) {
-      throw new Error(`Erro ao carregar JSON: ${response.status}`);
-    }
-    return response.json(); // Converte o JSON em objeto
-  })
-  .then(data => {
-    textoLeiMEI = data.textoLeiMEI; // Atribui o texto ao valor global
-  })
-  .catch(error => {
-    console.error('Erro ao carregar o JSON:', error);
-  });
-
-// Função permanece inalterada
-function pesquisarLei() {
+// Função para buscar apenas o termo relevante no contexto
+async function pesquisarLei() {
   const termo = document.getElementById('campoPesquisa').value.trim().toLowerCase();
   const resultadoDiv = document.getElementById('pesquisa-resultado');
   resultadoDiv.innerHTML = '';
 
   if (!termo) {
     resultadoDiv.innerText = 'Digite um termo para buscar na legislação.';
+    return;
+  }
+
+  const textoLeiMEI = await carregarTextoLei(); // Carrega o texto da lei do JSON
+
+  if (!textoLeiMEI) {
+    resultadoDiv.innerText = 'Não foi possível carregar a legislação.';
     return;
   }
 
