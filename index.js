@@ -330,3 +330,41 @@ const startButton = document.getElementById('startButton');
       contactInfo.classList.add('hidden'); // Esconde o terceiro card
       confirmation.classList.remove('hidden'); // Mostra o quarto card
     });
+
+
+ const phrases = [
+            "DESENVOLVIMENTO DE SISTEMAS",
+            "LICENCIAMENTO DE SOFTWARE",
+            "DESIGN DE PROJETOS"
+        ];
+        let currentIndex = 0;
+        let index = 0;
+
+        function scrambleText() {
+            const targetText = phrases[currentIndex];
+            const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()";
+            let scrambled = "";
+
+            for (let i = 0; i < targetText.length; i++) {
+                if (i < index) {
+                    scrambled += targetText[i];
+                } else {
+                    scrambled += chars.charAt(Math.floor(Math.random() * chars.length));
+                }
+            }
+
+            document.getElementById("scrambledText").textContent = scrambled;
+
+            if (index < targetText.length) {
+                index++;
+                setTimeout(scrambleText, 50);
+            } else {
+                setTimeout(() => {
+                    currentIndex = (currentIndex + 1) % phrases.length;
+                    index = 0;
+                    scrambleText();
+                }, 2000); // Tempo entre a troca das frases
+            }
+        }
+
+        scrambleText();
