@@ -253,10 +253,10 @@ card.classList.toggle('show');
 
 document.getElementById('BOTAO').onclick = function() {
   var sidebar = document.getElementById('ABA');
-  if (sidebar.style.left === '50%') {
-    sidebar.style.right = '-150%'; // Esconde a sidebar
+  if (sidebar.style.left === '0') {
+    sidebar.style.right = '0'; // Esconde a sidebar
   } else {
-    sidebar.style.right = '-150%'; // Mostra a sidebar
+    sidebar.style.right = '0'; // Mostra a sidebar
   }
 }
 
