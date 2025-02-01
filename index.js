@@ -254,7 +254,7 @@ card.classList.toggle('show');
 document.getElementById('BOTAO').onclick = function() {
   var sidebar = document.getElementById('ABA');
   if (sidebar.style.left === '0px') {
-    sidebar.style.right = '-500px'; // Esconde a sidebar
+    sidebar.style.right = '0px'; // Esconde a sidebar
   } else {
     sidebar.style.right = '0px'; // Mostra a sidebar
   }
@@ -263,7 +263,7 @@ document.getElementById('BOTAO').onclick = function() {
 
 document.getElementById('closeButton').onclick = function() {
   var sidebar = document.getElementById('ABA');
-  sidebar.style.right = '-250px'; // Esconde a sidebar
+  sidebar.style.right = '-150%'; // Esconde a sidebar
 }
 
 
