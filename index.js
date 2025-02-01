@@ -254,7 +254,7 @@ card.classList.toggle('show');
 document.getElementById('BOTAO').onclick = function() {
   var sidebar = document.getElementById('ABA');
   if (sidebar.style.left === '0px') {
-    sidebar.style.right = '0px'; // Esconde a sidebar
+    sidebar.style.right = '-150%'; // Esconde a sidebar
   } else {
     sidebar.style.right = '0px'; // Mostra a sidebar
   }
