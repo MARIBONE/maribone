@@ -323,11 +323,11 @@ align-items: center;">
 }
 
 .sidebar {
-  width: 150px; /* Ajuste conforme necessário */
+  width: 50%; /* Ajuste conforme necessário */
   height: 100%; /* Altura total da visualização */
   position: fixed; /* Fixa a sidebar na tela */
   top: 0;
-  right: -150px; /* Esconde a sidebar fora da tela à direita */
+  right: -150%; /* Esconde a sidebar fora da tela à direita */
   border: 1px solid #008ac3;
   background-color: #a7a7a7; /* Cor de fundo da sidebar */
   color: #008ac3;
@@ -356,7 +356,7 @@ align-items: center;">
 }
 
 .sidebar-menu a {
-  color: #ffffff;exto dos links */
+  color: #ffffff;
   text-decoration: none; /* Remove o sublinhado dos links */
 }
 
@@ -398,11 +398,13 @@ align-items: center;">
 </div>
 
 <div class="sidebar" id="ABA">
-  <ul class="sidebar-menu" style="font-size: 5vh;">
-    <li><a href="">Ínicio</a></li>
-    <li><a href="#servicos">Serviços</a></li>
-    <li><a href="#servicos">Contato</a></li>
-    <li><a href="#contato">Suporte</a></li>
+  <ul class="sidebar-menu" style="font-size: 5vw; text-align: left; text-indent: 10%;">
+    <li><a href="https://www.maribone.com.br/login">Entrar</a></li>
+    <li><a href="aplicativos">Quem Somos</a></li>
+    <li><a href="https://www.maribone.com.br/login">Saiba Mais</a></li>
+    <li><a href="https://www.maribone.com.br/login">Contato</a></li>
+    <li><a href="https://www.maribone.com.br/login">Sobre</a></li>
+    
   </ul>
 </div>
 
@@ -514,14 +516,19 @@ Sua aplicação é variada e pode ser utilzada em diversas áreas do conheciment
 
     
 <footer> 
-<img src="https://iconape.com/wp-content/png_logo_vector/whatsapp-logo.png" style="width: 20em; max-width: 8%; display: flex; height: auto; margin-left: 42em; margin-top: 3%;">
-
+    
+<a href="https://wa.me/5511982249379"> <img src="https://iconape.com/wp-content/png_logo_vector/whatsapp-logo.png" style="width: 20em; max-width: 8%; display: flex; height: auto; margin-left: 42em; margin-top: 1px;">
 
 <img src="https://lh7-us.googleusercontent.com/eovl0RnDTqarNl364LCa8H_6wD1ZImnP9IKQRIeszs4u__GgUu5Q5snAQgT_YxY0jHa9fCx0srs9e_NifqBFTYwqcrn_bs1EOFBZCrrfIDof0n-ta4rNx8i6yD9jldGJeTVNwTQ6noUH9B9Zk28Z3V-mGQvCuA" style="width: 60em; max-width: 30%; display: flex; height: auto; margin-left: 36%; margin-top: 0%;"><br>
-    
-<p style="color: #ffffff;"> Politica de Privacidade</p>
-<p style="color: #ffffff;"> Segurança dos Dados</p>
-<p style="color: #ffffff;"> Termos e Condições</p>
+
+<p style="color: #ffffff;"> <a href="https://www.maribone.com.br/juridico">Politica de Privacidade</p></a>
+<p style="color: #ffffff;"> <a href="https://www.maribone.com.br/juridico">Segurança dos Dados</p></a>
+<p style="color: #ffffff;"> <a href="https://www.maribone.com.br/juridico">Termos e Condições</p></a><br><br><br>
+
+
+    <p style="color: #5d5555;"> © 2020-2025 Æ MARIBONE TECNOLOGIA.<br>
+        Todos os Direitos Reservados.<br> 
+    58.335.004/0001-00</p>
 
 </footer>
 
@@ -773,84 +780,22 @@ card.classList.toggle('show');
 
 document.getElementById('BOTAO').onclick = function() {
   var sidebar = document.getElementById('ABA');
-  if (sidebar.style.left === '0px') {
-    sidebar.style.right = '-250px'; // Esconde a sidebar
+  if (sidebar.style.left === '0') {
+    sidebar.style.right = '0'; // Esconde a sidebar
   } else {
-    sidebar.style.right = '0px'; // Mostra a sidebar
+    sidebar.style.right = '0'; // Mostra a sidebar
   }
 }
 
 
 document.getElementById('closeButton').onclick = function() {
   var sidebar = document.getElementById('ABA');
-  sidebar.style.right = '-250px'; // Esconde a sidebar
+  sidebar.style.right = '-150%'; // Esconde a sidebar
 }
 
 
-    const textoLeiMEI = `
-    A 
 
 
-
-`;
-
-
-function pesquisarLei() {
-      const termo = document.getElementById('campoPesquisa').value.trim().toLowerCase();
-      const resultadoDiv = document.getElementById('pesquisa-resultado');
-      resultadoDiv.innerHTML = '';
-
-      if (!termo) {
-        resultadoDiv.innerText = 'Digite o código ou titulo do projeto para buscar:';
-        return;
-      }
-
-      const regex = new RegExp(`[^.]*?\\b${termo}\\b[^.]*?\\.`,'gi'); // Regex para capturar a frase onde o termo está presente
-      const matches = textoLeiMEI.match(regex);
-
-      if (matches) {
-        resultadoDiv.innerHTML = matches.join('<br><br>');
-      } else {
-        resultadoDiv.innerText = 'Nenhum termo encontrado.';
-      }
-    }
- 
-const startButton = document.getElementById('startButton');
-    const options = document.getElementById('options');
-    const optionsNext = document.getElementById('options-next');
-    const contactInfo = document.getElementById('contact-info');
-    const confirmation = document.getElementById('confirmation');
-    const radioButtons = document.querySelectorAll('input[name="option"]');
-    const nextOptions = document.querySelectorAll('input[name="goal"]');
-
-    // Quando o botão inicial é clicado
-    startButton.addEventListener('click', () => {
-      startButton.classList.add('hidden'); // Esconde o botão
-      options.classList.remove('hidden'); // Mostra o primeiro card
-    });
-
-    // Quando uma opção do primeiro card é selecionada
-    radioButtons.forEach(radio => {
-      radio.addEventListener('change', () => {
-        options.classList.add('hidden'); // Esconde o primeiro card
-        optionsNext.classList.remove('hidden'); // Mostra o segundo card
-      });
-    });
-
-    // Quando uma opção do segundo card é selecionada
-    nextOptions.forEach(option => {
-      option.addEventListener('change', () => {
-        optionsNext.classList.add('hidden'); // Esconde o segundo card
-        contactInfo.classList.remove('hidden'); // Mostra o terceiro card
-      });
-    });
-
-    // Quando os dados são enviados
-    document.getElementById('submit').addEventListener('click', () => {
-      contactInfo.classList.add('hidden'); // Esconde o terceiro card
-      confirmation.classList.remove('hidden'); // Mostra o quarto card
-    });
-    
     </script>
 
 
