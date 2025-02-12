@@ -772,26 +772,19 @@ function showNotification(message, type) {
 
 
 
-document.getElementById('BOX').addEventListener('click', function() {
-var card = document.getElementById('card');
-
-card.classList.toggle('show');
-});
-
-
 document.getElementById('BOTAO').onclick = function() {
   var sidebar = document.getElementById('ABA');
-  if (sidebar.style.left === '0px') {
-    sidebar.style.right = '-250px'; // Esconde a sidebar
+  if (sidebar.style.left === '0') {
+    sidebar.style.right = '0'; // Esconde a sidebar
   } else {
-    sidebar.style.right = '0px'; // Mostra a sidebar
+    sidebar.style.right = '0'; // Mostra a sidebar
   }
 }
 
 
 document.getElementById('closeButton').onclick = function() {
   var sidebar = document.getElementById('ABA');
-  sidebar.style.right = '-250px'; // Esconde a sidebar
+  sidebar.style.right = '-150px'; // Esconde a sidebar
 }
 
 
@@ -803,61 +796,6 @@ document.getElementById('closeButton').onclick = function() {
 `;
 
 
-function pesquisarLei() {
-      const termo = document.getElementById('campoPesquisa').value.trim().toLowerCase();
-      const resultadoDiv = document.getElementById('pesquisa-resultado');
-      resultadoDiv.innerHTML = '';
-
-      if (!termo) {
-        resultadoDiv.innerText = 'Digite o código ou titulo do projeto para buscar:';
-        return;
-      }
-
-      const regex = new RegExp(`[^.]*?\\b${termo}\\b[^.]*?\\.`,'gi'); // Regex para capturar a frase onde o termo está presente
-      const matches = textoLeiMEI.match(regex);
-
-      if (matches) {
-        resultadoDiv.innerHTML = matches.join('<br><br>');
-      } else {
-        resultadoDiv.innerText = 'Nenhum termo encontrado.';
-      }
-    }
- 
-const startButton = document.getElementById('startButton');
-    const options = document.getElementById('options');
-    const optionsNext = document.getElementById('options-next');
-    const contactInfo = document.getElementById('contact-info');
-    const confirmation = document.getElementById('confirmation');
-    const radioButtons = document.querySelectorAll('input[name="option"]');
-    const nextOptions = document.querySelectorAll('input[name="goal"]');
-
-    // Quando o botão inicial é clicado
-    startButton.addEventListener('click', () => {
-      startButton.classList.add('hidden'); // Esconde o botão
-      options.classList.remove('hidden'); // Mostra o primeiro card
-    });
-
-    // Quando uma opção do primeiro card é selecionada
-    radioButtons.forEach(radio => {
-      radio.addEventListener('change', () => {
-        options.classList.add('hidden'); // Esconde o primeiro card
-        optionsNext.classList.remove('hidden'); // Mostra o segundo card
-      });
-    });
-
-    // Quando uma opção do segundo card é selecionada
-    nextOptions.forEach(option => {
-      option.addEventListener('change', () => {
-        optionsNext.classList.add('hidden'); // Esconde o segundo card
-        contactInfo.classList.remove('hidden'); // Mostra o terceiro card
-      });
-    });
-
-    // Quando os dados são enviados
-    document.getElementById('submit').addEventListener('click', () => {
-      contactInfo.classList.add('hidden'); // Esconde o terceiro card
-      confirmation.classList.remove('hidden'); // Mostra o quarto card
-    });
     
     </script>
 
