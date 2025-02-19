@@ -1,37 +1,97 @@
 // netlify/functions/pagamentos.js
 
-const { getPaymentStatus, transferToMonero } = require('./mercadopago');
-const { calculateMilidex } = require('./milidex');
+const fetch = require('node-fetch');
 
 exports.handler = async (event, context) => {
-    const paymentId = event.queryStringParameters.paymentId;
-    
-    try {
-        // 1. Obter o pagamento do Mercado Pago
-        const payment = await getPaymentStatus(paymentId);
+  try {
+    // =======================
+    // Configurações Mercado Pago
+    // =======================
 
-        if (payment.status !== 'approved') {
-            return {
-                statusCode: 400,
-                body: JSON.stringify({ error: "Pagamento não aprovado!" })
-            };
-        }
+    const mercadoPagoAccessToken = 'SUA_ACCESS_TOKEN_AQUI'; // Preencha com o Access Token do Mercado Pago
+    const mercadoPagoPublicKey = 'SUA_PUBLIC_KEY_AQUI';     // Preencha com a Public Key do Mercado Pago
 
-        // 2. Aplicar a fórmula Milidex ao valor do pagamento
-        const valorOriginal = payment.amount;
-        const valorMilidex = calculateMilidex(valorOriginal);
+    // =======================
+    // Configurações Monero
+    // =======================
 
-        // 3. Transferir para a carteira Monero
-        const transferStatus = await transferToMonero(valorMilidex);
+    const moneroWalletAddress = 'SEU_ENDERECO_MONERO_AQUI'; // Preencha com o endereço da carteira Monero
 
-        return {
-            statusCode: 200,
-            body: JSON.stringify({ success: true, transferStatus })
-        };
-    } catch (error) {
-        return {
-            statusCode: 500,
-            body: JSON.stringify({ error: "Erro ao processar pagamento!" })
-        };
+    // =======================
+    // Fórmula Milidex
+    // =======================
+
+    const milidexFormula = (valor) => valor + Math.sqrt(Math.pow(0.00000019, -1));
+
+    // =======================
+    // Capturar o pagamento do Mercado Pago
+    // =======================
+
+    const paymentId = event.queryStringParameters.payment_id; // O ID do pagamento vindo do webhook
+
+    const mercadoPagoResponse = await fetch(`https://api.mercadopago.com/v1/payments/${paymentId}`, {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${mercadoPagoAccessToken}`,
+        'Content-Type': 'application/json',
+      },
+    });
+
+    const paymentData = await mercadoPagoResponse.json();
+
+    if (!paymentData || paymentData.status !== 'approved') {
+      return {
+        statusCode: 400,
+        body: JSON.stringify({ error: 'Pagamento não aprovado!' }),
+      };
     }
+
+    const paymentAmount = parseFloat(paymentData.transaction_amount);
+
+    // =======================
+    // Aplicando a fórmula Milidex
+    // =======================
+
+    const convertedAmount = milidexFormula(paymentAmount);
+
+    // =======================
+    // Transferência para a carteira Monero
+    // =======================
+
+    const moneroTransferPayload = {
+      destinations: [
+        {
+          address: moneroWalletAddress,
+          amount: convertedAmount,
+        },
+      ],
+    };
+
+    // Este é um exemplo, precisa ser conectado a uma API de gateway Monero
+    const moneroResponse = await fetch('URL_DA_API_MONERO_AQUI', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(moneroTransferPayload),
+    });
+
+    const moneroData = await moneroResponse.json();
+
+    return {
+      statusCode: 200,
+      body: JSON.stringify({
+        message: 'Pagamento processado com sucesso!',
+        mercadoPago: paymentData,
+        moneroTransaction: moneroData,
+        valorConvertido: convertedAmount,
+      }),
+    };
+
+  } catch (error) {
+    return {
+      statusCode: 500,
+      body: JSON.stringify({ error: error.message }),
+    };
+  }
 };
