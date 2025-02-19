@@ -8,14 +8,14 @@ exports.handler = async (event, context) => {
     // Configurações Mercado Pago
     // =======================
 
-    const mercadoPagoAccessToken = 'SUA_ACCESS_TOKEN_AQUI'; // Preencha com o Access Token do Mercado Pago
-    const mercadoPagoPublicKey = 'SUA_PUBLIC_KEY_AQUI';     // Preencha com a Public Key do Mercado Pago
+    const mercadoPagoAccessToken = 'APP_USR-3563867331568255-021817-a881bf6d52f6b60d59d79498a7645e0a-2251240952'; // Preencha com o Access Token do Mercado Pago
+    const mercadoPagoPublicKey = 'APP_USR-d483c572-9b7d-49ef-94d9-391f073968b0';     // Preencha com a Public Key do Mercado Pago
 
     // =======================
     // Configurações Monero
     // =======================
 
-    const moneroWalletAddress = 'SEU_ENDERECO_MONERO_AQUI'; // Preencha com o endereço da carteira Monero
+    const moneroWalletAddress = '4AR4fUi3QsZfZ3DGAQFbDua9TXQ3NHtAeGt3mh7MYZCk1NsVAjWmiSbLQRffztbXAH1y7ZmT4xyjKdzTwunETUELPDJ7CJz'; // Preencha com o endereço da carteira Monero
 
     // =======================
     // Fórmula Milidex
