@@ -2,9 +2,7 @@
 
 import fetch from 'node-fetch';
 
-export const handler: Handler = async (event, context) => {
-  return {
-  return {
+exports.handler async (event, context) {
   try {
     // =======================
     // Configurações Mercado Pago
@@ -152,7 +150,7 @@ document.getElementById('payButton').addEventListener('click', async () => {
 
 import fetch from 'node-fetch'; // Usando o fetch para fazer requisições à API do Mercado Pago
 
-export async function handler (event, context) {
+exports.handler async (event, context) {
   try {
     // =======================
     // Configurações Mercado Pago
