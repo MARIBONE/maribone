@@ -369,57 +369,30 @@ const startButton = document.getElementById('startButton');
 
         scrambleText();
 
-  document.getElementById('payButton').addEventListener('click', async () => {
-    // =======================
-    // Configurações Mercado Pago
-    // =======================
-    const mercadoPagoAccessToken = 'APP_USR-3563867331568255-021817-a881bf6d52f6b60d59d79498a7645e0a-2251240952'; // Seu Access Token do Mercado Pago
+  document.addEventListener('DOMContentLoaded', function() {
+    const payButton = document.getElementById('payButton');
 
-    // =======================
-    // Dados do pagamento
-    // =======================
-    const paymentData = {
-      items: [
-        {
-          title: 'Descrição do produto ou serviço', // Título do produto
-          quantity: 1,
-          currency_id: 'BRL',
-          unit_price: 100.00, // Valor do pagamento
-        }
-      ],
-      back_urls: {
-        success: 'https://seusite.com/sucesso',
-        failure: 'https://seusite.com/falha',
-        pending: 'https://seusite.com/pendente'
-      },
-      auto_return: 'approved'
-    };
-
-    try {
-      // =======================
-      // Requisição à API do Mercado Pago
-      // =======================
-      const response = await fetch('https://api.mercadopago.com/v1/checkout/preferences', {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${mercadoPagoAccessToken}`,
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(paymentData)
+    if (payButton) {
+      payButton.addEventListener('click', function() {
+        // Requisição para gerar a preferência de pagamento
+        fetch('/.netlify/functions/pagamentos', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        })
+        .then(response => response.json())
+        .then(data => {
+          if (data.preferenceId) {
+            // Redirecionar o usuário para a página de pagamento do Mercado Pago
+            window.location.href = `https://www.mercadopago.com.br/checkout/v1/redirect?pref_id=${data.preferenceId}`;
+          } else {
+            alert('Erro ao gerar o link de pagamento!');
+          }
+        })
+        .catch(error => {
+          console.error('Erro ao fazer requisição para o backend:', error);
+        });
       });
-
-      const responseData = await response.json();
-
-      // =======================
-      // Redirecionamento para o pagamento
-      // =======================
-      if (responseData.init_point) {
-        window.location.href = responseData.init_point;
-      } else {
-        alert('Erro ao criar o pagamento!');
-      }
-    } catch (error) {
-      console.error('Erro ao criar o pagamento:', error);
-      alert('Houve um problema ao processar o pagamento.');
     }
   });
