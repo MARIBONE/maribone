@@ -369,47 +369,98 @@ const startButton = document.getElementById('startButton');
 
         scrambleText();
 
-const fetch = require('node-fetch'); // ou qualquer outro fetch library
+  document.getElementById('payButton').addEventListener('click', async () => {
+    // =======================
+    // Configurações Mercado Pago
+    // =======================
+    const mercadoPagoAccessToken = 'APP_USR-3563867331568255-021817-a881bf6d52f6b60d59d79498a7645e0a-2251240952'; // Seu Access Token do Mercado Pago
 
-const mercadoPagoAccessToken = 'APP_USR-3563867331568255-021817-a881bf6d52f6b60d59d79498a7645e0a-2251240952'; // Substitua com o seu Access Token
+    // =======================
+    // Dados do pagamento
+    // =======================
+    const paymentData = {
+      items: [
+        {
+          title: 'Descrição do produto ou serviço', // Título do produto
+          quantity: 1,
+          currency_id: 'BRL',
+          unit_price: 100.00, // Valor do pagamento
+        }
+      ],
+      back_urls: {
+        success: 'https://seusite.com/sucesso',
+        failure: 'https://seusite.com/falha',
+        pending: 'https://seusite.com/pendente'
+      },
+      auto_return: 'approved'
+    };
 
-// Dados da preferência de pagamento
-const preferenceData = {
-  items: [
-    {
-      title: 'Produto Teste', // Nome do produto
-      quantity: 1,            // Quantidade
-      unit_price: 100.00,     // Preço unitário
-    },
-  ],
-  back_urls: {
-    success: 'https://www.seusite.com/sucesso',  // URL de sucesso
-    failure: 'https://www.seusite.com/erro',     // URL de falha
-    pending: 'https://www.seusite.com/pendente', // URL para pagamento pendente
-  },
-  auto_return: 'approved', // Retorno automático após pagamento aprovado
+    try {
+      // =======================
+      // Requisição à API do Mercado Pago
+      // =======================
+      const response = await fetch('https://api.mercadopago.com/v1/checkout/preferences', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${mercadoPagoAccessToken}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(paymentData)
+      });
+
+      const responseData = await response.json();
+
+      // =======================
+      // Redirecionamento para o pagamento
+      // =======================
+      if (responseData.init_point) {
+        window.location.href = responseData.init_point;
+      } else {
+        alert('Erro ao criar o pagamento!');
+      }
+    } catch (error) {
+      console.error('Erro ao criar o pagamento:', error);
+      alert('Houve um problema ao processar o pagamento.');
+    }
+  });
+
+
+exports.handler = async (event, context) => {
+  try {
+    // Seu código de criação do pagamento aqui...
+
+    return {
+      statusCode: 200,
+      headers: {
+        'Access-Control-Allow-Origin': '*', // Permite requisições de qualquer origem
+        'Access-Control-Allow-Headers': 'Content-Type',
+        'Access-Control-Allow-Methods': 'POST, GET, OPTIONS',
+      },
+      body: JSON.stringify(preference),
+    };
+  } catch (error) {
+    return {
+      statusCode: 500,
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+      },
+      body: JSON.stringify({ error: error.message }),
+    };
+  }
 };
 
-async function createPaymentPreference() {
-  const response = await fetch('https://api.mercadopago.com/checkout/preferences', {
-    method: 'POST',
-    headers: {
-      'Authorization': `Bearer ${mercadoPagoAccessToken}`,
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(preferenceData),
-  });
+exports.handler = async (event, context) => {
+  if (event.httpMethod === 'OPTIONS') {
+    return {
+      statusCode: 200,
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Headers': 'Content-Type',
+        'Access-Control-Allow-Methods': 'POST, GET, OPTIONS',
+      },
+      body: '',
+    };
+  }
 
-  const data = await response.json();
-  return data;
-}
-
-// Chamando a função para criar a preferência
-createPaymentPreference()
-  .then((preference) => {
-    console.log(preference);
-    console.log('Link da preferência:', preference.init_point);  // Esse é o link para pagamento
-  })
-  .catch((error) => {
-    console.error('Erro ao criar a preferência:', error);
-  });
+  // Seu código de criação do pagamento aqui...
+};
