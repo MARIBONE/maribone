@@ -7,26 +7,24 @@ exports.handler = async (event, context) => {
     // =======================
     // Configurações Mercado Pago
     // =======================
-
     const mercadoPagoAccessToken = 'APP_USR-3563867331568255-021817-a881bf6d52f6b60d59d79498a7645e0a-2251240952'; // Preencha com o Access Token do Mercado Pago
     const mercadoPagoPublicKey = 'APP_USR-d483c572-9b7d-49ef-94d9-391f073968b0';     // Preencha com a Public Key do Mercado Pago
 
     // =======================
-    // Configurações Monero
+    // Configurações MyMonero
     // =======================
-
     const moneroWalletAddress = '4AR4fUi3QsZfZ3DGAQFbDua9TXQ3NHtAeGt3mh7MYZCk1NsVAjWmiSbLQRffztbXAH1y7ZmT4xyjKdzTwunETUELPDJ7CJz'; // Preencha com o endereço da carteira Monero
+    const myMoneroViewKey = 'SuaViewKeyAqui'; // Preencha com a sua View Key da carteira Monero
+    const myMoneroApiUrl = 'https://mymonero.com/api'; // Endpoint da API MyMonero
 
     // =======================
     // Fórmula Milidex
     // =======================
-
     const milidexFormula = (valor) => valor + Math.sqrt(Math.pow(0.00000019, -1));
 
     // =======================
     // Capturar o pagamento do Mercado Pago
     // =======================
-
     const paymentId = event.queryStringParameters.payment_id; // O ID do pagamento vindo do webhook
 
     const mercadoPagoResponse = await fetch(`https://api.mercadopago.com/v1/payments/${paymentId}`, {
@@ -51,24 +49,20 @@ exports.handler = async (event, context) => {
     // =======================
     // Aplicando a fórmula Milidex
     // =======================
-
     const convertedAmount = milidexFormula(paymentAmount);
 
     // =======================
-    // Transferência para a carteira Monero
+    // Transferência para a carteira Monero via MyMonero API
     // =======================
-
     const moneroTransferPayload = {
-      destinations: [
-        {
-          address: moneroWalletAddress,
-          amount: convertedAmount,
-        },
-      ],
+      amount: convertedAmount * 1000000000000, // Converter para picoMonero
+      address: moneroWalletAddress, // Endereço da sua carteira Monero
+      payment_id: 'Pagamento ' + paymentId, // Referência ao pagamento
+      view_key: myMoneroViewKey, // Sua view key
     };
 
-    // Este é um exemplo, precisa ser conectado a uma API de gateway Monero
-    const moneroResponse = await fetch('URL_DA_API_MONERO_AQUI', {
+    // Envio da transação via API do MyMonero
+    const moneroTransferResponse = await fetch(myMoneroApiUrl, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -76,15 +70,15 @@ exports.handler = async (event, context) => {
       body: JSON.stringify(moneroTransferPayload),
     });
 
-    const moneroData = await moneroResponse.json();
+    const moneroTransferData = await moneroTransferResponse.json();
 
     return {
       statusCode: 200,
       body: JSON.stringify({
         message: 'Pagamento processado com sucesso!',
         mercadoPago: paymentData,
-        moneroTransaction: moneroData,
         valorConvertido: convertedAmount,
+        moneroTransferStatus: moneroTransferData,
       }),
     };
 
