@@ -369,3 +369,57 @@ const startButton = document.getElementById('startButton');
 
         scrambleText();
 
+document.getElementById('payButton').addEventListener('click', async () => {
+    // =======================
+    // Configurações Mercado Pago
+    // =======================
+    const mercadoPagoAccessToken = 'APP_USR-3563867331568255-021817-a881bf6d52f6b60d59d79498a7645e0a-2251240952'; // Seu Access Token do Mercado Pago
+
+    // =======================
+    // Dados do pagamento
+    // =======================
+    const paymentData = {
+      items: [
+        {
+          title: 'Token de Acesso Maribone', // Título do produto
+          quantity: 1,
+          currency_id: 'BRL',
+          unit_price: 100.00, // Valor do pagamento
+        }
+      ],
+      back_urls: {
+        success: 'https://maribone.com.br/login',
+        failure: 'https://maribone.com.br/juridico',
+        pending: 'https://https://maribone.com.br/sobre'
+      },
+      auto_return: 'approved'
+    };
+
+    try {
+      // =======================
+      // Requisição à API do Mercado Pago
+      // =======================
+      const response = await fetch('https://api.mercadopago.com/v1/checkout/preferences', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${mercadoPagoAccessToken}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(paymentData)
+      });
+
+      const responseData = await response.json();
+
+      // =======================
+      // Redirecionamento para o pagamento
+      // =======================
+      if (responseData.init_point) {
+        window.location.href = responseData.init_point;
+      } else {
+        alert('Erro ao criar o pagamento!');
+      }
+    } catch (error) {
+      console.error('Erro ao criar o pagamento:', error);
+      alert('Houve um problema ao processar o pagamento.');
+    }
+  });
