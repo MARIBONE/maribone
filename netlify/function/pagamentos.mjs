@@ -1,6 +1,6 @@
 // netlify/functions/pagamentos.js
 
-const fetch = require('node-fetch');
+import fetch from 'node-fetch';
 
 exports.handler = async (event, context) => {
   try {
@@ -148,7 +148,7 @@ document.getElementById('payButton').addEventListener('click', async () => {
 
 // netlify/functions/pagamentos.js
 
-const fetch = require('node-fetch'); // Usando o fetch para fazer requisições à API do Mercado Pago
+import fetch from 'node-fetch'; // Usando o fetch para fazer requisições à API do Mercado Pago
 
 exports.handler = async (event, context) => {
   try {
