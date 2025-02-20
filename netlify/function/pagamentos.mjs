@@ -2,7 +2,9 @@
 
 import fetch from 'node-fetch';
 
-export async function handler (event, context) {
+export const handler: Handler = async (event, context) => {
+  return {
+  return {
   try {
     // =======================
     // Configurações Mercado Pago
