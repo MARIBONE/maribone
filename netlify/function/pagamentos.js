@@ -14,7 +14,7 @@ exports.handler = async (event, context) => {
     // Configurações MyMonero
     // =======================
     const moneroWalletAddress = '4AR4fUi3QsZfZ3DGAQFbDua9TXQ3NHtAeGt3mh7MYZCk1NsVAjWmiSbLQRffztbXAH1y7ZmT4xyjKdzTwunETUELPDJ7CJz'; // Preencha com o endereço da carteira Monero
-    const myMoneroViewKey = 'SuaViewKeyAqui'; // Preencha com a sua View Key da carteira Monero
+    const myMoneroViewKey = '2300a7444b74b6bd8240bdd793fc8a525372dfffbc46676510b1b6d775955806'; // Preencha com a sua View Key da carteira Monero
     const myMoneroApiUrl = 'https://mymonero.com/api'; // Endpoint da API MyMonero
 
     // =======================
