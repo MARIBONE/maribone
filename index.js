@@ -369,31 +369,28 @@ const startButton = document.getElementById('startButton');
 
         scrambleText();
 
-    // Inicializa o Mercado Pago com a chave pública
-        MercadoPago.setPublicKey('APP_USR-d483c572-9b7d-49ef-94d9-391f073968b0'); // Insira sua chave pública
+  // Inicialize o Mercado Pago com sua chave pública
+    const mp = new MercadoPago('SUA_CHAVE_PUBLICA', {
+      locale: 'pt-BR'
+    });
 
-        // Função que cria a preferência e abre o checkout
-        function createPreference() {
-            fetch('/.netlify/functions/mercadopago')  // URL da função serverless do Netlify
-                .then(response => response.json())
-                .then(data => {
-                    const preferenceId = data.preferenceId;
-
-                    // Inicializa o checkout com o preferenceId
-                    const checkout = new MercadoPagoCheckout({
-                        preference: {
-                            id: preferenceId
-                        },
-                        render: {
-                            container: "#checkout-btn",
-                            label: "Pagar com Mercado Pago"
-                        }
-                    });
-
-                    checkout.open();  // Abre o checkout do Mercado Pago
-                })
-                .catch(error => console.error('Erro ao criar a preferência:', error));
-        }
-
-        // Adiciona o evento de click no botão
-        document.getElementById('checkout-btn').addEventListener('click', createPreference);
+    // Adicione o evento de clique no botão
+    document.getElementById('payButton').addEventListener('click', function () {
+      // Crie a preferência de pagamento via Pix
+      mp.payment.create({
+        transaction_amount: 100.0, // Valor da transação
+        description: 'Descrição do produto',
+        payment_method_id: 'pix',
+        payer_email: 'email_do_comprador@exemplo.com',
+        payer_identification_type: 'CPF',
+        payer_identification_number: '12345678909',
+      }).then(function(response) {
+        const preference = response.response;
+        // Aqui você pode redirecionar o usuário para o pagamento ou exibir o QR Code
+        alert('Pagamento gerado! Siga as instruções ou escaneie o QR Code!');
+        console.log(preference); // Você pode pegar a URL ou o QR Code gerado
+      }).catch(function(error) {
+        console.error('Erro ao criar o pagamento: ', error);
+        alert('Houve um erro ao tentar criar o pagamento. Tente novamente!');
+      });
+    });
