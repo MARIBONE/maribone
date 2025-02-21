@@ -369,30 +369,31 @@ const startButton = document.getElementById('startButton');
 
         scrambleText();
 
-  document.addEventListener('DOMContentLoaded', function() {
-    const payButton = document.getElementById('payButton');
+    // Inicializa o Mercado Pago com a chave pública
+        MercadoPago.setPublicKey('APP_USR-d483c572-9b7d-49ef-94d9-391f073968b0'); // Insira sua chave pública
 
-    if (payButton) {
-      payButton.addEventListener('click', function() {
-        // Requisição para gerar a preferência de pagamento
-        fetch('/.netlify/functions/pagamentos', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        })
-        .then(response => response.json())
-        .then(data => {
-          if (data.preferenceId) {
-            // Redirecionar o usuário para a página de pagamento do Mercado Pago
-            window.location.href = `https://www.mercadopago.com.br/checkout/v1/redirect?pref_id=${data.preferenceId}`;
-          } else {
-            alert('Erro ao gerar o link de pagamento!');
-          }
-        })
-        .catch(error => {
-          console.error('Erro ao fazer requisição para o backend:', error);
-        });
-      });
-    }
-  });
+        // Função que cria a preferência e abre o checkout
+        function createPreference() {
+            fetch('/.netlify/functions/mercadopago')  // URL da função serverless do Netlify
+                .then(response => response.json())
+                .then(data => {
+                    const preferenceId = data.preferenceId;
+
+                    // Inicializa o checkout com o preferenceId
+                    const checkout = new MercadoPagoCheckout({
+                        preference: {
+                            id: preferenceId
+                        },
+                        render: {
+                            container: "#checkout-btn",
+                            label: "Pagar com Mercado Pago"
+                        }
+                    });
+
+                    checkout.open();  // Abre o checkout do Mercado Pago
+                })
+                .catch(error => console.error('Erro ao criar a preferência:', error));
+        }
+
+        // Adiciona o evento de click no botão
+        document.getElementById('checkout-btn').addEventListener('click', createPreference);
