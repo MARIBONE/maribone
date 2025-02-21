@@ -1,5 +1,5 @@
 // netlify/functions/pagamentos.mjs
-
+ 
 import fetch from 'node-fetch'; // Usando o fetch para fazer requisições à API do Mercado Pago
 
 export const handler = async (event, context) => {
