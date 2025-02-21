@@ -255,65 +255,66 @@ document.getElementById('closeButton').onclick = function() {
  
 
   <script>
-    // Inicialize o Mercado Pago com sua chave pública
-    const mp = new MercadoPago('APP_USR-d483c572-9b7d-49ef-94d9-391f073968b0', {
-      locale: 'pt-BR'
-    });
+        const mp = new MercadoPago('TEST-74971261-55ad-4903-85c1-19d702319984', {
+            locale: 'pt-BR'
+        });
 
-    // Adiciona o evento de clique no botão
-    document.getElementById('payButton').addEventListener('click', function() {
-      // Criação da preferência de pagamento
-      mp.checkout.createPreference({
-        items: [
-          {
-            title: 'Produto de Teste',
-            quantity: 1,
-            currency_id: 'BRL',
-            unit_price: 100.00
-          }
-        ],
-        payer: {
-          email: 'email_do_comprador@exemplo.com',
-          identification: {
-            type: 'CPF',
-            number: '12345678909'
-          }
-        },
-        payment_methods: {
-          excluded_payment_methods: [
-            {
-              id: 'credit_card'
-            },
-            {
-              id: 'debit_card'
-            }
-          ],
-          installments: 1
-        },
-        back_urls: {
-          success: 'http://www.seusite.com/success',
-          failure: 'http://www.seusite.com/failure',
-          pending: 'http://www.seusite.com/pending'
-        },
-        notification_url: 'http://www.seusite.com/notification',
-        additional_info: {
-          platform: 'Mercado Pago'
-        }
-      }).then(function(response) {
-        const preference = response.response;
-        // Exibe o QR Code ou link para pagamento
-        const qrCodeUrl = preference.point_of_interaction.transaction_data.qr_code_url;
-        const qrCodeImage = document.createElement('img');
-        qrCodeImage.src = qrCodeUrl;
-        document.body.appendChild(qrCodeImage);
-        alert('Pagamento gerado! Escaneie o QR Code para finalizar!');
-      }).catch(function(error) {
-        console.error('Erro ao gerar pagamento via Pix: ', error);
-        alert('Houve um erro! Tente novamente.');
-      });
-    });
-</script>
+        document.getElementById('payButton').addEventListener('click', function() {
+            const email = document.getElementById('email').value;
+            const cpf = document.getElementById('cpf').value;
 
+            mp.checkout.createPreference({
+                items: [{
+                    title: 'Produto de Teste',
+                    quantity: 1,
+                    currency_id: 'BRL',
+                    unit_price: 100.00
+                }],
+                payer: {
+                    email: email,
+                    identification: {
+                        type: 'CPF',
+                        number: cpf
+                    }
+                },
+                payment_methods: {
+                    excluded_payment_methods: [{
+                        id: 'credit_card'
+                    }, {
+                        id: 'debit_card'
+                    }],
+                    installments: 1
+                },
+                back_urls: {
+                    success: 'http://www.seusite.com/success',
+                    failure: 'http://www.seusite.com/failure',
+                    pending: 'http://www.seusite.com/pending'
+                },
+                notification_url: 'http://www.seusite.com/notification'
+            }).then(function(response) {
+                const preference = response.response;
+                const qrCodeUrl = preference.point_of_interaction.transaction_data.qr_code_url;
+                const pixCode = preference.point_of_interaction.transaction_data.qr_code;
+                const qrCodeImage = document.createElement('img');
+                qrCodeImage.src = qrCodeUrl;
+                document.getElementById('qrCodeContainer').innerHTML = ''; // Limpa o container
+                document.getElementById('qrCodeContainer').appendChild(qrCodeImage);
+                document.getElementById('pixCodeContainer').innerHTML = `<p>Código Pix: ${pixCode}</p><button id="copyPix">Copiar Código Pix</button>`;
+
+                document.getElementById('copyPix').addEventListener('click', function() {
+                    navigator.clipboard.writeText(pixCode).then(function() {
+                        alert('Código Pix copiado!');
+                    }).catch(function(err) {
+                        console.error('Erro ao copiar código Pix: ', err);
+                    });
+                });
+                alert('Pagamento gerado! Escaneie o QR Code ou copie o código Pix para finalizar!');
+            }).catch(function(error) {
+                console.error('Erro ao gerar pagamento via Pix: ', error);
+                alert('Houve um erro! Tente novamente.');
+            });
+        });
+    </script>
 
 
 </body>
