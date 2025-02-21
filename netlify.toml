@@ -1,2 +1,2 @@
 [build]
-functions = "netlify/functions"
+  NODE_VERSION = "18" # ou a versão desejada
