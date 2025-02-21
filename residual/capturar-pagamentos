@@ -1,6 +1,6 @@
 // netlify/functions/capturar-pagamento.mjs
 
-import fetch from 'node-fetch';
+import fetch from 'node-fetch'; 
 
 export const handler = async (event, context) => {
     try {
