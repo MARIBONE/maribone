@@ -370,7 +370,7 @@ const startButton = document.getElementById('startButton');
         scrambleText();
 
   // Inicialize o Mercado Pago com sua chave pública
-    const mp = new MercadoPago('SUA_CHAVE_PUBLICA', {
+    const mp = new MercadoPago('APP_USR-d483c572-9b7d-49ef-94d9-391f073968b0', {
       locale: 'pt-BR'
     });
 
