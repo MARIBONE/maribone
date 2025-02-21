@@ -7,6 +7,6 @@
     "start": "netlify dev"
   },
   "dependencies": {
-    "mercado-pago": "^1.0.0"
+    "mercadopago": "^1.0.0"
   }
 }
