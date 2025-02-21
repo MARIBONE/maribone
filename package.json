@@ -1,5 +1,3 @@
-{
-  "dependencies": {
-    "mercado-pago": "^1.0.0"
-  }
+"dependencies": {
+  "@mercadopago/sdk-nodejs": "^1.0.0"
 }
