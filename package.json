@@ -1,12 +1,5 @@
 {
-  "name": "mercado-pago-integration",
-  "version": "1.0.0",
-  "description": "Integração com Mercado Pago usando Netlify Functions",
-  "main": "index.js",
-  "scripts": {
-    "start": "netlify dev"
-  },
   "dependencies": {
-    "mercado-pago": "https://${GITHUB_TOKEN}@github.com/mercadopago/mercado-pago-node.git"
+    "mercado-pago": "^1.0.0"
   }
 }
