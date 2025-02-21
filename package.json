@@ -1,3 +1,12 @@
-"dependencies": {
-  "@mercadopago/sdk-nodejs": "^1.0.0"
+{
+  "name": "mercado-pago-integration",
+  "version": "1.0.0",
+  "description": "Integração com Mercado Pago usando Netlify Functions",
+  "main": "index.js",
+  "scripts": {
+    "start": "netlify dev"
+  },
+  "dependencies": {
+    "@mercadopago/sdk-nodejs": "^1.0.0"
+  }
 }
