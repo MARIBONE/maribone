@@ -7,6 +7,6 @@
     "start": "netlify dev"
   },
   "dependencies": {
-    "@mercadopago/sdk-nodejs": "^1.0.0"
+    "@mercadopago/sdk-nodejs": "^3.0.4"
   }
 }
