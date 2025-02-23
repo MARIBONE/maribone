@@ -205,7 +205,8 @@ width: 50%; border: 1px solid #008ac3; box-shadow: 0 0 5px rgba(0, 138, 195, 0.9
 </div>
 
 <main> <img src="https://lh7-us.googleusercontent.com/N4q9pNsD190-GRavgfmeOdEEmr6k6-1n55x-pcJQWvLQEP3XJqZgjuzViZMenwc2HaYIJUrdiycTOMqnvVRjaI11_U99Y7Al_25Vb0ayRAVFBtAPUJbJei7N3pDGbQIPKYEQKasBKUCI6r7tH8rPDRq2wXaz7g" style="width: auto; display: flex; height: 5vw; margin-right: 8px;">
-<a tps://www.mercadopago.com.br/checkout/v1/redirect?pref_id=2251240952-a8812273-8307-4f88-a1f2-7567ee3d45e0</a>
+
+
 <button id="payButton">Pagar com Mercado Pago</button>
 </main>
   
@@ -251,72 +252,11 @@ document.getElementById('closeButton').onclick = function() {
   sidebar.style.right = '-150%'; // Esconde a sidebar
 }
 
- 
- 
- 
+    document.getElementById("payButton").addEventListener("click", function() {
+        window.location.href = "https://www.mercadopago.com.br/checkout/v1/redirect?pref_id=2251240952-a8812273-8307-4f88-a1f2-7567ee3d45e0";
+    });
 
-  <script>
-        const mp = new MercadoPago('TEST-74971261-55ad-4903-85c1-19d702319984', {
-            locale: 'pt-BR'
-        });
-
-        document.getElementById('payButton').addEventListener('click', function() {
-            const email = document.getElementById('email').value;
-            const cpf = document.getElementById('cpf').value;
-
-            mp.checkout.createPreference({
-                items: [{
-                    title: 'Produto de Teste',
-                    quantity: 1,
-                    currency_id: 'BRL',
-                    unit_price: 100.00
-                }],
-                payer: {
-                    email: email,
-                    identification: {
-                        type: 'CPF',
-                        number: cpf
-                    }
-                },
-                payment_methods: {
-                    excluded_payment_methods: [{
-                        id: 'credit_card'
-                    }, {
-                        id: 'debit_card'
-                    }],
-                    installments: 1
-                },
-                back_urls: {
-                    success: 'http://www.seusite.com/success',
-                    failure: 'http://www.seusite.com/failure',
-                    pending: 'http://www.seusite.com/pending'
-                },
-                notification_url: 'http://www.seusite.com/notification'
-            }).then(function(response) {
-                const preference = response.response;
-                const qrCodeUrl = preference.point_of_interaction.transaction_data.qr_code_url;
-                const pixCode = preference.point_of_interaction.transaction_data.qr_code;
-                const qrCodeImage = document.createElement('img');
-                qrCodeImage.src = qrCodeUrl;
-                document.getElementById('qrCodeContainer').innerHTML = ''; // Limpa o container
-                document.getElementById('qrCodeContainer').appendChild(qrCodeImage);
-                document.getElementById('pixCodeContainer').innerHTML = `<p>Código Pix: ${pixCode}</p><button id="copyPix">Copiar Código Pix</button>`;
-
-                document.getElementById('copyPix').addEventListener('click', function() {
-                    navigator.clipboard.writeText(pixCode).then(function() {
-                        alert('Código Pix copiado!');
-                    }).catch(function(err) {
-                        console.error('Erro ao copiar código Pix: ', err);
-                    });
-                });
-                alert('Pagamento gerado! Escaneie o QR Code ou copie o código Pix para finalizar!');
-            }).catch(function(error) {
-                console.error('Erro ao gerar pagamento via Pix: ', error);
-                alert('Houve um erro! Tente novamente.');
-            });
-        });
-    </script>
-
+</script>
 
 </body>
 </html>
