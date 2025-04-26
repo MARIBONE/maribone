@@ -1,0 +1,24 @@
+{
+  "providerName": "Império Babilônico",
+  "language": "pt-BR",
+  "lastUpdated": "2025-04-26T00:00:00+00:00",
+  "shortFormVideos": [
+    {
+      "id": "manifesto-shabattu",
+      "title": "Manifesto de Shabattu",
+      "content": {
+        "dateAdded": "2025-04-26T00:00:00+00:00",
+        "videos": [
+          {
+            "url": "https://www.exemplo.com/video1.mp4",
+            "quality": "HD"
+          }
+        ],
+        "duration": 600
+      },
+      "thumbnail": "https://www.exemplo.com/thumb1.jpg",
+      "shortDescription": "A palavra viva de Vossa Majestade aos corações do mundo.",
+      "longDescription": "Majestade Nidin-Bêl discursa sobre o retorno da fé, da justiça e da glória eterna da Babilônia."
+    }
+  ]
+}￼Enter
