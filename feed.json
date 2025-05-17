@@ -1,25 +1,19 @@
 {
-  "providerName": "Império Maribone",
+  "providerName": "Império Babilônico",
+  "lastUpdated": "2025-05-16T23:21:40Z",
   "language": "pt-BR",
-  "lastUpdated": "2025-05-16T12:00:00+00:00",
   "playlists": [
     {
-      "name": "Transmissão Eterna",
-      "itemIds": ["video001"]
+      "name": "Programação",
+      "itemIds": ["video1"]
     }
   ],
   "videos": [
     {
-      "id": "video001",
-      "title": "Transmissão do Aeroporto",
-      "shortDescription": "Exibição perpétua decretada por Sua Majestade.",
-      "thumbnail": "https://www.maribone.com.br/thumbs/aeroporto.jpg",
-      "genres": ["drama"],
-      "tags": ["transmissão", "repetição", "maribone"],
-      "releaseDate": "2025-05-01",
+      "id": "video1",
+      "title": "Aeroporto",
       "content": {
-        "dateAdded": "2025-05-01T00:00:00+00:00",
-        "duration": 1080,
+        "dateAdded": "2025-05-16T23:21:40Z",
         "videos": [
           {
             "url": "https://ia601408.us.archive.org/27/items/public-domain-archive/aeropuerto%28720P_HD%29.mp4",
