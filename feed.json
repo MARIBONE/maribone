@@ -1,38 +1,6 @@
-{
-  "providerName": "ImpettoStream",
-  "lastUpdated": "2025-05-15T12:00:00+00:00",
-  "language": "pt",
-  "series": [
-    {
-      "id": "serie001",
-      "title": "Programação Real",
-      "seasons": [
-        {
-          "seasonNumber": 1,
-          "episodes": [
-            {
-              "id": "ep001",
-              "title": "Aeroporto",
-              "description": "Um filme público exibido sob a graça da Coroa.",
-              "genres": ["drama", "clássico"],
-              "language": "pt",
-              "thumbnail": "https://via.placeholder.com/300x169.png?text=ImpettoStream",
-              "releaseDate": "2025-01-01",
-              "content": {
-                "dateAdded": "2025-05-15T12:00:00+00:00",
-                "videos": [
-                  {
-                    "url": "https://ia601408.us.archive.org/27/items/public-domain-archive/aeropuerto%28720P_HD%29.mp4",
-                    "quality": "HD",
-                    "videoType": "MP4"
-                  }
-                ],
-                "duration": 3600
-              }
-            }
-          ]
-        }
-      ]
-    }
-  ]
-}
+[
+  {
+    "title": "Aeropuerto",
+    "url": "https://ia601408.us.archive.org/27/items/public-domain-archive/aeropuerto%28720P_HD%29.mp4"
+  }
+]
