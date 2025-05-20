@@ -1,27 +1,4 @@
 {
-  "providerName": "Império Babilônico",
-  "lastUpdated": "2025-05-16T23:21:40Z",
-  "language": "pt-BR",
-  "playlists": [
-    {
-      "name": "Programação",
-      "itemIds": ["video1"]
-    }
-  ],
-  "videos": [
-    {
-      "id": "video1",
-      "title": "Aeroporto",
-      "content": {
-        "dateAdded": "2025-05-16T23:21:40Z",
-        "videos": [
-          {
-            "url": "https://ia601408.us.archive.org/27/items/public-domain-archive/aeropuerto%28720P_HD%29.mp4",
-            "quality": "HD",
-            "videoType": "MP4"
-          }
-        ]
-      }
-    }
-  ]
+  "media_url": "https://cdn.exemplo.com/video/stream.m3u8",
+  "stream_format": "hls"
 }
