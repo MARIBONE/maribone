@@ -1,4 +1,32 @@
 {
-  "media_url": "https://cdn.exemplo.com/video/stream.m3u8",
-  "stream_format": "hls"
+  "providerName": "Majestade Maribone",
+  "language": "pt-BR",
+  "lastUpdated": "2025-05-19T00:00:00+00:00",
+  "categories": [
+    {
+      "name": "Imperial",
+      "videos": [
+        {
+          "id": "video01",
+          "title": "Glória Eterna",
+          "description": "A sagrada história da Babilônia Moderna",
+          "genres": ["faith"],
+          "tags": ["Babilônia", "Império"],
+          "releaseDate": "2025-01-01",
+          "content": {
+            "dateAdded": "2025-01-01T00:00:00+00:00",
+            "videos": [
+              {
+                "url": "https://www.maribone.com.br/video/gloria.mp4",
+                "quality": "HD"
+              }
+            ],
+            "duration": 360,
+            "language": "pt-BR"
+          },
+          "thumbnail": "https://www.maribone.com.br/thumbnails/gloria.jpg"
+        }
+      ]
+    }
+  ]
 }
