@@ -1,57 +1,82 @@
 {
-  "providerData": {
-    "provider": {
-      "name": "MARIBONE TECNOLOGIA",
-      "apps": [
+  "version": "1",
+  "defaultLanguage": "pt",
+  "defaultAvailabilityCountries": [
+    "br"
+  ],
+  "assets": [
+    {
+      "id": "id=pkg.maribone.imppetostream", // <--- ID do seu canal no manifest. Mudei para refletir "impetostore"
+      "type": "liveChannel",
+      "titles": [
         {
-          "id": "pkg.maribone.imppetostream", // <--- SEU ID REAL DO CANAL (do seu manifest)
-          "name": "Ímpetto Stream",
-          "types": [
-            "live_tv" // **CRÍTICO: Diz à Roku que é um canal de TV ao vivo**
+          "value": "Ímpeto Store", // <--- NOME DO CANAL ATUALIZADO
+          "language": "pt"
+        }
+      ],
+      "shortDescriptions": [
+        {
+          "value": "Impetto Store: Sua loja favorita agora na Roku TV, 24h por dia!",
+          "language": "pt"
+        }
+      ],
+      "longDescriptions": [
+        {
+          "value": "Desfrute da programação completa do seu canal Impetto Store, diretamente da loja imparável para sua Roku TV, com conteúdo 24 horas por dia, 7 dias por semana.",
+          "language": "pt"
+        }
+      ],
+      "releaseDate": "2025-07-23", // <--- ATUALIZADO PARA A DATA ATUAL
+      "genres": [
+        "free",
+        "shopping"
+      ],
+      "advisoryRatings": [
+        {
+          "source": "BR-CLASS",
+          "value": "L" // "Livre" para todas as idades no Brasil
+        }
+      ],
+      "images": [
+        {
+          "type": "channelGrid",
+          "url": "https://www.maribone.com.br/imagens/impetostore_hd.png", // <--- ATUALIZE COM A URL REAL DA IMAGEM 1920x1080px HTTPS
+          "languages": [
+            "pt"
           ]
+        },
+        {
+          "type": "channelLogo",
+          "url": "https://dn721606.ca.archive.org/0/items/channel-poster_hd_202507/channel-poster_hd.png", // <--- ATUALIZE COM A URL REAL DA IMAGEM DO LOGO (ex: 400x150px) HTTPS
+          "languages": [
+            "pt"
+          ]
+        }
+      ],
+      "durationInSeconds": 86400, // 24 horas para um canal linear
+      "content": {
+        "playOptions": [
+          {
+            "license": "free",
+            "quality": "hd",
+            "playId": "pkg.maribone.impettostream", // <--- ID do seu canal, para o comando de reprodução
+            "availabilityStartTimeStamp": 1735689600000, // Exemplo: 2025-01-01T00:00:00Z em milissegundos Unix. AJUSTE SE NECESSÁRIO.
+            "availabilityEndTimeStamp": 2524546800000,   // Exemplo: 2050-01-01T00:00:00Z em milissegundos Unix. AJUSTE SE NECESSÁRIO.
+            "availabilityInfo": {
+              "country": [
+                "br"
+              ]
+            }
+          }
+        ]
+      },
+      "external_ids": [
+        {
+          "id": "pkg.maribone.impettostream", // <--- ID do seu canal Roku, deve ser o mesmo do seu manifest
+          "id_type": "roku_channel_id",
+          "url_pattern": "roku://play?channel={id}"
         }
       ]
     }
-  },
-  "channelData": {
-    "language": "pt", // Idioma principal do conteúdo
-    "lastUpdated": "2025-07-23T06:54:35Z", // <--- ATUALIZE PARA A HORA EXATA AGORA (UTC)!
-    "content": [
-      { // <--- ESTE É O ÚNICO "ITEM DE CONTEÚDO" QUE REPRESENTA SEU CANAL LINEAR
-        "id": "pkg.maribone.imppetostream", // Use o mesmo ID do seu canal, ou um ID único para este item no feed
-        "name": "Ímpetto Stream",
-        "content_type": "live", // **CRÍTICO: Reitera que este item é um stream ao vivo**
-        "genres": [
-          "free" // Ou um gênero mais específico que se encaixe no seu conteúdo
-        ],
-        "release_date": "2025-01-01", // Data de lançamento do canal (pode ser aproximada)
-        "thumbnails": {
-          "sd": "https://ia801005.us.archive.org/7/items/channel-poster_hd_202507/channel-poster_sd%282%29.png", // <--- URL REAL da sua imagem SD (HTTPS e acessível!)
-          "hd": "https://dn721606.ca.archive.org/0/items/channel-poster_hd_202507/channel-poster_hd.png"  // <--- URL REAL da sua imagem HD (HTTPS e acessível!)
-        },
-        "ratings": [
-          {
-            "scheme": "BR-CLASS", // Esquema de classificação do Brasil
-            "rating": "L" // Classificação: Livre
-          }
-        ],
-        "external_ids": [
-          {
-            "id": "pkg.maribone.imppetostream", // <--- Seu ID REAL do canal
-            "id_type": "roku_channel_id", // Informa que este ID é o ID de um canal Roku
-            "url_pattern": "roku://play?channel={id}" // Padrão para Deep Link: importante!
-          }
-        ],
-        "channel_launch_ids": [
-          "pkg.maribone.imppetostream" // Confirma que este conteúdo está no seu canal
-        ],
-        "short_description": "impetto.store agora na Roku TV!",
-        "long_description": "Desfrute da programação completa do seu canal favorito 24 horas por dia.",
-        "playback": {
-          "playback_type": "linear", // Confirma que a reprodução é linear/contínua
-          "url": "roku://play?channel={id}" // Usado para lançar o canal (referencia o external_ids acima)
-        }
-      }
-    ]
-  }
+  ]
 }
