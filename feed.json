@@ -4,54 +4,55 @@
       "name": "MARIBONE TECNOLOGIA",
       "apps": [
         {
-          "id": "pkg.maribone.imppetostream", // O ID do seu canal (pkg.seu.nome.do.canal)
+          "id": "pkg.maribone.imppetostream", // <--- Seu ID REAL do canal
           "name": "Ímpetto Stream",
           "types": [
-            "live_tv" // Indica que é um canal de TV ao vivo
+            "live_tv"
           ]
         }
       ]
     }
   },
   "channelData": {
-    "language": "pt", // Idioma principal do conteúdo
-    "lastUpdated": "2025-07-22T22:00:00Z", // Data e hora da última atualização do feed (formato ISO 8601)
+    "language": "pt",
+    "lastUpdated": "2025-07-23T01:43:08Z", // <--- ATUALIZE AGORA PARA O MOMENTO EXATO!
     "content": [
       {
-        "id": "pkg.maribone.imppetostream", // Um ID único para o seu stream ao vivo (pode ser o mesmo do channel_id ou um novo)
+        "id": "pkg.maribone.imppetostream", // <--- Seu ID REAL do canal
         "name": "Ímpetto Stream",
-        "content_type": "live", // Muito importante: indica que é conteúdo ao vivo
+        "content_type": "live", // ISSO É FUNDAMENTAL!
         "genres": [
-          "free" // Ou um gênero relevante para seu canal (noticias, esporte, infantil, etc.)
+          "free"
         ],
-        "release_date": "2025-01-01", // Data de lançamento do canal (pode ser aproximada)
+        "release_date": "2025-01-01",
         "thumbnails": {
-          "sd": "https://ia600907.us.archive.org/9/items/channel-poster_hd/channel-poster_sd.png",
-          "hd": "https://archive.org/download/channel-poster_hd/channel-poster_hd.png"
+          "sd": "https://www.maribone.com.br/imagens/imppetostream_sd.png", // <--- URLs REAIS e ACESSÍVEIS!
+          "hd": "https://www.maribone.com.br/imagens/imppetostream_hd.png"
         },
         "ratings": [
           {
-            "scheme": "BR-CLASS", // Ou outro sistema de classificação, se aplicável
-            "rating": "L" // Ex: "L" para livre, "10", "12", "14", "16", "18"
+            "scheme": "BR-CLASS",
+            "rating": "L"
           }
         ],
         "external_ids": [
           {
-            "id": "pkg.maribone.imppetostream", // Novamente, o ID do seu canal (pkg.seu.nome.do.canal)
+            "id": "pkg.maribone.imppetostream",
             "id_type": "roku_channel_id",
-            "url_pattern": "roku://play?channel={id}" // Padrão para Deep Link (muito importante!)
+            "url_pattern": "roku://play?channel={id}"
           }
         ],
         "channel_launch_ids": [
-          "pkg.maribone.imppetostream" // Confirma que este conteúdo está no seu canal
+          "pkg.maribone.imppetostream"
         ],
         "short_description": "impetto.store agora na Roku TV!",
         "long_description": "Desfrute da programação completa do seu canal favorito 24 horas por dia.",
         "playback": {
-          "playback_type": "linear", // Confirma que é linear
-          "url": "roku://play?channel={id}" // Usado para lançar o canal (referencia o external_ids acima)
+          "playback_type": "linear",
+          "url": "roku://play?channel={id}"
         }
       }
     ]
   }
+]
 }
