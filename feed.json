@@ -15,7 +15,7 @@
   },
   "channelData": {
     "language": "pt", // Idioma principal do conteúdo
-    "lastUpdated": "2025-07-22T10:00:00Z", // Data e hora da última atualização do feed (formato ISO 8601)
+    "lastUpdated": "2025-07-22T22:00:00Z", // Data e hora da última atualização do feed (formato ISO 8601)
     "content": [
       {
         "id": "pkg.maribone.imppetostream", // Um ID único para o seu stream ao vivo (pode ser o mesmo do channel_id ou um novo)
@@ -26,8 +26,8 @@
         ],
         "release_date": "2025-01-01", // Data de lançamento do canal (pode ser aproximada)
         "thumbnails": {
-          "sd": "https://seuservidor.com/imagens/logo_canal_sd.png",
-          "hd": "https://seuservidor.com/imagens/logo_canal_hd.png"
+          "sd": "https://ia600907.us.archive.org/9/items/channel-poster_hd/channel-poster_sd.png",
+          "hd": "https://archive.org/download/channel-poster_hd/channel-poster_hd.png"
         },
         "ratings": [
           {
