@@ -26,8 +26,8 @@
         ],
         "release_date": "2025-01-01", // Data de lançamento do canal (pode ser aproximada)
         "thumbnails": {
-          "sd": "https://www.maribone.com.br/imagens/imppetostream_sd.png", // <--- URL REAL da sua imagem SD (HTTPS e acessível!)
-          "hd": "https://www.maribone.com.br/imagens/imppetostream_hd.png"  // <--- URL REAL da sua imagem HD (HTTPS e acessível!)
+          "sd": "https://ia801005.us.archive.org/7/items/channel-poster_hd_202507/channel-poster_sd%282%29.png", // <--- URL REAL da sua imagem SD (HTTPS e acessível!)
+          "hd": "https://dn721606.ca.archive.org/0/items/channel-poster_hd_202507/channel-poster_hd.png"  // <--- URL REAL da sua imagem HD (HTTPS e acessível!)
         },
         "ratings": [
           {
