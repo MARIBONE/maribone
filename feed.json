@@ -15,7 +15,7 @@
   },
   "channelData": {
     "language": "pt", // Idioma principal do conteúdo
-    "lastUpdated": "2025-07-23T01:50:00Z", // <--- ATUALIZE PARA A HORA EXATA AGORA (UTC)!
+    "lastUpdated": "2025-07-23T06:50:30Z", // <--- ATUALIZE PARA A HORA EXATA AGORA (UTC)!
     "content": [
       { // <--- ESTE É O ÚNICO "ITEM DE CONTEÚDO" QUE REPRESENTA SEU CANAL LINEAR
         "id": "pkg.maribone.imppetostream", // Use o mesmo ID do seu canal, ou um ID único para este item no feed
