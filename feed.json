@@ -4,7 +4,7 @@
       "name": "MARIBONE TECNOLOGIA",
       "apps": [
         {
-          "id": "id=pkg.maribone.imppetostream", // O ID do seu canal (pkg.seu.nome.do.canal)
+          "id": "pkg.maribone.imppetostream", // O ID do seu canal (pkg.seu.nome.do.canal)
           "name": "Ímpetto Stream",
           "types": [
             "live_tv" // Indica que é um canal de TV ao vivo
@@ -18,7 +18,7 @@
     "lastUpdated": "2025-07-22T10:00:00Z", // Data e hora da última atualização do feed (formato ISO 8601)
     "content": [
       {
-        "id": "id=pkg.maribone.imppetostream", // Um ID único para o seu stream ao vivo (pode ser o mesmo do channel_id ou um novo)
+        "id": "pkg.maribone.imppetostream", // Um ID único para o seu stream ao vivo (pode ser o mesmo do channel_id ou um novo)
         "name": "Ímpetto Stream",
         "content_type": "live", // Muito importante: indica que é conteúdo ao vivo
         "genres": [
@@ -37,13 +37,13 @@
         ],
         "external_ids": [
           {
-            "id": "id=pkg.maribone.imppetostream", // Novamente, o ID do seu canal (pkg.seu.nome.do.canal)
+            "id": "pkg.maribone.imppetostream", // Novamente, o ID do seu canal (pkg.seu.nome.do.canal)
             "id_type": "roku_channel_id",
             "url_pattern": "roku://play?channel={id}" // Padrão para Deep Link (muito importante!)
           }
         ],
         "channel_launch_ids": [
-          "id=pkg.maribone.imppetostream" // Confirma que este conteúdo está no seu canal
+          "pkg.maribone.imppetostream" // Confirma que este conteúdo está no seu canal
         ],
         "short_description": "impetto.store agora na Roku TV!",
         "long_description": "Desfrute da programação completa do seu canal favorito 24 horas por dia.",
