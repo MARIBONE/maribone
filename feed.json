@@ -6,7 +6,7 @@
   ],
   "assets": [
     {
-      "id": "id=pkg.maribone.imppetostream", // <--- ID do seu canal no manifest. Mudei para refletir "impetostore"
+      "id": "pkg.maribone.imppetostream", // <--- ID do seu canal no manifest. Mudei para refletir "impetostore"
       "type": "liveChannel",
       "titles": [
         {
