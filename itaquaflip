@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Empresa de Tecnologia. Design de Projetos. Desenvolvimento de Sistemas. Assessoria Juridica. Streaming de TV. Sistemas Automotivos. Criacao de Sites e Aplicativos.">
+<meta name="author" content="AE MARIBONE - A. EDSON MARIBONE">
+<meta name="generator" content="AE Maribone">
+<meta name="robots" content="/index, follow">
+<meta name="keywords" content="Patrimonio, Valorizacao, Excelencia, Referencia, Tecnologia, Alto Rendimento, Estrutura, Elegancia, Automacao, Sofisticacao, Maribone, Criacao de Sites e Aplicativos, Projetos, Blueprint">
+<title>AE MARIBONE</title>
+</head>
+       
+
+
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+
+<style> 
+
+body {
+background-color: #008ac3;
+display: flex;
+flex-direction: column;
+margin: 1px;
+border: 1px solid #000000;
+font-family: 'garamond', 'times new roman'; 'arial', sans-serif;
+font-size: 2vw;
+text-align: center;
+box-shadow: 0 0 10px rgba(0, 0, 0, 0.9);
+font-weight: bold;
+width: 98vw;
+height: 200vw;
+word-spacing: 0.2em;
+}
+
+header {
+display: flex;
+flex-direction: row;
+justify-content: space-between;
+align-items: center;
+margin: 1px; 
+border: 1px solid #000000; 
+max-width: 100%; 
+background-color: #ffffff; 
+height: 5em; 
+
+}
+
+
+#datetime {
+  height: 100px;
+}
+
+       
+#speedometer-container {
+  position: relative;
+  overflow: hidden;
+  border-radius: 100% 100% 0 0;
+  background: #dcdcdc;
+  width: 12em;
+  height: 6em; /* Ajuste para manter a proporção desejada */
+}
+
+.speedometer {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 24em;
+  height: 24em;
+  background: conic-gradient(#4caf50 0% 50%, #dcdcdc 50% 100%);
+  border-radius: 50%;
+  transform: translateX(-50%);
+}
+
+.speedometer::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  background: #ffffff;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+}
+
+.pointer {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 2px;
+  height: 50%;
+  background: #000000;
+  transform-origin: bottom;
+  transform: translateX(-50%) rotate(45deg);
+  z-index: 2;
+}
+
+.label {
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  bottom: -1em;
+  font-weight: bold;
+}
+
+section {
+margin: 1px; 
+border: 1px solid #000000; 
+max-width: 100%; 
+background-color: #ffffff; 
+height: 20em; 
+max-width: 100%;
+position: right;
+}
+
+#map {
+height: 40em;
+max-width: 50%;
+position: left;
+
+}
+
+
+
+main {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            margin: 1px;
+            border: 1px solid #000000;
+            max-width: 100%;
+            background-color: #ffffff;
+            height: 11em;
+        }
+
+        .donut-chart {
+            margin-left: -5em;
+            width: 50%;
+            height: 50%;
+            border-radius: 50%;
+            background: conic-gradient(#ff6384 0% 50%, #36a2eb 50% 75%, #ffce56 75% 90%, #4bc0c0 90% 100%);
+            position: relative;
+        }
+
+        .donut-chart::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 70%;
+            height: 70%;
+            background: #ffffff;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 10;
+        }
+
+        .legend {
+            font-size: 75%;
+            position: absolute;
+            bottom: 0;
+            left: 100%;
+            transform: translateX(-50%);
+            width: 1%;
+            display: flex;
+            flex-direction: column;
+            align-items: left;
+            box-sizing: border-box;
+            z-index: 2;
+        }
+
+        .legend span {
+            display: flex;
+            align-items: center;
+            margin: 3px 0;
+        }
+
+        .color-box {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+
+
+ footer {
+    margin: 1px; 
+    border: 1px solid #000000; 
+    max-width: 98%; 
+    background-color: #ffffff; 
+    height: 100%; 
+    overflow: auto; /* Adicionado para permitir rolagem se necessário */
+    box-sizing: border-box; /* Adicionado para incluir padding e bordas na largura total */
+  }
+
+  table {
+    width: 100%; /* Garantido para ocupar toda a largura disponível */
+    border-collapse: collapse;
+    table-layout: fixed; /* Adicionado para evitar que a tabela se expanda além da largura */
+  }
+
+  table, th, td {
+    border: 1px solid black;
+  }
+
+  th, td {
+font-size: 16px;
+    padding: 8px;
+    text-align: left;
+    overflow: hidden; /* Adicionado para esconder o conteúdo que ultrapassa a célula */
+    text-overflow: ellipsis; /* Adicionado para mostrar '...' em vez de texto cortado */
+    white-space: nowrap; /* Adicionado para evitar quebra de linha dentro das células */
+    box-sizing: border-box; /* Adicionado para incluir padding e bordas na largura total */
+  }
+
+  th {
+    background-color: #f4f4f4; /* Opcional: cor de fundo para os cabeçalhos */
+  }
+
+
+#LOCALE {
+    margin: 1px; 
+    border: 1px solid #000000; 
+    max-width: 100%; 
+    background-color: #ffffff; 
+    height: 100%; 
+    overflow: auto; /* Adicionado para permitir rolagem se necessário */
+    box-sizing: border-box; /* Adicionado para incluir padding e bordas na largura total 
+}
+
+
+</style>
+
+<body>
+
+<header>
+<div style="background-image: url('https://lh7-us.googleusercontent.com/vut0zZKwNeq100B4Ktzt4-_My3b40Pn7zWcpNdgTS2FAnPlWiDqOzHrq9BBx6jHUhoKkIZsSgrx90kbnJ0YzcJZ-FkXcjN0jftGVTpk4cfQ2A6WWFvziSQMyK42immVsc0NA-_Uq8cvEz5RcK9xrey4Ortp5pA'); background-size: cover; background-repeat: no-repeat; margin: 1px; border: 1px solid #ffffff; width: 12em; height: 5em;"></div>
+
+<div id="datetime" style="display: flex; justify-content: space-evenly; align-items: center; border: 1px solid #ffffff; width: 12em; height: 4em;">
+</div>
+
+<div id="speedometer-container" style="border: 1px solid #000000; width: 12em; height: 4em;">
+<div class="speedometer">
+<div class="pointer"></div>
+</div>
+<div class="label">0% - 100%</div>
+</div>
+
+
+<div style="background-image: url('https://lh7-us.googleusercontent.com/vut0zZKwNeq100B4Ktzt4-_My3b40Pn7zWcpNdgTS2FAnPlWiDqOzHrq9BBx6jHUhoKkIZsSgrx90kbnJ0YzcJZ-FkXcjN0jftGVTpk4cfQ2A6WWFvziSQMyK42immVsc0NA-_Uq8cvEz5RcK9xrey4Ortp5pA'); background-size: 30%; background-repeat: no-repeat; margin: 1px; border: 1px solid #ffffff; width: 12em; height: 3em;">
+contador
+</div>
+</header>
+
+
+<section id="map">
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+</section>
+
+
+<main>
+    <div style="margin: 10px; border: 1px solid #000000; width: 25%; height: 10em;">caixa de mensagem</div>
+    <div style="margin: 10px; border: 1px solid #000000; width: 25%; height: 10em;">mapa de calor</div>
+    <div style="margin: 10px; border: 1px solid #000000; width: 25%; height: 10em;">agenda</div>
+    <div id="chart-container" style="display: flex; justify-content: space-evenly; align-items: center; margin: 10px; border: 1px solid #000000; width: 25%; height: 10em;">
+        <div class="donut-chart">
+            <div class="legend">
+                <span><div class="color-box" style="background-color: #ff6384;"></div> Categoria 1</span>
+                <span><div class="color-box" style="background-color: #36a2eb;"></div> Categoria 2</span>
+                <span><div class="color-box" style="background-color: #ffce56;"></div> Categoria 3</span>
+                <span><div class="color-box" style="background-color: #4bc0c0;"></div> Categoria 4</span>
+            </div>
+        </div>
+    </div>
+</main>
+
+<footer style="max-width: 100%;">
+    <table border="1" id="data-table">
+      <tr>
+        <th>DATA</th>
+        <th>IP</th>
+        <th>DISPOSITIVO</th>
+        <th>SISTEMA OPERACIONAL</th>
+        <th>NAVEGADOR E VERSÃO</th>
+        <th>RESOLUÇÃO</th>
+      </tr>
+    </table>
+  </footer>
+
+<div id="LOCALE">
+  <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQR3EjSyTLJEVss4Rv1PoQ-vswU_ZCsd8xN68o7X8uwO4-Ay9_OVMdyci61LDSku2gN9yfEPHYSTl6j/pubhtml?widget=true&amp;headers=false" width="100%" height="100%" frameborder="0" allowfullscreen></iframe>
+</div>
+
+
+<script src="complemento.js"></script>
+
+
+</body>
+</html>
