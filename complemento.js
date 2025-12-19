@@ -1,9 +1,10 @@
 // Configuração do mapa
 var map = L.map('map').setView([-23.5505, -46.6333], 2); // Ponto inicial (Fallback temporário)
 
-L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}', {
-    attribution: 'Tiles &copy; Esri &mdash; Esri, DeLorme, NAVTEQ',
-    maxZoom: 16
+L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+    attribution: '&copy; OpenStreetMap &copy; CARTO',
+    subdomains: 'abcd',
+    maxZoom: 20
 }).addTo(map);
 
 // A mais nobre função de Geolocalização para encontrar o Soberano
