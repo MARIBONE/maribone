@@ -1,10 +1,9 @@
 // Configuração do mapa
 var map = L.map('map').setView([-23.5505, -46.6333], 2); // Ponto inicial (Fallback temporário)
 
-L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-    attribution: '&copy; OpenStreetMap &copy; CARTO',
-    subdomains: 'abcd',
-    maxZoom: 20
+L.tileLayer('https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png', {
+    maxZoom: 20,
+    attribution: '&copy; Stadia Maps, &copy; OpenStreetMap'
 }).addTo(map);
 
 // A mais nobre função de Geolocalização para encontrar o Soberano
