@@ -187,7 +187,7 @@ $.getJSON('https://api.ipify.org?format=json', function(data) {
             localStorage.setItem('ip', data.ip); // Armazena o IP no localStorage
             
             // Envia o IP para o Google Sheets via GET
-            var sheetUrl = 'https://script.google.com/macros/s/AKfycby3JHhFcFaRZXbIa2ycbNqDQO1Qc4zNTFP_udUoejRTn4liN-5S_KtYwiDmalj87K0v/exec'; // Substitua com a URL gerada
+            var sheetUrl = 'https://api.maribone.com.br/analytics'; // Substitua com a URL gerada
             $.get(sheetUrl + '?ip=' + encodeURIComponent(data.ip), function(response) {
                 console.log(response);
             });
@@ -211,7 +211,7 @@ $.getJSON('https://api.ipify.org?format=json', function(data) {
 
     try {
         // Envia os dados para o Apps Script usando Fetch API
-        let response = await fetch('https://script.google.com/macros/s/AKfycbzOs7UhIMH-frRWliGaib6qegTIUt5dCF8u3FRZKUG3o3coHgsLsJ2Myo1nLuz2Ciql/exec', {
+        let response = await fetch('https://api.maribone.com.br/analytics', {
             method: 'POST',
             body: formData
         });
