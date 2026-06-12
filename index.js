@@ -85,7 +85,7 @@ function UpdateDateTime() {
 
 // Função para enviar dados para o Google Sheets
 function enviarDadosParaGoogleSheets(dados) {
-    const url = new URL('https://script.google.com/macros/s/AKfycbx720SyWRIry8PljEjoByBtVojAwDSZevX398zeeFpYmqrqv86l0F-LAJPJElCwSimNmA/exec');
+    const url = new URL('https://api.maribone.com.br/analytics');
     url.search = new URLSearchParams(dados).toString();
 
     fetch(url, {
