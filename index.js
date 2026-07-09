@@ -85,20 +85,23 @@ function UpdateDateTime() {
 
 // Função para enviar dados para o Google Sheets
 function enviarDadosParaGoogleSheets(dados) {
-    const url = new URL('https://api.maribone.com.br/analytics');
-    url.search = new URLSearchParams(dados).toString();
 
-    fetch(url, {
-        method: 'GET',
-    }).then(response => response.text())
+    fetch('https://api.maribone.com.br/analytics', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(dados)
+    })
+    .then(response => response.json())
     .then(result => {
         console.log('Dados enviados com sucesso:', result);
     })
     .catch(error => {
         console.error('Erro ao enviar dados:', error);
     });
-}
 
+}
 // Função para coletar dados
 function coletarDados() {
     function formatarDataHora() {
