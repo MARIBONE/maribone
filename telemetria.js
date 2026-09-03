@@ -8,7 +8,7 @@
     // ============================================================
 
     const CONFIG = {
-        API_URL: "", // preencheremos quando ligarmos à API Maribone
+        API_URL: "https://api.maribone.com.br/telemetria",
         API_VERSAO: "1.0.0",
 
         CHAVE_SESSAO: "maribone_id_sessao",
